@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Creture
 {
-    [SerializeField] private float speed = 5.0f;
-
     private CharacterController CC;
+    public VirtualJoystick VJ;
     private void Awake()
     {
+        this.init(100, 10, 1);
+        VJ.speed = this.speed;
         CC = GetComponent<CharacterController>();
+        
     }
     // Start is called before the first frame update
     private void Start()
@@ -21,5 +23,14 @@ public class Player : MonoBehaviour
     private void Update()
     {
         
+    }
+    protected override void death()
+    {
+        base.death();
+        Debug.Log("GAME OVER");
+    }
+    public Transform playerTransform()
+    {
+        return this.transform;
     }
 }

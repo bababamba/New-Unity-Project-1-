@@ -5,6 +5,7 @@ using UnityEngine.EventSystems; // 키보드, 마우스, 터치를 이벤트로 
 public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public CharacterController characterController;
+    public float speed;
     [SerializeField]
     private RectTransform lever;
     private RectTransform rectTransform;
@@ -86,7 +87,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         
         if (characterController)
         {
-            characterController.Move(inputVector/100);
+            characterController.Move((inputVector/1000)*speed);
         }
     }
 
