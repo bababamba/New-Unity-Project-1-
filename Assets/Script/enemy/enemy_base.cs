@@ -5,10 +5,14 @@ using UnityEngine;
 public class enemy_base : Creture
 {
     CircleCollider2D col;
-    GameObject player;
+    protected GameObject player;
     Transform playerCenter;
     float playerRadius;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        gameObject.tag = "Enemy";
+    }
     void Start()
     {
         this.init(100,1,2);
@@ -45,7 +49,6 @@ public class enemy_base : Creture
         // 원의 중심과 CircleCollider2D의 중심 거리가 반지름보다 작으면 충돌로 간주
         if (distance <= playerRadius)
         {
-            Debug.Log(distance + " " + playerRadius);
             return true;
         }
 

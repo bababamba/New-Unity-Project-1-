@@ -7,9 +7,11 @@ public class Creture : Damageable
     protected float speed;
     protected int type;
     protected GameObject Manager;
+    protected GameManager gameManager;
     protected void init(int max, float speed, int type)
     {
         Manager = GameObject.Find("GameManager");
+        gameManager = Manager.GetComponent<GameManager>();
         this.setMaxHP(max);
         this.setCurHP(max);
         this.speed = speed;

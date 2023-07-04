@@ -11,7 +11,7 @@ public class Player : Creture
         this.init(100, 10, 1);
         VJ.speed = this.speed;
         CC = GetComponent<CharacterController>();
-        
+        gameObject.tag = "Player";
     }
     // Start is called before the first frame update
     private void Start()
@@ -22,7 +22,7 @@ public class Player : Creture
     // Update is called once per frame
     private void Update()
     {
-        
+        //gameManager.closestEnemy().transform.position;
     }
     protected override void death()
     {
