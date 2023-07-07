@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
     int killCount;
     int goldEarned;
     bool isPlayerActive = false;
+    public GameObject[] enemies;
 
-    GameObject player;
+
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
     }
     void init()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         killCount = 0;
         goldEarned = 0;
         isGaming = true;
@@ -45,25 +47,32 @@ public class GameManager : MonoBehaviour
     {
         return goldEarned;
     }
-    public GameObject closestEnemy()
+    public Transform closestEnemy()
     {
         GameObject cEnemy = null;
         float closestDistance = Mathf.Infinity;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        
 
-
+        
         foreach (GameObject enemy in enemies)
         {
-            float distanceToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
+            
+                
+                float distanceToPlayer = Vector2.Distance(enemy.transform.position, player.transform.position);
 
-            // 현재 적과 플레이어 사이의 거리가 가장 가까운 거리라면 갱신
-            if (distanceToPlayer < closestDistance)
-            {
-                closestDistance = distanceToPlayer;
-                cEnemy = enemy;
-            }
+                // 현재 적과 플레이어 사이의 거리가 가장 가까운 거리라면 갱신
+                if (distanceToPlayer < closestDistance)
+                {
+                    closestDistance = distanceToPlayer;
+                    cEnemy = enemy;
+                }
+            
         }
-        return cEnemy;
+        if (cEnemy)
+            return cEnemy.transform;
+        else
+            return player.transform;
     }
     
 }

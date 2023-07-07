@@ -13,22 +13,22 @@ public class Damageable : MonoBehaviour
     {
     }
 
-    protected int getCurHP()
+    public int getCurHP()
     {
 
         return this.curHP;
     }
-    protected int getCurHPPercent()
+    public int getCurHPPercent()
     {
 
         return this.curHP;
     }
-    protected int getMaxHP()
+    public int getMaxHP()
     {
 
         return this.maxHP;
     }
-    protected void addCurHP(int value)
+    public void addCurHP(int value)
     {
         if(value > 0)
         {
@@ -44,7 +44,7 @@ public class Damageable : MonoBehaviour
 
         }
     }
-    protected void setCurHP(int value)
+    public void setCurHP(int value)
     {
         if (value > 0)
         {
@@ -60,7 +60,7 @@ public class Damageable : MonoBehaviour
 
         }
     }
-    protected void addMaxHP(int value)
+    public void addMaxHP(int value)
     {
         if (value > 0)
         {
@@ -74,9 +74,11 @@ public class Damageable : MonoBehaviour
             {
                 this.curHP = this.maxHP;
             }
+            if (this.curHP <= 0)
+                death();
         }
     }
-    protected void setMaxHP(int value)
+    public void setMaxHP(int value)
     {
         if (value > 0)
         {
@@ -90,12 +92,14 @@ public class Damageable : MonoBehaviour
             {
                 this.curHP = this.maxHP;
             }
+            if (this.curHP <= 0)
+                death();
         }
     }
-    protected virtual void death() 
+    public virtual void death() 
     {
-        Debug.Log("die,potato,die");
-        Destroy(owner);
+        Debug.Log(gameObject);
+        Destroy(gameObject);
 
      }
 }

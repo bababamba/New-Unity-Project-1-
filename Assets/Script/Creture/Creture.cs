@@ -17,16 +17,15 @@ public class Creture : Damageable
         this.speed = speed;
         this.type = type;
     }
-    protected virtual void takeDamage(int dmg)
+    public virtual void takeDamage(int dmg)
     {
         this.addCurHP(-dmg);
     }
     protected virtual void attack()
     {
     }
-    protected override void death()
+    public override void death()
     {
         base.death();
-        Debug.Log("Cre death!");
     }
 }

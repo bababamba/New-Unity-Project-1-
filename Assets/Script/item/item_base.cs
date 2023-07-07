@@ -8,24 +8,43 @@ public class item_base : MonoBehaviour
     protected int itemNum = -1;
     protected int invenNum = -1;
     protected GameObject player;
-    protected float cooldown;
+    protected Player playerScript;
+    protected float cooldown =1;
     protected float Maxcooldown;
+    protected bool isinit = false;
+    protected GameObject Manager;
+    protected GameManager gameManager;
+    protected bool isPassive;
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         player = GameObject.Find("player");
+        playerScript = player.GetComponent < Player > ();
         gameObject.tag = "item";
-        this.transform.position = new Vector3(itemNum,0,0);
+        //this.transform.position = new Vector3(itemNum,0,0);
+        Manager = GameObject.Find("GameManager");
+        gameManager = Manager.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
-    void Update()
-    {   if(active)
-        cooldown--;
+    protected virtual void Update()
+    {
+        
+
+
+
+        if (active)
+        {
+            cooldown--;
+            
+        }
         if (cooldown == 0)
         {
-            itemTrigger();
+            
+            
             cooldown = Maxcooldown;
+            itemTrigger();
         }
     }
     public float getCooldown()
@@ -40,7 +59,7 @@ public class item_base : MonoBehaviour
     {
         return invenNum;
     }
-    protected void itemTrigger()
+    protected virtual void itemTrigger()
     {
 
     }

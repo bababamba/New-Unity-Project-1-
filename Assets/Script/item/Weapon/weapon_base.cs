@@ -5,20 +5,24 @@ using UnityEngine;
 public class weapon_base : item_base
 {
     protected int basic_attack;
-    protected int ad;
-    protected int ap;
+    protected int add;
+    protected int apd;
     protected Transform here;
-    
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        isPassive = false;
+    }
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        here = gameObject.transform;
+        base.Update();
+        
 
     }
     

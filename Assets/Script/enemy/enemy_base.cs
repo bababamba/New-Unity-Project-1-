@@ -54,6 +54,7 @@ public class enemy_base : Creture
 
         return false;
     }
+    
 
 
 
