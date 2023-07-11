@@ -14,7 +14,7 @@ public class sunFlower : passive_base
         base.Start();
         hp = 10;
         armor = 1;
-        Maxcooldown = 500;
+        Maxcooldown = 0.5f;
     }
 
     // Update is called once per frame

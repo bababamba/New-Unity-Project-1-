@@ -21,7 +21,7 @@ public class item_base : MonoBehaviour
     {
         player = GameObject.Find("player");
         playerScript = player.GetComponent < Player > ();
-        gameObject.tag = "item";
+        gameObject.tag = "Item";
         //this.transform.position = new Vector3(itemNum,0,0);
         Manager = GameObject.Find("GameManager");
         gameManager = Manager.GetComponent<GameManager>();
@@ -36,10 +36,10 @@ public class item_base : MonoBehaviour
 
         if (active)
         {
-            cooldown--;
+            cooldown -= Time.deltaTime;
             
         }
-        if (cooldown == 0)
+        if (cooldown <= 0)
         {
             
             

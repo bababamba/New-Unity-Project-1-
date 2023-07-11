@@ -2,19 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class flower : synergy_base
+public class heartOfFire : weapon_base
 {
-    private void Awake()
-    {
-        itemNum = 1;
-    }
-    // Start is called before the first frame update
+    public GameObject bullet;
+    fireOfHeart fire;
     protected override void Start()
     {
         base.Start();
-        hp = 10;
-        armor = 1;
-        Maxcooldown = 0.5f;
+        fire = bullet.GetComponent<fireOfHeart>();
+        Maxcooldown = 1;
     }
 
     // Update is called once per frame
@@ -26,6 +22,6 @@ public class flower : synergy_base
     }
     protected override void itemTrigger()
     {
-        Debug.Log("synergy!@");
+        GameObject heartFire = Instantiate(bullet, player.transform.position, Quaternion.identity);
     }
 }

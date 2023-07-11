@@ -46,7 +46,7 @@ public class itemManager : MonoBehaviour
     }
     void init()
     {
-        GameObject[] itemObject = GameObject.FindGameObjectsWithTag("item");
+        GameObject[] itemObject = GameObject.FindGameObjectsWithTag("Item");
         GameObject[] synergyObject = GameObject.FindGameObjectsWithTag("Synergy");
         items = new item_base[itemObject.Length];
         

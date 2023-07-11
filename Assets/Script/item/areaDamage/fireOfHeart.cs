@@ -2,30 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class flower : synergy_base
-{
-    private void Awake()
-    {
-        itemNum = 1;
-    }
+public class fireOfHeart : areaD_base
+{ // dmg, maxLifeTime, maxDmgDuration, effectTime
+ 
+    GameObject player;
     // Start is called before the first frame update
     protected override void Start()
     {
+        player = GameObject.Find("player");
+        dmg = 5;
+        maxLifeTime = 1;
+        maxDmgDuration = 0.2f;
         base.Start();
-        hp = 10;
-        armor = 1;
-        Maxcooldown = 0.5f;
     }
 
     // Update is called once per frame
     protected override void Update()
     {
+        this.transform.position = player.transform.position;
         base.Update();
 
-
-    }
-    protected override void itemTrigger()
-    {
-        Debug.Log("synergy!@");
     }
 }

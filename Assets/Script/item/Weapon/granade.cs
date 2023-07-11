@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class basicWeapon : weapon_base
+public class granade : weapon_base
 {
     public GameObject bullet;
-    public float shootForce = 10f;
+    public float shootForce = 5f;
     // Start is called before the first frame update
     protected override void Start()
     {
+        itemNum = 3;
+        Maxcooldown = 2;
         base.Start();
-        invenNum = 0;
-        itemNum = 1;
-        Maxcooldown = 1;
     }
 
     // Update is called once per frame
@@ -22,7 +21,7 @@ public class basicWeapon : weapon_base
     }
     protected override void itemTrigger()
     {
-        Transform temp = gameManager.closestEnemy();
+        Transform temp = gameManager.randomEnemy();
         if (temp != player.transform)
         {
             GameObject whiteBox = Instantiate(bullet, player.transform.position, Quaternion.identity);
@@ -31,5 +30,4 @@ public class basicWeapon : weapon_base
             whiteBoxRigidbody.AddForce(shootDirection * shootForce, ForceMode2D.Impulse);
         }
     }
-    
 }

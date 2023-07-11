@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Player : Creture
 {
-    private CharacterController CC;
+    
     public VirtualJoystick VJ;
     public GameObject iManager;
     private itemManager imanager;
+    public Vector2 playerDirection;
 
     int armor;
     int ad;
@@ -22,7 +23,7 @@ public class Player : Creture
         imanager = iManager.GetComponent<itemManager>();
         this.init(100, 10, 1);
         VJ.speed = this.speed;
-        CC = GetComponent<CharacterController>();
+        
         gameObject.tag = "Player";
     }
     // Start is called before the first frame update
@@ -34,6 +35,8 @@ public class Player : Creture
     // Update is called once per frame
     private void Update()
     {
+        // 이전 위치 갱신
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             imanager.getInventory();
@@ -46,6 +49,7 @@ public class Player : Creture
             takeDamage(20);
         }
         //gameManager.closestEnemy().transform.position;
+        
     }
     public override void death()
     {
@@ -56,6 +60,19 @@ public class Player : Creture
     {
         return this.transform;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("hit!");
+        if (collision.gameObject.CompareTag("ItemObject"))
+        {
+            Debug.Log("item!");
+            gameManager.expUp(10);
+            Destroy(collision.gameObject);
+        }
+    }
+
+
     public void playerStatusChange(int cHp, int cArmor, int cAd, int cAp, float cMove, int cArmorP, int cMagicP, float cCritical, bool equip )
     {
         if (equip)

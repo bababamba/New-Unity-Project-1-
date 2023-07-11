@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     bool isGaming;
     int killCount;
     int goldEarned;
+    float exp;
+    float maxExp;
     bool isPlayerActive = false;
     public GameObject[] enemies;
 
@@ -30,6 +32,22 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         goldEarned = 0;
         isGaming = true;
+        exp = 0;
+        maxExp = 100;
+    }
+    public void expUp(float earned)
+    {
+        exp += earned;
+        while (exp > maxExp)
+        {
+            exp -= maxExp;
+            levelUp();
+            
+        }
+    }
+    public void levelUp()
+    {
+        maxExp += (float)0.3 * maxExp;
     }
     public void killCountUp()
     {
@@ -52,27 +70,44 @@ public class GameManager : MonoBehaviour
         GameObject cEnemy = null;
         float closestDistance = Mathf.Infinity;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        
 
-        
+
+
         foreach (GameObject enemy in enemies)
         {
-            
-                
-                float distanceToPlayer = Vector2.Distance(enemy.transform.position, player.transform.position);
 
-                // 현재 적과 플레이어 사이의 거리가 가장 가까운 거리라면 갱신
-                if (distanceToPlayer < closestDistance)
-                {
-                    closestDistance = distanceToPlayer;
-                    cEnemy = enemy;
-                }
-            
+
+            float distanceToPlayer = Vector2.Distance(enemy.transform.position, player.transform.position);
+
+            // 현재 적과 플레이어 사이의 거리가 가장 가까운 거리라면 갱신
+            if (distanceToPlayer < closestDistance)
+            {
+                closestDistance = distanceToPlayer;
+                cEnemy = enemy;
+            }
+
         }
         if (cEnemy)
             return cEnemy.transform;
         else
             return player.transform;
     }
-    
+    public Transform randomEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        int len = enemies.Length;
+        if (len > 1)
+        {
+            int seed = Random.Range(0, len);
+            if (enemies[seed])
+                return enemies[seed].transform;
+            else
+                return player.transform;
+        }
+        else if (len == 1)
+            return enemies[0].transform;
+        else
+            return player.transform;
+    }
+
 }

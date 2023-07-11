@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class projectile_base : MonoBehaviour
 {
-    float lifeTime=5;
-    int lifePen =1;
+    protected float lifeTime;
+    protected int lifePen;
 
-    float maxLifetime=5;
-    int maxLifePen=2;
-    int dmg = 10;
-    private List<enemy_base> attackedEnemies = new List<enemy_base>(); // 공격한 적을 저장하는 리스트
+    //maxLifetime, maxLifePen,dmg
+    protected float maxLifetime = 5;
+    protected int maxLifePen = 1;
+    protected int dmg = 10;
+    protected private List<enemy_base> attackedEnemies = new List<enemy_base>(); // 공격한 적을 저장하는 리스트
     void Awake()
     {
         gameObject.tag = "Projectile";
@@ -19,8 +20,8 @@ public class projectile_base : MonoBehaviour
     protected virtual void Start()
     {
         init();
-        
-        
+
+
     }
 
     // Update is called once per frame
@@ -47,10 +48,10 @@ public class projectile_base : MonoBehaviour
                 }
                 if (lifePen <= 0)
                 {
-                    Destroy(gameObject);
+                    die();
                 }
 
-                
+
                 break;
             }
         }
@@ -72,28 +73,8 @@ public class projectile_base : MonoBehaviour
     {
         lifeTime = maxLifetime;
         lifePen = maxLifePen;
-    }
-    /* void OnCollisionEnter2D(Collider2D collision)
-     {
-         Debug.Log("!1");
-         if (collision.gameObject.CompareTag("Enemy"))
-         {
-             Debug.Log("!");
-             enemy_base enemy = collision.gameObject.GetComponent<enemy_base>();
-             if (enemy != null)
-             {
-                 enemy.takeDamage(dmg);
-                 Debug.Log("!");
-             }
 
-             lifePen--;
-             if (lifePen <= 0)
-             {
-                 Debug.Log("총알의 내구도가 0이 되었습니다!");
-                 Destroy(gameObject);
-             }
-         }
-     }*/
+    }
     bool IsEnemyAttacked(enemy_base enemy)
     {
         return attackedEnemies.Contains(enemy);
@@ -112,5 +93,17 @@ public class projectile_base : MonoBehaviour
             }
         }
         return false;
+    }
+    protected virtual void die()
+    {
+        Destroy(this.gameObject);
+    }
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("ItemObject"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+        }
+
     }
 }

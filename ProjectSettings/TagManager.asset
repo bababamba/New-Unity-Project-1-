@@ -5,9 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - item
   - Projectile
   - Synergy
+  - Item
+  - ItemObject
   layers:
   - Default
   - TransparentFX
