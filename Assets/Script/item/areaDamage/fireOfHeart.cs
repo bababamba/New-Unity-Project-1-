@@ -23,4 +23,5 @@ public class fireOfHeart : areaD_base
         base.Update();
 
     }
+    
 }

@@ -8,8 +8,10 @@ public class heartOfFire : weapon_base
     fireOfHeart fire;
     protected override void Start()
     {
+
+        itemNum = 1;
         base.Start();
-        fire = bullet.GetComponent<fireOfHeart>();
+        
         Maxcooldown = 1;
     }
 
@@ -23,5 +25,7 @@ public class heartOfFire : weapon_base
     protected override void itemTrigger()
     {
         GameObject heartFire = Instantiate(bullet, player.transform.position, Quaternion.identity);
+        fire = bullet.GetComponent<fireOfHeart>();
+        fire.init(2, 0.2f, 1, 0);
     }
 }

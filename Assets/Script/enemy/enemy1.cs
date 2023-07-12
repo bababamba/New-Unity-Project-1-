@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pro_basic : projectile_base
-{    //maxLifetime, maxLifePen,dmg
+public class enemy1 : enemy_base
+{
     // Start is called before the first frame update
     protected override void Start()
     {
-        maxLifetime = 5;
-        maxLifePen = 2;
-        dmg = 10;
         base.Start();
+        this.init(100, 1, 2);
     }
 
     // Update is called once per frame
-    protected override void die()
+    protected override void Update()
     {
-        base.die();
+        base.Update();
+        moveToPlayer();
     }
-
 }

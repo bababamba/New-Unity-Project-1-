@@ -98,7 +98,7 @@ public class Damageable : MonoBehaviour
     }
     public virtual void death() 
     {
-        Debug.Log(gameObject);
+        
         Destroy(gameObject);
 
      }

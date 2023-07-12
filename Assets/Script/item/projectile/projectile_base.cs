@@ -19,8 +19,8 @@ public class projectile_base : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        init();
-
+        lifeTime = maxLifetime;
+        lifePen = maxLifePen;
 
     }
 
@@ -69,10 +69,11 @@ public class projectile_base : MonoBehaviour
 
 
     }
-    void init()
+    public virtual void init(int iDmg, float iMaxLifetime,  int iMaxLifePen)
     {
-        lifeTime = maxLifetime;
-        lifePen = maxLifePen;
+        dmg = iDmg;
+        maxLifePen = iMaxLifePen;
+        maxLifetime = iMaxLifetime;
 
     }
     bool IsEnemyAttacked(enemy_base enemy)

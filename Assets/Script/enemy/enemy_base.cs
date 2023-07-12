@@ -19,9 +19,9 @@ public class enemy_base : Creture
     {
         gameObject.tag = "Enemy";
     }
-    void Start()
+    protected virtual void Start()
     {
-        this.init(100,1,2);
+        
         col = GetComponent<CircleCollider2D>();
         player = GameObject.Find("player");
         playerScript = player.GetComponent<Player>();
@@ -29,7 +29,7 @@ public class enemy_base : Creture
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
        
       // moveToPlayer();

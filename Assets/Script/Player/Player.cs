@@ -10,18 +10,18 @@ public class Player : Creture
     private itemManager imanager;
     public Vector2 playerDirection;
 
-    int armor;
-    int ad;
-    int ap;
-    int move;
-    int armorP;
-    int magicP;
-    float critical;
+    public int armor;
+    public int ad;
+    public int ap;
+    public int move;
+    public int armorP;
+    public int magicP;
+    public float critical;
     private void Awake()
     {
         iManager = GameObject.Find("itemManager");
         imanager = iManager.GetComponent<itemManager>();
-        this.init(100, 10, 1);
+        this.init(100, 3, 1);
         VJ.speed = this.speed;
         
         gameObject.tag = "Player";
@@ -63,7 +63,6 @@ public class Player : Creture
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("hit!");
         if (collision.gameObject.CompareTag("ItemObject"))
         {
             Debug.Log("item!");

@@ -12,6 +12,7 @@ public class areaD_base : MonoBehaviour
     protected float maxDmgDuration = 1;
     protected float effectTime =1;
     protected bool forEffect = false;
+    protected bool isBox = false;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -23,14 +24,14 @@ public class areaD_base : MonoBehaviour
     {
         if (!forEffect)
         {
-            if (dmgDuration == 0)
+            if (dmgDuration <= 0)
             {
                 Vector2 bulletPosition = transform.position;
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(bulletPosition, 0.1f);
-                Debug.Log(colliders);
+                //Collider2D[] colliders = Physics2D.OverlapCircleAll(bulletPosition, GetRadiusFromCollider(GetComponent<Collider2D>()));
+                Collider2D[] colliders = Physics2D.OverlapAreaAll(transform.position - GetComponent<Collider2D>().bounds.extents,transform.position + GetComponent<Collider2D>().bounds.extents);
                 foreach (Collider2D collider in colliders)
                 {
-                   
+                    Debug.Log(collider);
                     if (collider.CompareTag("Enemy"))
                     {
                         enemy_base enemy = collider.GetComponent<enemy_base>();
@@ -73,6 +74,28 @@ public class areaD_base : MonoBehaviour
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
         }
 
+    }
+    float GetRadiusFromCollider(Collider2D collider)
+    {
+        float radius = 0f;
+        if (collider is CircleCollider2D)
+        {
+            radius = ((CircleCollider2D)collider).radius;
+        }
+        else if (collider is BoxCollider2D)
+        {
+            Vector2 boxSize = ((BoxCollider2D)collider).size;
+            radius = Mathf.Max(boxSize.x, boxSize.y) / 2f;
+        }
+
+        return radius;
+    }
+    public void init(int iDmg, float iMaxDmgDuration, float iMaxLifeTime, float iEffectTime)
+    {
+        maxDmgDuration = iMaxDmgDuration;
+        maxLifeTime = iMaxLifeTime;
+        dmg = iDmg;
+        effectTime = iEffectTime;
     }
 }
 

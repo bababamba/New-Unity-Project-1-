@@ -15,6 +15,7 @@ public class item_base : MonoBehaviour
     protected GameObject Manager;
     protected GameManager gameManager;
     protected bool isPassive;
+    protected int level = 1;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -62,5 +63,9 @@ public class item_base : MonoBehaviour
     protected virtual void itemTrigger()
     {
 
+    }
+    public virtual void levelUp()
+    {
+        this.level++;
     }
 }
