@@ -7,7 +7,7 @@ public class areaD_base : MonoBehaviour
     float lifeTime;
     float dmgDuration = 0;
     // dmg, maxLifeTime, maxDmgDuration, effectTime
-    protected int dmg=1;
+    protected float dmg=1;
     protected float maxLifeTime = 1;
     protected float maxDmgDuration = 1;
     protected float effectTime =1;
@@ -31,7 +31,7 @@ public class areaD_base : MonoBehaviour
                 Collider2D[] colliders = Physics2D.OverlapAreaAll(transform.position - GetComponent<Collider2D>().bounds.extents,transform.position + GetComponent<Collider2D>().bounds.extents);
                 foreach (Collider2D collider in colliders)
                 {
-                    Debug.Log(collider);
+                    
                     if (collider.CompareTag("Enemy"))
                     {
                         enemy_base enemy = collider.GetComponent<enemy_base>();
@@ -90,7 +90,7 @@ public class areaD_base : MonoBehaviour
 
         return radius;
     }
-    public void init(int iDmg, float iMaxDmgDuration, float iMaxLifeTime, float iEffectTime)
+    public void init(float iDmg, float iMaxDmgDuration, float iMaxLifeTime, float iEffectTime)
     {
         maxDmgDuration = iMaxDmgDuration;
         maxLifeTime = iMaxLifeTime;

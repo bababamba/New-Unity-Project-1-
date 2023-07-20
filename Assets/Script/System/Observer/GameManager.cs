@@ -5,13 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     bool isGaming;
-    int killCount;
-    int goldEarned;
-    float exp;
-    float maxExp;
-    bool isPlayerActive = false;
+    public int killCount;
+    public int goldEarned;
+    public float exp;
+    public float maxExp;
+    public bool isPlayerActive = false;
     public GameObject[] enemies;
+    public GameObject enemy;
+    public GameObject UIManagerObject;
+    public GameObject itemManagerObject;
 
+    private UIManager UIM;
+    private itemManager itemM;
+    public float minDistance = 13f;
+    public float maxDistance = 16f;
+    public float spawnRate = 1f;
+    public float currentSpawnRate = 1f;
 
     public GameObject player;
 
@@ -25,28 +34,41 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+        if (isGaming)
+        {
+            currentSpawnRate -= Time.deltaTime;
+            if (currentSpawnRate <= 0f)
+            {
+                currentSpawnRate += spawnRate;
+                SpawnMonster();
+               
+            }
+        }
     }
     void init()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        UIM = UIManagerObject.GetComponent<UIManager>();
+        itemM = itemManagerObject.GetComponent<itemManager>();
         killCount = 0;
         goldEarned = 0;
         isGaming = true;
         exp = 0;
-        maxExp = 100;
+        maxExp = 100f;
     }
     public void expUp(float earned)
     {
         exp += earned;
         while (exp > maxExp)
         {
+            //getUnactiveItems();
+            UIM.LevelUpStart();
             exp -= maxExp;
-            levelUp();
-            
         }
     }
-    public void levelUp()
+    public void levelUp(int a)
     {
+        
         maxExp += (float)0.3 * maxExp;
     }
     public void killCountUp()
@@ -109,5 +131,43 @@ public class GameManager : MonoBehaviour
         else
             return player.transform;
     }
+    private void SpawnMonster()
+    {
+        Vector2 playerPosition = player.transform.position;
+        Vector2 spawnPosition = GetRandomSpawnPosition(playerPosition);
+        GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+        while (IsOverlappingTree(spawnedEnemy))
+        {
+            spawnedEnemy.transform.position = GetRandomSpawnPosition(playerPosition);
+        }
 
+        
+    }
+
+    private Vector2 GetRandomSpawnPosition(Vector2 playerPosition)
+    {
+        float distance = Random.Range(minDistance, maxDistance);
+        Vector2 randomDirection = Random.insideUnitCircle.normalized;
+        Vector2 spawnPosition = playerPosition + randomDirection * distance;
+
+        return spawnPosition;
+    }
+
+    private bool IsOverlappingTree(GameObject enemyCollider)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyCollider.transform.position, 1f);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Structure"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+
+    
 }

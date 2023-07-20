@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class weapon_base : item_base
 {
-    protected int basic_attack;
-    protected int add;
-    protected int apd;
-    protected int dmg;
+    protected float basic_attack;
+    protected float add;
+    protected float apd;
+    protected float dmg;
     protected Transform here;
     private void Awake()
     {
@@ -17,9 +17,7 @@ public class weapon_base : item_base
     protected override void Start()
     {
         base.Start();
-        dmg += playerScript.ad * add;
-        dmg += playerScript.ap * apd;
-        dmg += basic_attack;
+        calcDmg();
 
     }
 
@@ -29,6 +27,14 @@ public class weapon_base : item_base
         base.Update();
         
 
+    }
+    protected float calcDmg()
+    {
+        dmg = 0f;
+        dmg += playerScript.ad * add;
+        dmg += playerScript.ap * apd;
+        dmg += basic_attack;
+        return dmg;
     }
     
 }

@@ -24,8 +24,8 @@ public class flower : synergy_base
 
 
     }
-    protected override void itemTrigger()
+    protected override void itemTrigger(int itemLevel)
     {
-        Debug.Log("synergy!@");
+        
     }
 }

@@ -11,6 +11,8 @@ public class itemManager : MonoBehaviour
     public item_base[] inventory;
     public synergy_base[] synergies;
     public Player player;
+    
+    List<int> tempItems = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +73,30 @@ public class itemManager : MonoBehaviour
                 Debug.Log(item);
             else
                 Debug.Log("ºó Ä­");
+        }
+    }
+    public List<int> getUnactiveItems()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i].active == false)
+            {
+                tempItems.Add(i);
+            }
+        }
+        return tempItems;
+
+    }
+    public void itemEarn(int num)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            if(inventory[i] == null)
+            {
+                items[num].active = true;
+                inventory[i] = items[num];
+                break;
+            }
         }
     }
 }

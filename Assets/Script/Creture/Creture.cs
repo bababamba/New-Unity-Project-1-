@@ -17,7 +17,7 @@ public class Creture : Damageable
         this.speed = speed;
         this.type = type;
     }
-    public virtual void takeDamage(int dmg)
+    public virtual void takeDamage(float dmg)
     {
         this.addCurHP(-dmg);
     }

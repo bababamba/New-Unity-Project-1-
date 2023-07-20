@@ -24,7 +24,7 @@ public class pro_granade : projectile_base
         boomScript.init(boomDmg, 1, 0, 0.5f);
         base.die();
     }
-    public override void init(int iDmg, float iMaxLifetime, int iMaxLifePen)
+    public override void init(float iDmg, float iMaxLifetime, int iMaxLifePen)
     {
         base.init(1, iMaxLifetime, iMaxLifePen);
     }

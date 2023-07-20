@@ -19,8 +19,11 @@ public class fireOfHeart : areaD_base
     // Update is called once per frame
     protected override void Update()
     {
-        this.transform.position = player.transform.position;
-        base.Update();
+        if (player)
+        {
+            this.transform.position = player.transform.position;
+            base.Update();
+        }
 
     }
     

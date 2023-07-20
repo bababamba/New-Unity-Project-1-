@@ -24,8 +24,8 @@ public class sunFlower : passive_base
 
 
     }
-    protected override void itemTrigger()
+    protected override void itemTrigger(int itemLevel)
     {
-        playerScript.addCurHP(1);
+        playerScript.addCurHP(itemLevel);
     }
 }

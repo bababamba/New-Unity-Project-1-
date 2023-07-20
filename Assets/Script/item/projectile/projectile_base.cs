@@ -10,7 +10,7 @@ public class projectile_base : MonoBehaviour
     //maxLifetime, maxLifePen,dmg
     protected float maxLifetime = 5;
     protected int maxLifePen = 1;
-    protected int dmg = 10;
+    protected float dmg = 10;
     protected private List<enemy_base> attackedEnemies = new List<enemy_base>(); // 공격한 적을 저장하는 리스트
     void Awake()
     {
@@ -69,7 +69,7 @@ public class projectile_base : MonoBehaviour
 
 
     }
-    public virtual void init(int iDmg, float iMaxLifetime,  int iMaxLifePen)
+    public virtual void init(float iDmg, float iMaxLifetime,  int iMaxLifePen)
     {
         dmg = iDmg;
         maxLifePen = iMaxLifePen;

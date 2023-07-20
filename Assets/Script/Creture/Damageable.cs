@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    private int curHP;
-    private int maxHP;
+    private float curHP;
+    private float maxHP;
     public GameObject owner;
     
     // Start is called before the first frame update
@@ -13,22 +13,22 @@ public class Damageable : MonoBehaviour
     {
     }
 
-    public int getCurHP()
+    public float getCurHP()
     {
 
         return this.curHP;
     }
-    public int getCurHPPercent()
+    public float getCurHPPercent()
     {
 
         return this.curHP;
     }
-    public int getMaxHP()
+    public float getMaxHP()
     {
 
         return this.maxHP;
     }
-    public void addCurHP(int value)
+    public void addCurHP(float value)
     {
         if(value > 0)
         {
@@ -44,7 +44,7 @@ public class Damageable : MonoBehaviour
 
         }
     }
-    public void setCurHP(int value)
+    public void setCurHP(float value)
     {
         if (value > 0)
         {
@@ -60,7 +60,7 @@ public class Damageable : MonoBehaviour
 
         }
     }
-    public void addMaxHP(int value)
+    public void addMaxHP(float value)
     {
         if (value > 0)
         {
@@ -78,7 +78,7 @@ public class Damageable : MonoBehaviour
                 death();
         }
     }
-    public void setMaxHP(int value)
+    public void setMaxHP(float value)
     {
         if (value > 0)
         {

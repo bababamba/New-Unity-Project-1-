@@ -21,7 +21,7 @@ public class Player : Creture
     {
         iManager = GameObject.Find("itemManager");
         imanager = iManager.GetComponent<itemManager>();
-        this.init(100, 3, 1);
+        this.init(100, 10, 1);
         VJ.speed = this.speed;
         
         gameObject.tag = "Player";
@@ -65,8 +65,9 @@ public class Player : Creture
     {
         if (collision.gameObject.CompareTag("ItemObject"))
         {
-            Debug.Log("item!");
-            gameManager.expUp(10);
+            Debug.Log(gameManager.exp);
+            Debug.Log(gameManager.maxExp);
+            gameManager.expUp(10f);
             Destroy(collision.gameObject);
         }
     }
