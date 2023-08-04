@@ -17,6 +17,7 @@ public class weapon_base : item_base
     protected override void Start()
     {
         base.Start();
+        itemType = 1;
         calcDmg();
 
     }

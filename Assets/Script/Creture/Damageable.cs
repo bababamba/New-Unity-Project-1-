@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Damageable : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class Damageable : MonoBehaviourPunCallbacks
 {
     private float curHP;
     private float maxHP;

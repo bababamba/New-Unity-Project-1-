@@ -22,7 +22,7 @@ public class passive_base : item_base
     protected override void Start()
     {
         base.Start();
-       
+        itemType = 2;
     }
 
     // Update is called once per frame

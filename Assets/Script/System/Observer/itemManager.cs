@@ -8,7 +8,8 @@ public class itemManager : MonoBehaviour
     GameObject[] itemObject;
     GameObject[] synergyObject;
     public item_base[] items;
-    public item_base[] inventory;
+    [SerializeField]
+    private inventory inventory;
     public synergy_base[] synergies;
     public Player player;
     
@@ -16,7 +17,7 @@ public class itemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory = new item_base[9];
+       
     }
 
     // Update is called once per frame
@@ -31,14 +32,13 @@ public class itemManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            items[0].active = true;
-            inventory[0] = items[0];
+            for(int i = 0;i<items.Length; i++)
+            {
+                print(items[i] + " " + i);
+            }
+           
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            items[1].active = true;
-            inventory[1] = items[1];
-        }
+
 
         if(items[0].active == true && items[1].active == true)
         {
@@ -67,13 +67,7 @@ public class itemManager : MonoBehaviour
     }
     public void getInventory()
     {
-        foreach(item_base item in inventory)
-        {
-            if (item)
-                Debug.Log(item);
-            else
-                Debug.Log("ºó Ä­");
-        }
+        
     }
     public List<int> getUnactiveItems()
     {
@@ -87,16 +81,61 @@ public class itemManager : MonoBehaviour
         return tempItems;
 
     }
-    public void itemEarn(int num)
+    public List<int> getActiveItems()
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            if(inventory[i] == null)
+            if (items[i].active == true)
             {
-                items[num].active = true;
-                inventory[i] = items[num];
-                break;
+                tempItems.Add(i);
             }
         }
+        return tempItems;
+
     }
+    public List<item_base> forLevelUP()
+    {
+        List<int> DropPool = getActiveItems();
+        List<int> selected = new List<int>();
+        List<item_base> item_s = new List<item_base>();
+        if(DropPool.Count > 1)
+        {
+            selected.AddRange(PickRandomNumbers(DropPool, 1));
+            selected.AddRange(PickRandomNumbers(getUnactiveItems(), 2));
+
+        }
+        else
+        {
+            selected.AddRange(PickRandomNumbers(getUnactiveItems(), 3));
+        }
+        item_s.Add(items[selected[0]]);
+        item_s.Add(items[selected[1]]);
+        item_s.Add(items[selected[2]]);
+        return item_s;
+    }
+    private List<int> PickRandomNumbers(List<int> sourceList, int count)
+    {
+        List<int> randomNumbers = new List<int>();
+
+        if (count > sourceList.Count)
+        {
+            Debug.LogWarning("Count exceeds list size.");
+            return randomNumbers;
+        }
+
+        System.Random random = new System.Random();
+
+        for (int i = 0; i < count; i++)
+        {
+            int randomIndex = random.Next(sourceList.Count);
+            int randomNumber = sourceList[randomIndex];
+            randomNumbers.Add(randomNumber);
+            sourceList.RemoveAt(randomIndex);
+        }
+
+        return randomNumbers;
+    }
+
+
+
 }

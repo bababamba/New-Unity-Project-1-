@@ -13,14 +13,17 @@ public class basicWeapon : weapon_base
         basic_attack = 10;
         add = 0.1f;
         base.Start();
-        invenNum = 0;
-        itemNum = 1;
+        itemNum = 0;
         Maxcooldown = 1;
+        itemName = "호신용 무기";
+        
+        itemCaption = "이정도의 무기도 없다면 이곳에서 살아남을 수 없다.";
     }
 
     // Update is called once per frame
     protected override void Update()
     {
+        itemText = "가장 가까운 적에게" + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 입히는 투사체를 발사한다.";
         base.Update();
     }
     protected override void itemTrigger(int itemLevel)

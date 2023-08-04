@@ -59,18 +59,15 @@ public class GameManager : MonoBehaviour
     public void expUp(float earned)
     {
         exp += earned;
-        while (exp > maxExp)
+        while (exp >= maxExp)
         {
-            //getUnactiveItems();
+            
             UIM.LevelUpStart();
             exp -= maxExp;
+            maxExp += (float)0.3 * maxExp;
         }
     }
-    public void levelUp(int a)
-    {
-        
-        maxExp += (float)0.3 * maxExp;
-    }
+    
     public void killCountUp()
     {
         killCount++;

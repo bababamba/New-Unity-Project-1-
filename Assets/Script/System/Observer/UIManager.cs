@@ -20,11 +20,12 @@ public class UIManager : MonoBehaviour
     public Button mainMenuButton;
     private bool isPaused = false;
 
-    public GameObject levelUpMenu;
-    public Button Button1;
-    public Button Button2;
-    public Button Button3;
-    
+    [SerializeField]
+    private levelUpUI levelUpUIScript;
+    [SerializeField]
+    private itemManager itemManagerScript;
+
+    public item_base testItem;
 
     GameManager gameManagerScript;
     private float gold;
@@ -32,35 +33,19 @@ public class UIManager : MonoBehaviour
     private float maxExp; // 플레이어의 최대 경험치
     private float expPercentNumber;
 
-    public GameObject inventory;
-    public Image invenFrame0;
-    public Image invenIcon0;
-    public Image invenFrame1;
-    public Image invenIcon1;
-    public Image invenFrame2;
-    public Image invenIcon2;
-    public Image invenFrame3;
-    public Image invenIcon3;
-    public Image invenFrame4;
-    public Image invenIcon4;
-    public Image invenFrame5;
-    public Image invenIcon5;
-    public Image invenFrame6;
-    public Image invenIcon6;
-    public Image invenFrame7;
-    public Image invenIcon7;
-    public Image invenFrame8;
-    public Image invenIcon8;
-    public Image invenFrameCurrent;
-    public Image invenIconCurrent;
+    public GameObject inventoryObject;
+    private inventory inventory;
 
 
-    public Sprite[] itemSprites;
-    private int[] currentSpriteIndexOfInven = new int[10];
+    private void Awake()
+    {
+        inventoryObject.SetActive(true);
+    }
     void Start()
     {
         // 플레이어 오브젝트에서 ExpController 스크립트를 찾아서 exp와 maxExp 값을 가져옵니다.
         gameManagerScript = gameManager.GetComponent<GameManager>();
+        inventory = inventoryObject.GetComponent<inventory>();
         if (gameManagerScript != null)
         {
             gold = gameManagerScript.goldEarned;
@@ -73,12 +58,12 @@ public class UIManager : MonoBehaviour
         resumeButton.onClick.AddListener(ResumeGame);
         optionButton.onClick.AddListener(OpenOptions);
         mainMenuButton.onClick.AddListener(ReturnToMainMenu);
-        Button1.onClick.AddListener(OnLevelUpButton1Click);
-        Button2.onClick.AddListener(OnLevelUpButton2Click);
-        Button3.onClick.AddListener(OnLevelUpButton3Click);
+
         // 시작 시에는 pauseMenu를 비활성화합니다.
+        
         pauseMenu.SetActive(false);
-        levelUpMenu.SetActive(false);
+
+        inventoryObject.SetActive(true);
     }
 
     void Update()
@@ -98,6 +83,7 @@ public class UIManager : MonoBehaviour
         {
             if (isPaused)
             {
+                inventoryObject.SetActive(false);
                 pauseMenu.SetActive(false);
                 ResumeGame();
             }
@@ -106,6 +92,24 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(true);
                 PauseGame();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.I)) // 또는 원하는 키를 사용합니다.
+        {
+            if (isPaused)
+            {
+                pauseMenu.SetActive(false);
+                inventoryObject.SetActive(false);
+                ResumeGame();
+            }
+            else
+            {
+                inventoryObject.SetActive(true);
+                PauseGame();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.A)) // 또는 원하는 키를 사용합니다.
+        {
+            inventory.AcquireItem(testItem);
         }
     }
     public void PauseGame()
@@ -136,42 +140,23 @@ public class UIManager : MonoBehaviour
     {
         return a;
     }
+
     // 레벨업 버튼을 누를 때 실행될 함수들입니다.
-    public void OnLevelUpButton1Click()
-    {
-        gameManagerScript.levelUp(1);
-
-        ResumeGame();
-        levelUpMenu.SetActive(false);
-    }
-
-    public void OnLevelUpButton2Click()
-    {
-        gameManagerScript.levelUp(2);
-        ResumeGame();
-        levelUpMenu.SetActive(false);
-    }
-
-    public void OnLevelUpButton3Click()
-    {
-        gameManagerScript.levelUp(3);
-
-        ResumeGame();
-        levelUpMenu.SetActive(false);
-    }
-
     public void LevelUpStart()
     {
-        levelUpMenu.SetActive(true);
+        List<item_base> item_selected = itemManagerScript.forLevelUP();
+
+        levelUpUIScript.OpenLevelUP();
+        
+        levelUpUIScript.setItems(item_selected[0], item_selected[1], item_selected[2]);
         PauseGame();
         
     }
-    public void LevelUp(int level)
+    public void LevelUp()
     {
-        levelUpMenu.SetActive(false);
-        PauseGame();
+        ResumeGame();
         // 레벨업 함수에서 반환된 레벨을 출력합니다.
-        Debug.Log("Player Level Up to: " + level);
+        Debug.Log("Player Level Up!");
 
         // 레벨업 이벤트를 발생시킵니다.
 

@@ -21,6 +21,7 @@ public class mapGenerator : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.Find("player");
         GenerateMap(1, 0, 0);
         GenerateMap(0, 1, 0);
         GenerateMap(0, -1, 0);

@@ -10,18 +10,23 @@ public class moonFlower : weapon_base
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         basic_attack = 30;
         add = 0.3f;
         apd = 0.3f;
         itemNum = 4;
         Maxcooldown = 1.5f;
-        base.Start();
+        
+        itemName = "달바라기";
+        itemText = "진행방향을 달의 형태로 베어" + basic_attack + " + " + apd * playerScript.ap +  "+"+ add*playerScript.ad + "만큼의 피해를 준다.";
+        itemCaption = "오직 만월에만 담금질 한 검이다. 달의 마력이 배어있어 사용자의 마력에 따라 더 날카로워진다.";
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+        itemText = "진행방향을 달의 형태로 베어" + basic_attack + " + " + apd * playerScript.ap + "+" + add * playerScript.ad + "만큼의 피해를 준다.";
     }
     protected override void itemTrigger(int itemLevel)
     {

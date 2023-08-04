@@ -24,8 +24,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     
 
-    public Sprite None;
-    public Sprite Knob;
+ 
     private void Awake()
     {
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class item_base : MonoBehaviour
 {
     public bool active = false;
@@ -16,6 +17,12 @@ public class item_base : MonoBehaviour
     protected GameManager gameManager;
     protected bool isPassive;
     protected int level = 1;
+    public Sprite itemImage;
+    public int itemType;
+
+    protected string itemName;
+    protected string itemText;
+    protected string itemCaption;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -26,6 +33,8 @@ public class item_base : MonoBehaviour
         //this.transform.position = new Vector3(itemNum,0,0);
         Manager = GameObject.Find("GameManager");
         gameManager = Manager.GetComponent<GameManager>();
+        itemType = 0;
+
     }
 
     // Update is called once per frame
@@ -67,5 +76,17 @@ public class item_base : MonoBehaviour
     public virtual void levelUp()
     {
         this.level++;
+    }
+    public string getItemName()
+    {
+        return itemName;
+    }
+    public string getItemText()
+    {
+        return itemText;
+    }
+    public string getItemCaption()
+    {
+        return itemCaption;
     }
 }

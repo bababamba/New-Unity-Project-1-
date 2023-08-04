@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Player : Creture
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.UI;
+public class Player : Creture, IPunObservable
 {
+    public Rigidbody2D RB;
+    public Animator AN;
+    public SpriteRenderer SR;
+    public PhotonView PV;
+    public Text NickNameText;
+
+    public GameObject HealthBar;
     
     public VirtualJoystick VJ;
-    public GameObject iManager;
-    private itemManager imanager;
+    
+    
     public Vector2 playerDirection;
 
     public int armor;
@@ -19,8 +28,10 @@ public class Player : Creture
     public float critical;
     private void Awake()
     {
-        iManager = GameObject.Find("itemManager");
-        imanager = iManager.GetComponent<itemManager>();
+        NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
+        NickNameText.color = PV.IsMine ? Color.white : Color.blue;
+
+        
         this.init(100, 10, 1);
         VJ.speed = this.speed;
         
@@ -29,7 +40,7 @@ public class Player : Creture
     // Start is called before the first frame update
     private void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -37,23 +48,12 @@ public class Player : Creture
     {
         // 이전 위치 갱신
         
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            imanager.getInventory();
-            Debug.Log(getCurHP());
-            Debug.Log(armor);
-            
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            takeDamage(20);
-        }
-        //gameManager.closestEnemy().transform.position;
         
     }
     public override void death()
     {
-        base.death();
+        //base.death();
+        VJ.speed = 0;
         Debug.Log("GAME OVER");
     }
     public Transform playerTransform()
@@ -65,8 +65,6 @@ public class Player : Creture
     {
         if (collision.gameObject.CompareTag("ItemObject"))
         {
-            Debug.Log(gameManager.exp);
-            Debug.Log(gameManager.maxExp);
             gameManager.expUp(10f);
             Destroy(collision.gameObject);
         }
@@ -98,5 +96,10 @@ public class Player : Creture
             this.critical -= cCritical;
             
         }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+       
     }
 }
