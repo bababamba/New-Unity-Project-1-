@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems; // 키보드, 마우스, 터치를 이벤트로 오브젝트에 보낼 수 있는 기능을 지원
+using Photon.Pun;
+using Photon.Realtime;
 
-public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class VirtualJoystick : MonoBehaviourPunCallbacks, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     
     public GameObject player;
@@ -30,7 +32,9 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     }
     private void Start()
-    {
+    {if (!photonView.IsMine)
+            this.gameObject.SetActive(false);
+
         playerScript = player.GetComponent<Player>();
     }
 

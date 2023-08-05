@@ -4,6 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using Cinemachine;
+
+
 public class Player : Creture, IPunObservable
 {
     public Rigidbody2D RB;
@@ -13,11 +16,12 @@ public class Player : Creture, IPunObservable
     public Text NickNameText;
 
     public GameObject HealthBar;
-    
+    private Transform barTransform;
     public VirtualJoystick VJ;
     
     
     public Vector2 playerDirection;
+    Vector3 curPos;
 
     public int armor;
     public int ad;
@@ -36,17 +40,29 @@ public class Player : Creture, IPunObservable
         VJ.speed = this.speed;
         
         gameObject.tag = "Player";
+        if (PV.IsMine)
+        {
+            var CM = GameObject.Find("CMCamera").GetComponent<CinemachineVirtualCamera>();
+            CM.Follow = transform;
+            CM.LookAt = transform;
+        }
+
+
+
     }
     // Start is called before the first frame update
     private void Start()
     {
-       
+        barTransform = HealthBar.transform;
     }
 
     // Update is called once per frame
     private void Update()
-    {
-        // 이전 위치 갱신
+    {//위치 동기화
+        UpdateHealthBar();
+        if (!PV.IsMine)
+            if ((transform.position - curPos).magnitude >= 100) transform.position = curPos;
+            else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
         
         
     }
@@ -100,6 +116,21 @@ public class Player : Creture, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-       
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(HealthBar.transform.localScale);
+        }
+        else
+        {
+            curPos = (Vector3)stream.ReceiveNext();
+            HealthBar.transform.localScale = (Vector3)stream.ReceiveNext();
+        }
+    }
+    private void UpdateHealthBar()
+    {
+        float scale = (float)this.getCurHP() / (float)this.getMaxHP();
+        barTransform.localScale = new Vector3(scale, 0.1f, 1f);
+        barTransform.localPosition = new Vector3(-0.5f + scale * 0.5f, 0.7f, 0f);
     }
 }

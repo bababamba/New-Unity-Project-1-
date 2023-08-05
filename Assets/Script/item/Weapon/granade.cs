@@ -28,7 +28,7 @@ public class granade : weapon_base
     }
     protected override void itemTrigger(int itemLevel)
     {
-        Transform temp = gameManager.randomEnemy();
+        Transform temp = gameManager.randomEnemy(playerNumber);
         if (temp != player.transform)
         {
             GameObject whiteBox = Instantiate(bullet, player.transform.position, Quaternion.identity);

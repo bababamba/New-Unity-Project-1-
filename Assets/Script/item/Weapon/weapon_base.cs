@@ -18,7 +18,7 @@ public class weapon_base : item_base
     {
         base.Start();
         itemType = 1;
-        calcDmg();
+       
 
     }
 

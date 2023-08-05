@@ -30,7 +30,7 @@ public class moonFlower : weapon_base
     }
     protected override void itemTrigger(int itemLevel)
     {
-        Transform temp = gameManager.randomEnemy();
+        Transform temp = gameManager.randomEnemy(playerNumber);
         if (temp != player.transform)
         {
             GameObject whiteBox = Instantiate(bullet, player.transform.position+ new Vector3(playerScript.playerDirection.x, playerScript.playerDirection.y)*1.5f, Quaternion.LookRotation(Vector3.forward, playerScript. playerDirection));

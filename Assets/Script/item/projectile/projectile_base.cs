@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class projectile_base : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class projectile_base : MonoBehaviourPunCallbacks, IPunObservable
 {
     protected float lifeTime;
     protected int lifePen;
 
+    private Vector3 networkPosition;
     //maxLifetime, maxLifePen,dmg
     protected float maxLifetime = 5;
     protected int maxLifePen = 1;
@@ -34,47 +36,58 @@ public class projectile_base : MonoBehaviour
         else
             Destroy(gameObject);
         Vector2 bulletPosition = transform.position;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(bulletPosition, 0.1f);
-        foreach (Collider2D collider in colliders)
+        if (!photonView.IsMine)
         {
-            if (collider.CompareTag("Enemy"))
-            {
-                enemy_base enemy = collider.GetComponent<enemy_base>();
-                if (enemy != null && !attackedEnemies.Contains(enemy))
-                {
-                    enemy.takeDamage(dmg);
-                    lifePen--;
-                    attackedEnemies.Add(enemy);
-                }
-                if (lifePen <= 0)
-                {
-                    die();
-                }
-
-
-                break;
-            }
+            transform.position = Vector3.Lerp(transform.position, networkPosition, Time.deltaTime * 5);
         }
-        for (int i = attackedEnemies.Count - 1; i >= 0; i--)
+        else
         {
-            enemy_base enemy = attackedEnemies[i];
-            if (!IsEnemyColliderInColliders(enemy, colliders))
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(bulletPosition, 0.1f);
+            foreach (Collider2D collider in colliders)
             {
-                attackedEnemies.RemoveAt(i);
+                if (collider.CompareTag("Enemy"))
+                {
+                    enemy_base enemy = collider.GetComponent<enemy_base>();
+                    if (enemy != null && !attackedEnemies.Contains(enemy))
+                    {
+                        enemy.takeDamage(dmg);
+                        lifePen--;
+                        attackedEnemies.Add(enemy);
+                    }
+                    if (lifePen <= 0)
+                    {
+                        die();
+                    }
+
+
+                    break;
+                }
             }
+            for (int i = attackedEnemies.Count - 1; i >= 0; i--)
+            {
+                enemy_base enemy = attackedEnemies[i];
+                if (!IsEnemyColliderInColliders(enemy, colliders))
+                {
+                    attackedEnemies.RemoveAt(i);
+                }
+            }
+
+
+
+
         }
-
-
-
-
-
     }
-    public virtual void init(float iDmg, float iMaxLifetime,  int iMaxLifePen)
+    [PunRPC]
+    public void initP(float iDmg, float iMaxLifetime, int iMaxLifePen)
     {
         dmg = iDmg;
         maxLifePen = iMaxLifePen;
         maxLifetime = iMaxLifetime;
 
+    }
+    public virtual void init(float iDmg, float iMaxLifetime,  int iMaxLifePen)
+    {
+        photonView.RPC("initP", RpcTarget.AllBuffered, iDmg, iMaxLifetime, iMaxLifePen);
     }
     bool IsEnemyAttacked(enemy_base enemy)
     {
@@ -106,5 +119,17 @@ public class projectile_base : MonoBehaviour
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
         }
 
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+        }
+        else
+        {
+            networkPosition = (Vector3)stream.ReceiveNext();
+        }
     }
 }

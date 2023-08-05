@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     bool isGaming;
     public int killCount;
@@ -15,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject UIManagerObject;
     public GameObject itemManagerObject;
 
+    public PhotonView PV;
+
     private UIManager UIM;
     private itemManager itemM;
     public float minDistance = 13f;
@@ -22,7 +26,7 @@ public class GameManager : MonoBehaviour
     public float spawnRate = 1f;
     public float currentSpawnRate = 1f;
 
-    public GameObject player;
+    public GameObject[] player;
 
     // Start is called before the first frame update
     void Start()
@@ -36,18 +40,19 @@ public class GameManager : MonoBehaviour
         
         if (isGaming)
         {
-            currentSpawnRate -= Time.deltaTime;
+            //currentSpawnRate -= Time.deltaTime;
             if (currentSpawnRate <= 0f)
             {
                 currentSpawnRate += spawnRate;
-                SpawnMonster();
+                for(int i=0;i<player.Length;i++)
+                SpawnMonster(i);
                
             }
         }
     }
     void init()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectsWithTag("Player");
         UIM = UIManagerObject.GetComponent<UIManager>();
         itemM = itemManagerObject.GetComponent<itemManager>();
         killCount = 0;
@@ -58,6 +63,13 @@ public class GameManager : MonoBehaviour
     }
     public void expUp(float earned)
     {
+        PV.RPC("expUpP", RpcTarget.AllBuffered, earned);
+    }
+
+
+    [PunRPC]
+    public void expUpP(float earned)
+    {
         exp += earned;
         while (exp >= maxExp)
         {
@@ -67,7 +79,7 @@ public class GameManager : MonoBehaviour
             maxExp += (float)0.3 * maxExp;
         }
     }
-    
+    [PunRPC]
     public void killCountUp()
     {
         killCount++;
@@ -84,7 +96,7 @@ public class GameManager : MonoBehaviour
     {
         return goldEarned;
     }
-    public Transform closestEnemy()
+    public Transform closestEnemy(int playerNumber, float range)
     {
         GameObject cEnemy = null;
         float closestDistance = Mathf.Infinity;
@@ -96,12 +108,13 @@ public class GameManager : MonoBehaviour
         {
 
 
-            float distanceToPlayer = Vector2.Distance(enemy.transform.position, player.transform.position);
+            float distanceToPlayer = Vector2.Distance(enemy.transform.position, player[playerNumber].transform.position);
 
             // 현재 적과 플레이어 사이의 거리가 가장 가까운 거리라면 갱신
             if (distanceToPlayer < closestDistance)
             {
                 closestDistance = distanceToPlayer;
+                if(closestDistance<range)
                 cEnemy = enemy;
             }
 
@@ -109,9 +122,9 @@ public class GameManager : MonoBehaviour
         if (cEnemy)
             return cEnemy.transform;
         else
-            return player.transform;
+            return player[playerNumber].transform;
     }
-    public Transform randomEnemy()
+    public Transform randomEnemy(int playerNumber)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         int len = enemies.Length;
@@ -121,16 +134,16 @@ public class GameManager : MonoBehaviour
             if (enemies[seed])
                 return enemies[seed].transform;
             else
-                return player.transform;
+                return player[playerNumber].transform;
         }
         else if (len == 1)
             return enemies[0].transform;
         else
-            return player.transform;
+            return player[playerNumber].transform;
     }
-    private void SpawnMonster()
+    private void SpawnMonster(int playerNumber)
     {
-        Vector2 playerPosition = player.transform.position;
+        Vector2 playerPosition = player[playerNumber].transform.position;
         Vector2 spawnPosition = GetRandomSpawnPosition(playerPosition);
         GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
         while (IsOverlappingTree(spawnedEnemy))
@@ -165,6 +178,18 @@ public class GameManager : MonoBehaviour
         return false;
     }
     
+    public void FindAllPlayer()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player");
+    }
+    public int getPlayerNumber(GameObject p)
+    {
+        for (int i = 0; i < player.Length; i++)
+            if (player[i] == p)
+                return i;
 
+        Debug.LogError("Not Player!");
+        return -1;
+    }
     
 }

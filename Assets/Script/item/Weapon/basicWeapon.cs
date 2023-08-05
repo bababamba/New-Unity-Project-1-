@@ -28,7 +28,7 @@ public class basicWeapon : weapon_base
     }
     protected override void itemTrigger(int itemLevel)
     {
-        Transform temp = gameManager.closestEnemy();
+        Transform temp = gameManager.closestEnemy(playerNumber,100f);
         if (temp != player.transform)
         {
             GameObject whiteBox = Instantiate(bullet, player.transform.position, Quaternion.identity);

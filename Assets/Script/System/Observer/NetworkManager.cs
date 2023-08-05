@@ -29,6 +29,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         //base.OnJoinedRoom();
         DisconnectPanel.SetActive(false);
+        if(!PhotonNetwork.IsMasterClient)
         Spawn();
     }
     private void Update()
