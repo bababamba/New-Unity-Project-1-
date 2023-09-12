@@ -17,6 +17,7 @@ public class Creture : Damageable
         this.speed = speed;
         this.type = type;
     }
+
     public virtual void takeDamage(float dmg)
     {
         this.addCurHP(-dmg);
@@ -27,5 +28,10 @@ public class Creture : Damageable
     public override void death()
     {
         base.death();
+    }
+    public void SetManager()
+    {
+        Manager = GameObject.Find("GameManager");
+        gameManager = Manager.GetComponent<GameManager>();
     }
 }

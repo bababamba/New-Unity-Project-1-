@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
-public class GameManager : MonoBehaviourPunCallbacks
+
+
+public class GameManager : MonoBehaviour
 {
-    bool isGaming;
+    public bool isGaming = false;
     public int killCount;
     public int goldEarned;
     public float exp;
@@ -17,58 +17,81 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject UIManagerObject;
     public GameObject itemManagerObject;
 
-    public PhotonView PV;
+
 
     private UIManager UIM;
     private itemManager itemM;
+
     public float minDistance = 13f;
     public float maxDistance = 16f;
-    public float spawnRate = 1f;
+    public float spawnRate = 3f;
     public float currentSpawnRate = 1f;
 
     public GameObject[] player;
 
+    bool isStart = false;
     // Start is called before the first frame update
     void Start()
     {
         init();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!isStart)
+        {
+            ReadyToStart();
+            GameStart();
+
+            isStart = true;
+        }
         if (isGaming)
         {
-            //currentSpawnRate -= Time.deltaTime;
+            currentSpawnRate -= Time.deltaTime;
             if (currentSpawnRate <= 0f)
             {
                 currentSpawnRate += spawnRate;
-                for(int i=0;i<player.Length;i++)
-                SpawnMonster(i);
+                for (int i = 0; i < player.Length; i++)
+                {
+                    SpawnMonster(i);
+                    
+                }
+                if (spawnRate>0.2f)
+                spawnRate -= 0.001f;
                
             }
         }
+        else
+            GameStart();
+        
+    }
+
+    void ReadyToStart()
+    {
+        UIM.inventoryObject.GetComponent<inventory>().AcquireItem(itemM.items[0]);
     }
     void init()
     {
         player = GameObject.FindGameObjectsWithTag("Player");
         UIM = UIManagerObject.GetComponent<UIManager>();
         itemM = itemManagerObject.GetComponent<itemManager>();
+
         killCount = 0;
         goldEarned = 0;
-        isGaming = true;
+        //isGaming = true;
         exp = 0;
         maxExp = 100f;
     }
-    public void expUp(float earned)
+
+    public void GameStart()
     {
-        PV.RPC("expUpP", RpcTarget.AllBuffered, earned);
+        isGaming = true;
     }
 
 
-    [PunRPC]
-    public void expUpP(float earned)
+    public void expUp(float earned)
     {
         exp += earned;
         while (exp >= maxExp)
@@ -79,7 +102,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             maxExp += (float)0.3 * maxExp;
         }
     }
-    [PunRPC]
     public void killCountUp()
     {
         killCount++;
@@ -141,6 +163,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         else
             return player[playerNumber].transform;
     }
+
     private void SpawnMonster(int playerNumber)
     {
         Vector2 playerPosition = player[playerNumber].transform.position;
@@ -150,6 +173,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             spawnedEnemy.transform.position = GetRandomSpawnPosition(playerPosition);
         }
+        
+        spawnedEnemy.GetComponent<enemy_base>().initE(playerNumber);
 
         
     }
@@ -180,16 +205,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     
     public void FindAllPlayer()
     {
+        
         player = GameObject.FindGameObjectsWithTag("Player");
     }
-    public int getPlayerNumber(GameObject p)
+   public GameObject FindPlayerByNumber(int n)
     {
-        for (int i = 0; i < player.Length; i++)
-            if (player[i] == p)
-                return i;
+        
 
-        Debug.LogError("Not Player!");
-        return -1;
+        return player[n];
     }
     
 }

@@ -8,7 +8,7 @@ public class enemy1 : enemy_base
     protected override void Start()
     {
         base.Start();
-        this.init(100, 1, 2);
+        this.init(50, 1, 2);
     }
 
     // Update is called once per frame

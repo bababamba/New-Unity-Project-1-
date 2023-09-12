@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems; // 키보드, 마우스, 터치를 이벤트로 오브젝트에 보낼 수 있는 기능을 지원
-using Photon.Pun;
-using Photon.Realtime;
 
-public class VirtualJoystick : MonoBehaviourPunCallbacks, IBeginDragHandler, IDragHandler, IEndDragHandler
+
+public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     
     public GameObject player;
@@ -32,8 +31,7 @@ public class VirtualJoystick : MonoBehaviourPunCallbacks, IBeginDragHandler, IDr
 
     }
     private void Start()
-    {if (!photonView.IsMine)
-            this.gameObject.SetActive(false);
+    {
 
         playerScript = player.GetComponent<Player>();
     }
@@ -58,7 +56,8 @@ public class VirtualJoystick : MonoBehaviourPunCallbacks, IBeginDragHandler, IDr
     // 오브젝트를 클릭해서 드래그 하는 도중에 들어오는 이벤트 
     public void OnDrag(PointerEventData eventData)
     {
-        ControlJoystickLever(eventData); 
+        ControlJoystickLever(eventData);
+        playerScript.AN.SetBool("walk", true);
         
     }
 
@@ -86,6 +85,7 @@ public class VirtualJoystick : MonoBehaviourPunCallbacks, IBeginDragHandler, IDr
         Stick.color = parency;
         isInput = false;
         lever.anchoredPosition = Vector2.zero;
+        playerScript.AN.SetBool("walk", false);
     }
     
     private void InputControlVector()

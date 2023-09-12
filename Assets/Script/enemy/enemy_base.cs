@@ -11,7 +11,9 @@ public class enemy_base : Creture
 
     public GameObject healthBar;
     private Transform barTransform;
+    private SpriteRenderer spriteRenderer;
 
+    private Vector3 networkPosition;
     //Transform playerCenter;
     //float playerRadius;
     // Start is called before the first frame update
@@ -21,10 +23,9 @@ public class enemy_base : Creture
     }
     protected virtual void Start()
     {
-        
+
         col = GetComponent<CircleCollider2D>();
-        player = GameObject.Find("player");
-        playerScript = player.GetComponent<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         barTransform = healthBar.transform;
     }
 
@@ -34,8 +35,6 @@ public class enemy_base : Creture
        
       // moveToPlayer();
         UpdateHealthBar();
-
-
     }
     public override void death()
     {
@@ -51,7 +50,17 @@ public class enemy_base : Creture
             direction.Normalize();
             // 적을 플레이어 방향으로 이동시킴
             transform.Translate(direction * speed * Time.deltaTime);
+            if (direction.x < 0)
+                flipE(false);
+            else
+                flipE(true);
         }
+    }
+   
+public void flipE(bool a = true)
+
+    {
+        spriteRenderer.flipX = a;
     }
     /*
     private bool CheckCollisionWithCircle()
@@ -91,6 +100,12 @@ public class enemy_base : Creture
         barTransform.localScale = new Vector3(scale, 0.1f, 1f);
         barTransform.localPosition = new Vector3(-0.5f + scale * 0.5f, 0.7f, 0f);
     }
-
+    public void initE(int P)
+    {
+        SetManager();
+        
+        player = gameManager.FindPlayerByNumber(P);
+        playerScript = player.GetComponent<Player>();
+    }
 
 }

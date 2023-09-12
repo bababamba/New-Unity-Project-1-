@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
-public class areaD_base : MonoBehaviourPunCallbacks, IPunObservable
+
+public class areaD_base : MonoBehaviour
 {
     private Vector3 networkPosition;
+
     float lifeTime;
     float dmgDuration = 0;
     // dmg, maxLifeTime, maxDmgDuration, effectTime
@@ -19,56 +19,53 @@ public class areaD_base : MonoBehaviourPunCallbacks, IPunObservable
     protected virtual void Start()
     {
         init();
+
+
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (!photonView.IsMine)
-        {
-            transform.position = Vector3.Lerp(transform.position, networkPosition, Time.deltaTime * 5);
-        }
-        else
-        {
 
-
-            if (!forEffect)
+        
+        if (!forEffect)
+        {
+            if (dmgDuration <= 0)
             {
-                if (dmgDuration <= 0)
+                Vector2 bulletPosition = transform.position;
+                //Collider2D[] colliders = Physics2D.OverlapCircleAll(bulletPosition, GetRadiusFromCollider(GetComponent<Collider2D>()));
+                Collider2D[] colliders = Physics2D.OverlapAreaAll(transform.position - GetComponent<Collider2D>().bounds.extents, transform.position + GetComponent<Collider2D>().bounds.extents);
+                foreach (Collider2D collider in colliders)
                 {
-                    Vector2 bulletPosition = transform.position;
-                    //Collider2D[] colliders = Physics2D.OverlapCircleAll(bulletPosition, GetRadiusFromCollider(GetComponent<Collider2D>()));
-                    Collider2D[] colliders = Physics2D.OverlapAreaAll(transform.position - GetComponent<Collider2D>().bounds.extents, transform.position + GetComponent<Collider2D>().bounds.extents);
-                    foreach (Collider2D collider in colliders)
+
+                    if (collider.CompareTag("Enemy"))
                     {
-
-                        if (collider.CompareTag("Enemy"))
+                        enemy_base enemy = collider.GetComponent<enemy_base>();
+                        if (enemy != null)
                         {
-                            enemy_base enemy = collider.GetComponent<enemy_base>();
-                            if (enemy != null)
-                            {
-                                enemy.takeDamage(dmg);
-                            }
-
+                            enemy.takeDamage(dmg);
                         }
+
                     }
-                    dmgDuration = maxDmgDuration;
                 }
-                else
-                    dmgDuration -= Time.deltaTime;
-                if (lifeTime > 0f)
-                {
-                    lifeTime -= Time.deltaTime;
-                }
-                else
-                    die();
+                dmgDuration = maxDmgDuration;
             }
-            else if (effectTime > 0f)
-                effectTime -= Time.deltaTime;
             else
-                Destroy(this.gameObject);
+                dmgDuration -= Time.deltaTime;
+            if (lifeTime > 0f)
+            {
+                lifeTime -= Time.deltaTime;
+            }
+            else
+                die();
         }
+        else if (effectTime > 0f)
+            effectTime -= Time.deltaTime;
+        else
+            Destroy(this.gameObject);
+        
     }
+    
     void init()
     {
         lifeTime = maxLifeTime;
@@ -102,22 +99,15 @@ public class areaD_base : MonoBehaviourPunCallbacks, IPunObservable
     }
     public void init(float iDmg, float iMaxDmgDuration, float iMaxLifeTime, float iEffectTime)
     {
+        initP(iDmg, iMaxDmgDuration, iMaxLifeTime, iEffectTime);
+    }
+
+    public void initP(float iDmg, float iMaxDmgDuration, float iMaxLifeTime, float iEffectTime)
+    {
         maxDmgDuration = iMaxDmgDuration;
         maxLifeTime = iMaxLifeTime;
         dmg = iDmg;
         effectTime = iEffectTime;
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(transform.position);
-        }
-        else
-        {
-            networkPosition = (Vector3)stream.ReceiveNext();
-        }
     }
 }
 

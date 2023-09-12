@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
-public class mapGenerator : MonoBehaviourPunCallbacks
+public class mapGenerator : MonoBehaviour
 {
     public GameObject grassTile;
     public GameObject treeTile;

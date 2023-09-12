@@ -4,20 +4,20 @@ using UnityEngine;
 using System;
 public class itemManager : MonoBehaviour
 {
-    bool isinit = false;
-    GameObject[] itemObject;
+     public bool isinit = false;
+     public GameObject[] itemObject;
     GameObject[] synergyObject;
-    public item_base[] items;
+    public  List<item_base> items;
     [SerializeField]
-    private inventory inventory;
-    public synergy_base[] synergies;
-    public Player player;
+    public inventory inventory;
+    public List<synergy_base> synergies;
+    public GameObject player;
     
     List<int> tempItems = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
-       
+        player = GameObject.Find("player");
     }
 
     // Update is called once per frame
@@ -25,18 +25,8 @@ public class itemManager : MonoBehaviour
     {
         if (!isinit)
         {
-            init();
+            init(player);
             isinit = !isinit;
-        }
-        
-        
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            for(int i = 0;i<items.Length; i++)
-            {
-                print(items[i] + " " + i);
-            }
-           
         }
 
 
@@ -46,8 +36,27 @@ public class itemManager : MonoBehaviour
         }
 
     }
-    void init()
+    public void init(GameObject p)
     {
+        items.Clear();
+        synergies.Clear();
+        Transform[] childTransforms = p.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < childTransforms.Length; i++)
+        {
+            if (childTransforms[i].gameObject.GetComponent<synergy_base>())
+            {
+                synergies.Add(childTransforms[i].gameObject.GetComponent<synergy_base>());
+
+            }
+            else if (childTransforms[i].gameObject.GetComponent<item_base>())
+            {
+                items.Add(childTransforms[i].gameObject.GetComponent<item_base>());
+                
+            }
+            
+        }
+        
+        /*
         GameObject[] itemObject = GameObject.FindGameObjectsWithTag("Item");
         GameObject[] synergyObject = GameObject.FindGameObjectsWithTag("Synergy");
         items = new item_base[itemObject.Length];
@@ -61,9 +70,9 @@ public class itemManager : MonoBehaviour
         {
             synergies[i] = synergyObject[i].GetComponent<synergy_base>();
         }
-
-        Array.Sort(items, (x, y) => x.getItemNumber().CompareTo(y.getItemNumber()));
-        Array.Sort(synergies, (x, y) => x.getItemNumber().CompareTo(y.getItemNumber()));
+        */
+        items.Sort((x, y) => x.getItemNumber().CompareTo(y.getItemNumber()));
+        synergies.Sort((x, y) => x.getItemNumber().CompareTo(y.getItemNumber()));
     }
     public void getInventory()
     {
@@ -71,7 +80,7 @@ public class itemManager : MonoBehaviour
     }
     public List<int> getUnactiveItems()
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             if (items[i].active == false)
             {
@@ -83,7 +92,7 @@ public class itemManager : MonoBehaviour
     }
     public List<int> getActiveItems()
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < items.Count; i++)
         {
             if (items[i].active == true)
             {

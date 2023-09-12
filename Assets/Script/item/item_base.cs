@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
 
-public class item_base : MonoBehaviourPunCallbacks
+
+public class item_base : MonoBehaviour
 {
     public bool active = false;
     protected int itemNum = -1;
     protected int invenNum = -1;
     protected GameObject player;
-    protected int playerNumber;
+    protected int playerNumber = 0;
     protected Player playerScript;
     protected float cooldown =1;
     protected float Maxcooldown;
@@ -26,19 +25,17 @@ public class item_base : MonoBehaviourPunCallbacks
     protected string itemName;
     protected string itemText;
     protected string itemCaption;
-
-    public PhotonView PV;
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        player = GameObject.Find("player");
+        player = transform.parent.parent.gameObject;
         playerScript = player.GetComponent<Player>();
         
         gameObject.tag = "Item";
         //this.transform.position = new Vector3(itemNum,0,0);
         Manager = GameObject.Find("GameManager");
         gameManager = Manager.GetComponent<GameManager>();
-        playerNumber = gameManager.getPlayerNumber(player);
+      
         itemType = 0;
 
     }
@@ -46,12 +43,11 @@ public class item_base : MonoBehaviourPunCallbacks
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (!player)
-            getMyOwner();
+       
         
 
 
-        if(photonView.IsMine)
+
         if (active)
         {
             cooldown -= Time.deltaTime;
@@ -97,13 +93,5 @@ public class item_base : MonoBehaviourPunCallbacks
     {
         return itemCaption;
     }
-    protected void getMyOwner() {
-        
-        player = GameObject.Find("player");
-        playerScript = player.GetComponent<Player>();
-        if (player)
-            playerNumber =  gameManager.getPlayerNumber(player);
-    
-    
-    }
+
 }

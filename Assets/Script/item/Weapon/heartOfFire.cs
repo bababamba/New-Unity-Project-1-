@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
+
 
 public class heartOfFire : weapon_base
 {
     public GameObject bullet;
-   
+    fireOfHeart fire;
     
     protected override void Start()
     {
@@ -33,8 +32,11 @@ public class heartOfFire : weapon_base
     }
     protected override void itemTrigger(int itemLevel)
     {
-        PhotonNetwork.Instantiate(bullet.name, player.transform.position, Quaternion.identity).GetComponent<fireOfHeart>().init(calcDmg(), 0.2f, 1, 0);
+        GameObject fire = Instantiate(bullet, player.transform.position, Quaternion.identity);
+        fire.transform.SetParent(player.transform);
+        fire.GetComponent<fireOfHeart>().init(calcDmg(), 0.2f, 1, 0);
         
+
     }
     public override void levelUp()
     {

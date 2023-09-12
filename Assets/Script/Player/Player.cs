@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
+
 using UnityEngine.UI;
 using Cinemachine;
 
 
-public class Player : Creture, IPunObservable
+public class Player : Creture
 {
     public Rigidbody2D RB;
     public Animator AN;
     public SpriteRenderer SR;
-    public PhotonView PV;
+
     public Text NickNameText;
 
     public GameObject HealthBar;
@@ -30,22 +29,20 @@ public class Player : Creture, IPunObservable
     public int armorP;
     public int magicP;
     public float critical;
+
+    public bool playerDie = false;
     private void Awake()
     {
-        NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
-        NickNameText.color = PV.IsMine ? Color.white : Color.blue;
 
         
         this.init(100, 10, 1);
         VJ.speed = this.speed;
         
         gameObject.tag = "Player";
-        if (PV.IsMine)
-        {
+
             var CM = GameObject.Find("CMCamera").GetComponent<CinemachineVirtualCamera>();
             CM.Follow = transform;
             CM.LookAt = transform;
-        }
 
 
 
@@ -60,17 +57,28 @@ public class Player : Creture, IPunObservable
     private void Update()
     {//위치 동기화
         UpdateHealthBar();
-        if (!PV.IsMine)
-            if ((transform.position - curPos).magnitude >= 100) transform.position = curPos;
-            else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
-        
-        
+
+
+        if (playerDirection.x > 0)
+            flip(false);
+        else
+            flip(true);
+    }
+
+    public void flip(bool a)
+    {
+        SR.flipX = a;
     }
     public override void death()
     {
-        //base.death();
-        VJ.speed = 0;
-        Debug.Log("GAME OVER");
+        
+        if (!playerDie)
+        {
+            //base.death();
+            VJ.speed = 0;
+            
+            playerDie = true;
+        }
     }
     public Transform playerTransform()
     {
@@ -114,19 +122,6 @@ public class Player : Creture, IPunObservable
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(transform.position);
-            stream.SendNext(HealthBar.transform.localScale);
-        }
-        else
-        {
-            curPos = (Vector3)stream.ReceiveNext();
-            HealthBar.transform.localScale = (Vector3)stream.ReceiveNext();
-        }
-    }
     private void UpdateHealthBar()
     {
         float scale = (float)this.getCurHP() / (float)this.getMaxHP();

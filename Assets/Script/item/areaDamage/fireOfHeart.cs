@@ -5,11 +5,11 @@ using UnityEngine;
 public class fireOfHeart : areaD_base
 { // dmg, maxLifeTime, maxDmgDuration, effectTime
  
-    GameObject player;
+    public GameObject player;
     // Start is called before the first frame update
     protected override void Start()
     {
-        player = GameObject.Find("player");
+        player = transform.parent.gameObject;
         dmg = 5;
         maxLifeTime = 1;
         maxDmgDuration = 0.2f;
@@ -26,5 +26,6 @@ public class fireOfHeart : areaD_base
         }
 
     }
+   
     
 }
