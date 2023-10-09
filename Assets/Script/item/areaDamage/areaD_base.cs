@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class areaD_base : MonoBehaviour
 {
-    private Vector3 networkPosition;
-
     float lifeTime;
     float dmgDuration = 0;
     // dmg, maxLifeTime, maxDmgDuration, effectTime

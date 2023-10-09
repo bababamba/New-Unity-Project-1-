@@ -14,16 +14,19 @@ public class Theaxe : passive_base
     protected override void Start()
     {
         base.Start();
-        ad = 100;
+        ad = 30;
         armor = 1;
 
         itemName = "날카로운 도끼";
-
-        itemCaption = "공격력을 강하게 올려준다.공격력:100";
+        itemText = "공격력:30";
+        itemCaption = "공격력을 강하게 올려준다. 휘두르기에는 너무 작지만 힘이 강해지는 것 같다.";
     }
     public override void levelUp()
     {
         base.levelUp();
-        ad += 30;
+        itemName = "날카로운 도끼+" + (level-1).ToString();
+              
+        ad += 10;
+        itemText = "공격력:" + ad.ToString();
     }
 }

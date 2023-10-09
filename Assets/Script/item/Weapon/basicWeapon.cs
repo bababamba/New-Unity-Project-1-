@@ -33,7 +33,7 @@ public class basicWeapon : weapon_base
         {
             GameObject whiteBox = Instantiate(bullet, player.transform.position, Quaternion.identity);
             bulletScript = whiteBox.GetComponent<projectile_base>();
-            bulletScript.init(calcDmg(), 5, 4);
+            bulletScript.init(calcDmg(), 5, 1);
             Rigidbody2D whiteBoxRigidbody = whiteBox.GetComponent<Rigidbody2D>();
             Vector2 shootDirection = (temp.position - player.transform.position).normalized; // 시작점에서 발사 지점까지의 벡터 방향을 구함
             whiteBoxRigidbody.AddForce(shootDirection * shootForce, ForceMode2D.Impulse);

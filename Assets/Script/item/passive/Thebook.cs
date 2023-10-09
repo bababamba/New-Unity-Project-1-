@@ -14,16 +14,19 @@ public class Thebook : passive_base
     protected override void Start()
     {
         base.Start();
-        ap = 100;
-        armor = 1;
+        ap = 30;
+        
        
         itemName = "마도서";
-
-        itemCaption = "마력을 강하게 올려준다.마력:100";
+        itemText = "마력:30";
+        itemCaption = "마력을 강하게 올려준다.";
     }
     public override void levelUp()
     {
         base.levelUp();
-        ap += 30;
+        itemName = "마도서+" + (level - 1).ToString();
+        ap += 10;
+        itemText = "마력:" + ap.ToString();
+        
     }
 }

@@ -258,6 +258,7 @@ public class mapGenerator : MonoBehaviour
                     {
                         map[x, y] = Instantiate(grassTile, new Vector2(mapX * 30 + x, -mapY * 30 - y), Quaternion.identity);
                         map[x, y].transform.SetParent(this.gameObject.transform);
+                        map[x, y].tag = "Structure";
                         map[x, y] = Instantiate(treeTile, new Vector2(mapX * 30 + x, -mapY * 30 - y), Quaternion.identity);
                     }
                     else if (tileCode.StartsWith("W")) // ¹° Å¸ÀÏ
@@ -266,6 +267,7 @@ public class mapGenerator : MonoBehaviour
                         if (direction >= 1 && direction <= 10)
                         {
                             map[x, y] = Instantiate(waterTiles[direction - 1], new Vector2(mapX * 30 + x, -mapY * 30 - y), Quaternion.identity);
+                            map[x, y].tag = "Structure";
                         }
                     }
                     map[x, y].transform.SetParent(this.gameObject.transform);

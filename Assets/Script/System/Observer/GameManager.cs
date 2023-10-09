@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isStart)
+        if (!isStart)
         {
             ReadyToStart();
             GameStart();
@@ -55,22 +55,23 @@ public class GameManager : MonoBehaviour
                 currentSpawnRate += spawnRate;
                 for (int i = 0; i < player.Length; i++)
                 {
-                    SpawnMonster(i);
-                    
+                    //SpawnMonster(i);
+
                 }
-                if (spawnRate>0.2f)
-                spawnRate -= 0.001f;
-               
+                if (spawnRate > 0.2f)
+                    spawnRate -= 0.001f;
+
             }
         }
         else
             GameStart();
-        
+
     }
 
     void ReadyToStart()
     {
         UIM.inventoryObject.GetComponent<inventory>().AcquireItem(itemM.items[0]);
+        Audio_Manager.Instance.BGM_Title();
     }
     void init()
     {
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
         exp += earned;
         while (exp >= maxExp)
         {
-            
+
             UIM.LevelUpStart();
             exp -= maxExp;
             maxExp += (float)0.3 * maxExp;
@@ -136,8 +137,8 @@ public class GameManager : MonoBehaviour
             if (distanceToPlayer < closestDistance)
             {
                 closestDistance = distanceToPlayer;
-                if(closestDistance<range)
-                cEnemy = enemy;
+                if (closestDistance < range)
+                    cEnemy = enemy;
             }
 
         }
@@ -173,10 +174,10 @@ public class GameManager : MonoBehaviour
         {
             spawnedEnemy.transform.position = GetRandomSpawnPosition(playerPosition);
         }
-        
+
         spawnedEnemy.GetComponent<enemy_base>().initE(playerNumber);
 
-        
+
     }
 
     private Vector2 GetRandomSpawnPosition(Vector2 playerPosition)
@@ -202,6 +203,19 @@ public class GameManager : MonoBehaviour
 
         return false;
     }
+    public Transform getPlayerTransform(Transform self)
+    {
+
+
+        if (player[0])
+            return player[0].transform;
+        else return self;
+    }
+
+
+
+
+
     
     public void FindAllPlayer()
     {

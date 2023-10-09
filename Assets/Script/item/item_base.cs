@@ -19,6 +19,8 @@ public class item_base : MonoBehaviour
     protected GameManager gameManager;
     protected bool isPassive;
     protected int level = 1;
+    [SerializeField]
+    protected bool CooldownOff = false;
     public Sprite itemImage;
     public int itemType;
 
@@ -48,7 +50,7 @@ public class item_base : MonoBehaviour
 
 
 
-        if (active)
+        if (active&&!CooldownOff)
         {
             cooldown -= Time.deltaTime;
             

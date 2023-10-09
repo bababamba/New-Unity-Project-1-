@@ -31,6 +31,8 @@ public class Player : Creture
     public float critical;
 
     public bool playerDie = false;
+
+    public bool isBarrier = false;
     private void Awake()
     {
 
@@ -89,8 +91,7 @@ public class Player : Creture
     {
         if (collision.gameObject.CompareTag("ItemObject"))
         {
-            gameManager.expUp(10f);
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<item_object>().Triggerd();
         }
     }
 
@@ -128,4 +129,14 @@ public class Player : Creture
         barTransform.localScale = new Vector3(scale, 0.1f, 1f);
         barTransform.localPosition = new Vector3(-0.5f + scale * 0.5f, 0.7f, 0f);
     }
+
+    public override void takeDamage(float dmg)
+    {
+        if (!isBarrier)
+            base.takeDamage(dmg);
+        else
+            isBarrier = false;
+    }
+
+
 }
