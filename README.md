@@ -82,7 +82,9 @@ Github Desktop
 │  ├─New Unity Project (1)_Data
 │  └─toplay
 └─UserSettings
-
-
-
 ```
+
+# 4. 개발 기간
+2023.4월 경 부터 개발을 시작하였고 8월까지의 개발 후 휴식 이후 2024 2월 재가동 
+# 5. 현재 목표
+뱀서 라이크 클론 게임 만들기
