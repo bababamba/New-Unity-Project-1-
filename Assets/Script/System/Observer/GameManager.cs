@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
                 currentSpawnRate += spawnRate;
                 for (int i = 0; i < player.Length; i++)
                 {
-                    //SpawnMonster(i);
+                    SpawnMonster(i);
 
                 }
                 if (spawnRate > 0.2f)
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     void ReadyToStart()
     {
         UIM.inventoryObject.GetComponent<inventory>().AcquireItem(itemM.items[0]);
-        Audio_Manager.Instance.BGM_Title();
+        //Audio_Manager.Instance.BGM_Title();
     }
     void init()
     {
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         killCount = 0;
         goldEarned = 0;
-        //isGaming = true;
+        isGaming = true;
         exp = 0;
         maxExp = 100f;
     }
