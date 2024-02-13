@@ -24,7 +24,7 @@ public class flower : synergy_base
 
 
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
         
     }

@@ -26,14 +26,14 @@ public class granade : weapon_base
         base.Update();
         itemText = "주위의 랜덤한 적에게" + basic_attack + "만큼의 피해를 입히는 폭탄을 던진다.";
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
         Transform temp = gameManager.randomEnemy(playerNumber);
         if (temp != player.transform)
         {
             GameObject whiteBox = Instantiate(bullet, player.transform.position, Quaternion.identity);
             bulletScript = whiteBox.GetComponent<projectile_base>();
-            bulletScript.init(calcDmg(), 2+itemLevel,1);
+            bulletScript.init(calcDmg(), 2+this.level,1);
             Rigidbody2D whiteBoxRigidbody = whiteBox.GetComponent<Rigidbody2D>();
             Vector2 shootDirection = (temp.position - player.transform.position).normalized; // 시작점에서 발사 지점까지의 벡터 방향을 구함
             whiteBoxRigidbody.AddForce(shootDirection * shootForce, ForceMode2D.Impulse);

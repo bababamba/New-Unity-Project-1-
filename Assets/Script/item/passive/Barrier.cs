@@ -35,7 +35,7 @@ public class Barrier : passive_base
         }
 
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
         CooldownOff = true;
         BarrierObject = Instantiate(barrier, player.transform.position, Quaternion.identity);
