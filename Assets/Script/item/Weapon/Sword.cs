@@ -37,14 +37,14 @@ public class Sword  : weapon_base
             GameObject swordEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
             bulletScript = swordEffect.GetComponent<SwordAttack>();
             bulletScript.init(calcDmg(), 5, 1);
-            swordEffect.transform.SetParent(player.transform, false);
+            swordEffect.transform.SetParent(player.transform, true);
         }
         else//Âî¸£±â
         {
             GameObject swordEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
             bulletScript = swordEffect.GetComponent<SwordAttack>();
             bulletScript.init(calcDmg(), 5, 1);
-            swordEffect.transform.SetParent(player.transform, false);
+            swordEffect.transform.SetParent(player.transform, true);
         }
         slash = !slash;
     }

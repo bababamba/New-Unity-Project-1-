@@ -7,7 +7,7 @@ public class SwordAttack : MeleeAttackBase
     // Start is called before the first frame update
     protected override void Start()
     {
-        maxLifetime = 5;
+        maxLifetime = 0.5f;
         dmg = 10;
         base.Start();
     }

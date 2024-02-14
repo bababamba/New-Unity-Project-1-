@@ -14,8 +14,10 @@ public class Audio_Manager : MonoBehaviour
         if(Instance == null)
             Instance = this;
 
-        bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume", 0.8f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
+        if(bgmSlider != null)
+            bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume", 0.8f);
+        if(sfxSlider != null)
+            sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
     }
 
     void Update()

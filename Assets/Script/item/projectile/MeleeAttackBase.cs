@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class MeleeAttackBase : projectile_base
 {
-    List<Collider2D> enemyInRange;
-    List<Collider2D> enemyAttacked;
+    List<enemy_base> enemyInRange;
+    List<enemy_base> enemyAttacked;
 
     protected override void Start()
     {
         base.Start();
+        enemyInRange = new List<enemy_base>();
+        enemyAttacked = new List<enemy_base>();
     }
 
     protected override void Update()
@@ -25,13 +27,14 @@ public class MeleeAttackBase : projectile_base
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Enemy"))
-            enemyInRange.Add(col);
         enemy_base enemy = col.GetComponent<enemy_base>();
-        if(enemy != null && !enemyAttacked.Contains(col))
+        if (col.CompareTag("Enemy"))
+            enemyInRange.Add(enemy);
+ 
+        if(enemy != null && !enemyAttacked.Contains(enemy))
         {
             enemy.takeDamage(dmg);
-            enemyAttacked.Add(col);
+            enemyAttacked.Add(enemy);
         }
     }
 
