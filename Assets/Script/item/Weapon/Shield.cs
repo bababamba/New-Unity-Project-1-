@@ -6,8 +6,8 @@ public class Shield : weapon_base
 {
     public GameObject bullet;
     public float shootForce = 10f;
-    public int shieldquantity;
-    projectile_base bulletScript;
+    public int shieldquantity = 3;
+    ShieldAttack bulletScript;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -33,10 +33,13 @@ public class Shield : weapon_base
     {
         for (int i = 0; i < shieldquantity; i++)
         {
-            GameObject shield = Instantiate(bullet, player.transform.position, Quaternion.identity);
+            float angle = ((2 * Mathf.PI) / shieldquantity) * i;
+            GameObject shield = Instantiate(bullet, new Vector2(player.transform.position.x + Mathf.Cos(i), player.transform.position.y + Mathf.Sin(i)), Quaternion.identity);
             bulletScript = shield.GetComponent<ShieldAttack>();
+            bulletScript.angle = angle;
             bulletScript.init(calcDmg(), 5, 1);
-            shield.transform.SetParent(player.transform, false);
+            shield.transform.SetParent(player.transform, true);
+            bulletScript.player = player;
         }
     }
     public override void levelUp()

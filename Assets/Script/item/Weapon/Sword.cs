@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Sword  : weapon_base
 {
-    public GameObject bullet;
+    public GameObject slashEffect;
+    public GameObject pokeEfffect;
     public float shootForce = 10f;
-    projectile_base bulletScript;
+    MeleeAttackBase bulletScript;
     public bool slash;
     // Start is called before the first frame update
     protected override void Start()
@@ -32,19 +33,26 @@ public class Sword  : weapon_base
     }
     protected override void itemTrigger()
     {
-        if(slash)//베기
+        Vector2 position = new Vector2(playerScript.playerDirection.x, playerScript.playerDirection.y) * 1.5f;
+        if (slash)//베기
         {
-            GameObject swordEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
+            GameObject swordEffect = Instantiate(slashEffect, player.transform.position + new Vector3(playerScript.playerDirection.x, 
+                playerScript.playerDirection.y) * 1.5f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
             bulletScript = swordEffect.GetComponent<SwordAttack>();
+            bulletScript.player = player;
+            bulletScript.position = position;
             bulletScript.init(calcDmg(), 5, 1);
-            swordEffect.transform.SetParent(player.transform, true);
+            //swordEffect.transform.SetParent(player.transform, true);
         }
         else//찌르기
         {
-            GameObject swordEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
+            GameObject swordEffect = Instantiate(pokeEfffect, player.transform.position + new Vector3(playerScript.playerDirection.x, 
+                playerScript.playerDirection.y) * 1.5f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
             bulletScript = swordEffect.GetComponent<SwordAttack>();
+            bulletScript.player = player;
+            bulletScript.position = position;
             bulletScript.init(calcDmg(), 5, 1);
-            swordEffect.transform.SetParent(player.transform, true);
+            //swordEffect.transform.SetParent(player.transform, true);
         }
         slash = !slash;
     }

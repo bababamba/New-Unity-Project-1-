@@ -6,7 +6,7 @@ public class Dagger : weapon_base
 {
     public GameObject bullet;
     public float shootForce = 10f;
-    projectile_base bulletScript;
+    MeleeAttackBase bulletScript;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -14,7 +14,7 @@ public class Dagger : weapon_base
         add = 0.1f;
         base.Start();
         itemNum = 0;
-        Maxcooldown = 1;
+        Maxcooldown = 0.5f;
         itemName = "´Ü°Ë";
 
         itemCaption = "";
@@ -28,10 +28,13 @@ public class Dagger : weapon_base
     }
     protected override void itemTrigger()
     {
-        GameObject daggerEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
+        Vector2 position = new Vector2(playerScript.playerDirection.x, playerScript.playerDirection.y) * 1f;
+        GameObject daggerEffect = Instantiate(bullet, player.transform.position + new Vector3(playerScript.playerDirection.x, 
+            playerScript.playerDirection.y) * 1f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = daggerEffect.GetComponent<DaggerAttack>();
+        bulletScript.player = player;
+        bulletScript.position = position;
         bulletScript.init(calcDmg(), 5, 1);
-        daggerEffect.transform.SetParent(player.transform, false);
     }
     public override void levelUp()
     {

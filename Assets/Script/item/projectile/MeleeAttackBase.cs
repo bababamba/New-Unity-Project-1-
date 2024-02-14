@@ -7,6 +7,9 @@ public class MeleeAttackBase : projectile_base
     List<enemy_base> enemyInRange;
     List<enemy_base> enemyAttacked;
 
+    public GameObject player;
+    public Vector2 position;
+
     protected override void Start()
     {
         base.Start();

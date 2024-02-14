@@ -7,9 +7,15 @@ public class DaggerAttack : MeleeAttackBase
     // Start is called before the first frame update
     protected override void Start()
     {
-        maxLifetime = 5;
+        maxLifetime = 0.1f;
         dmg = 10;
         base.Start();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        this.transform.position = new Vector3(player.transform.position.x + position.x, player.transform.position.y + position.y);
     }
 
     // Update is called once per frame

@@ -6,7 +6,7 @@ public class BattleAxe : weapon_base
 {
     public GameObject bullet;
     public float shootForce = 10f;
-    projectile_base bulletScript;
+    MeleeAttackBase bulletScript;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -28,10 +28,13 @@ public class BattleAxe : weapon_base
     }
     protected override void itemTrigger()
     {
-        GameObject axeEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
+        Vector2 position = new Vector2(playerScript.playerDirection.x, playerScript.playerDirection.y) * 1f;
+        GameObject axeEffect = Instantiate(bullet, player.transform.position + new Vector3(playerScript.playerDirection.x, 
+            playerScript.playerDirection.y) * 0.5f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = axeEffect.GetComponent<BattleAxeAttack>();
+        bulletScript.player = player;
+        bulletScript.position = position;
         bulletScript.init(calcDmg(), 5, 1);
-        axeEffect.transform.SetParent(player.transform, false);
     }
     public override void levelUp()
     {

@@ -6,7 +6,7 @@ public class Hammer : weapon_base
 {
     public GameObject bullet;
     public float shootForce = 10f;
-    projectile_base bulletScript;
+    MeleeAttackBase bulletScript;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -28,10 +28,13 @@ public class Hammer : weapon_base
     }
     protected override void itemTrigger()
     {
-        GameObject hammerEffect = Instantiate(bullet, player.transform.position, Quaternion.identity);
+        Vector2 position = new Vector2(playerScript.playerDirection.x, playerScript.playerDirection.y) * 2f;
+        GameObject hammerEffect = Instantiate(bullet, player.transform.position + new Vector3(playerScript.playerDirection.x, 
+            playerScript.playerDirection.y) * 2f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = hammerEffect.GetComponent<HammerAttack>();
+        bulletScript.player = player;
+        bulletScript.position = position;
         bulletScript.init(calcDmg(), 5, 1);
-        hammerEffect.transform.SetParent(player.transform, false);
 
     }
     public override void levelUp()
