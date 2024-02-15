@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class specialEnemy2 : specialEnemyBase
 {
-    public GameObject bullet;
-    public float shootForce = 10f;
-    enemyProjectileBase bulletScript;
+    public GameObject ExplodeArea;
     protected override void Start()
     {
         base.Start();
         this.init(50, 1, 2);
 
         initSpecialEnemy(true, 2f);
+        GameObject Area = Instantiate(ExplodeArea, this.transform.position, Quaternion.identity);
+        Area.transform.SetParent(this.transform);
+
     }
 
     protected override void gimick()
@@ -21,6 +22,7 @@ public class specialEnemy2 : specialEnemyBase
         
 
     }
+
     // Start is called before the first frame update
 
 }
