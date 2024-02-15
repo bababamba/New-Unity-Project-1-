@@ -60,7 +60,7 @@ public class item_base : MonoBehaviour
             
             
             cooldown = Maxcooldown;
-            itemTrigger(level);
+            itemTrigger();
         }
     }
     public float getCooldown()
@@ -75,7 +75,7 @@ public class item_base : MonoBehaviour
     {
         return invenNum;
     }
-    protected virtual void itemTrigger(int itemLevel)
+    protected virtual void itemTrigger()
     {
 
     }

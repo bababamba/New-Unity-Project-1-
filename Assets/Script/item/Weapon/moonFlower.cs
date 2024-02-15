@@ -28,7 +28,7 @@ public class moonFlower : weapon_base
         base.Update();
         itemText = "진행방향을 달의 형태로 베어" + basic_attack + " + " + apd * playerScript.ap + "+" + add * playerScript.ad + "만큼의 피해를 준다.";
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
         Transform temp = gameManager.randomEnemy(playerNumber);
         if (temp != player.transform)

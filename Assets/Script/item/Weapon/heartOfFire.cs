@@ -30,7 +30,7 @@ public class heartOfFire : weapon_base
         itemText = "주위에" + basic_attack + " + " + apd * playerScript.ap + "만큼의 피해를 틱마다 입힌다.";
 
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
         GameObject fire = Instantiate(bullet, player.transform.position, Quaternion.identity);
         fire.transform.SetParent(player.transform);

@@ -26,7 +26,7 @@ public class basicWeapon : weapon_base
         itemText = "가장 가까운 적에게" + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 입히는 투사체를 발사한다.";
         base.Update();
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
         Transform temp = gameManager.closestEnemy(playerNumber,100f);
         if (temp != player.transform)

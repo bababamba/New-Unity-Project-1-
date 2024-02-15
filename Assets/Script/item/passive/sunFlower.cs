@@ -28,8 +28,8 @@ public class sunFlower : passive_base
         itemText = "체력을 " + level + "씩 채워준다.";
 
     }
-    protected override void itemTrigger(int itemLevel)
+    protected override void itemTrigger()
     {
-        playerScript.addCurHP(itemLevel);
+        playerScript.addCurHP(this.level);
     }
 }
