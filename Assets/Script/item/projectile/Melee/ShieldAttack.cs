@@ -11,6 +11,8 @@ public class ShieldAttack : AttackBase
     {
         maxLifetime = 5;
         dmg = 10;
+        isMelee = true;
+        knockbackForce = 10f;
         base.Start();
     }
 

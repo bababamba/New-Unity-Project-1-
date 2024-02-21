@@ -12,6 +12,8 @@ public class AttackBase : projectile_base
 
     public GameObject player;
     public Vector2 position;
+    protected float knockbackForce;
+    protected bool isMelee = false;
 
     protected override void Start()
     {
@@ -48,6 +50,8 @@ public class AttackBase : projectile_base
         if(enemy != null && !enemyAttacked.Contains(enemy))
         {
             enemy.takeDamage(dmg);
+            if (enemy != null && isMelee)
+                KnockBack(enemy.transform);
             enemyAttacked.Add(enemy);
         }
     }
@@ -56,4 +60,11 @@ public class AttackBase : projectile_base
     {
         base.die();
     }
+
+    public void KnockBack(Transform target)
+    {
+        Vector2 direction = (target.position - player.transform.position).normalized;
+        //target.GetComponent<Rigidbody2D>().AddForce(direction * knockbackForce, ForceMode2D.Impulse);
+    }
+
 }

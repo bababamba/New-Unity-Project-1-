@@ -10,6 +10,8 @@ public class HammerAttack : AttackBase
     {
         maxLifetime = 0.5f;
         dmg = 10;
+        isMelee = true;
+        knockbackForce = 10f;
         base.Start();
     }
 

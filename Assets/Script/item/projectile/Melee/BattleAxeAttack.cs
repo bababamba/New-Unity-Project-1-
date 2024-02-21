@@ -9,6 +9,8 @@ public class BattleAxeAttack : AttackBase
     {
         maxLifetime = 0.25f;
         dmg = 10;
+        isMelee = true;
+        knockbackForce = 0.1f;
         base.Start();
     }
 
