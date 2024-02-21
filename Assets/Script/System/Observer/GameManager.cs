@@ -147,32 +147,6 @@ public class GameManager : MonoBehaviour
         else
             return player[playerNumber].transform;
     }
-    public Transform StrongestEnemy(int playerNumber, float range, Transform notTarget = null)
-    {
-        GameObject cEnemy = null;
-        float highestHP = 0f;
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-
-
-        foreach (GameObject enemy in enemies)
-        {
-
-            float distanceToPlayer = Vector2.Distance(enemy.transform.position, player[playerNumber].transform.position);
-            float hp = enemy.GetComponent<enemy_base>().getCurHP();
-
-            if (hp > highestHP && distanceToPlayer <= range && !(notTarget != null && notTarget == cEnemy))
-            {
-                highestHP = hp;
-                cEnemy = enemy;
-            }
-
-        }
-        if (cEnemy)
-            return cEnemy.transform;
-        else
-            return player[playerNumber].transform;
-    }
     public Transform randomEnemy(int playerNumber)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -190,35 +164,7 @@ public class GameManager : MonoBehaviour
         else
             return player[playerNumber].transform;
     }
-    public Transform randomEnemyInRange(int playerNumber, int range)
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        List<GameObject> EIR = new List<GameObject>();
-        GameObject[] enemiesInRange;
-        for(int i = 0; i < enemies.Length; i++)
-        {
-            float distanceToPlayer = Vector2.Distance(enemies[i].transform.position, player[playerNumber].transform.position);
-            if(distanceToPlayer <= range)
-            {
-                EIR.Add(enemies[i]);
-            }
-        }
-        enemiesInRange = EIR.ToArray();
 
-        int len = enemiesInRange.Length;
-        if (len > 1)
-        {
-            int seed = Random.Range(0, len);
-            if (enemiesInRange[seed])
-                return enemiesInRange[seed].transform;
-            else
-                return player[playerNumber].transform;
-        }
-        else if (len == 1)
-            return enemiesInRange[0].transform;
-        else
-            return player[playerNumber].transform;
-    }
     private void SpawnMonster(int playerNumber)
     {
         Vector2 playerPosition = player[playerNumber].transform.position;
