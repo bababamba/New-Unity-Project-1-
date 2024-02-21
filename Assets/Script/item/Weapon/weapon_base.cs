@@ -9,6 +9,8 @@ public class weapon_base : item_base
     protected float apd;
     protected float dmg;
     protected Transform here;
+    protected bool isMelee = false;
+
     private void Awake()
     {
         isPassive = false;
