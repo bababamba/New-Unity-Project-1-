@@ -13,7 +13,16 @@ public class AttackBase : projectile_base
     public GameObject player;
     public Vector2 position;
     protected float knockbackForce;
-    protected bool isMelee = false;
+
+    public enum Type
+    {
+        FIRE = 0,
+        ICE = 1,
+        ELEC = 2,
+        MELEE = 3
+    }
+    public Type type;
+
 
     protected override void Start()
     {
@@ -50,8 +59,10 @@ public class AttackBase : projectile_base
         if(enemy != null && !enemyAttacked.Contains(enemy))
         {
             enemy.takeDamage(dmg);
-            if (enemy != null && isMelee)
+            if(enemy != null && type == Type.MELEE)
                 KnockBack(enemy.transform);
+            if (enemy != null && type == Type.ICE)
+                enemy.frozen = true;
             enemyAttacked.Add(enemy);
         }
     }
@@ -64,7 +75,7 @@ public class AttackBase : projectile_base
     public void KnockBack(Transform target)
     {
         Vector2 direction = (target.position - player.transform.position).normalized;
-        //target.GetComponent<Rigidbody2D>().AddForce(direction * knockbackForce, ForceMode2D.Impulse);
+        target.GetComponent<enemy_base>().Knockback(direction, knockbackForce);
     }
 
 }

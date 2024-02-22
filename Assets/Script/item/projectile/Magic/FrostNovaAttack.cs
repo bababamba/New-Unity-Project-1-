@@ -8,6 +8,7 @@ public class FrostNovaAttack : AttackBase
     {
         maxLifetime = 1f;
         dmg = 3;
+        type = Type.ICE;
         base.Start();
     }
 

@@ -14,6 +14,7 @@ public class FireballAttack : AttackBase
     protected override void Start()
     {
         maxLifetime = 3f;
+        type = Type.FIRE;
         base.Start();
     }
 

@@ -13,6 +13,7 @@ public class ChainLightningAttack : AttackBase
     protected override void Start()
     {
         maxLifetime = 0.25f;
+        type = Type.ELEC;
         base.Start();
 
         this.curTarget.GetComponent<enemy_base>().takeDamage(dmg);

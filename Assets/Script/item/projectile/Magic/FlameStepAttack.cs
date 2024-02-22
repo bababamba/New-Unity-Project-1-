@@ -8,6 +8,7 @@ public class FlameStepAttack : AttackBase
     {
         maxLifetime = 2f;
         dmg = 5f;
+        type = Type.FIRE;
         base.Start();
     }
 

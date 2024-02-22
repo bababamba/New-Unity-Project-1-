@@ -8,6 +8,7 @@ public class BlizzardAttack : AttackBase
     {
         maxLifetime = 3f;
         dmg = 10;
+        type = Type.ICE;
         base.Start();
     }
 

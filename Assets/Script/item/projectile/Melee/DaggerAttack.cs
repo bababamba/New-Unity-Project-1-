@@ -9,7 +9,7 @@ public class DaggerAttack : AttackBase
     {
         maxLifetime = 0.1f;
         dmg = 10;
-        isMelee = true;
+        type = Type.MELEE;
         knockbackForce = 10f;
         base.Start();
     }

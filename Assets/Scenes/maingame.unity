@@ -4372,6 +4372,10 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4645984977966861274, guid: 159115cdc360bf84f98a40d72c95a0ce, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 159115cdc360bf84f98a40d72c95a0ce, type: 3}
 --- !u!4 &1611948390 stripped

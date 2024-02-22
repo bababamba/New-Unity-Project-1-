@@ -10,6 +10,7 @@ public class ThunderBoltAttack : AttackBase
     {
         maxLifetime = 2f;
         dmg = 10;
+        type = Type.ELEC;
         base.Start();
     }
 

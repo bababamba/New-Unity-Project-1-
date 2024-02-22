@@ -8,6 +8,7 @@ public class FireballExplosion : AttackBase
     {
         maxLifetime = 1f;
         dmg = 10;
+        type = Type.FIRE;
         base.Start();
     }
 

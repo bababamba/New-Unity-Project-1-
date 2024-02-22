@@ -10,8 +10,8 @@ public class SwordAttack : AttackBase
     {
         maxLifetime = 0.5f;
         dmg = 10;
-        isMelee = true;
-        knockbackForce = 1f;
+        type = Type.MELEE;
+        knockbackForce = 10f;
         base.Start();
     }
 

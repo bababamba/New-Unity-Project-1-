@@ -16,8 +16,22 @@ public class enemy_base : Creture
     private Vector3 ownPosition;
     private Vector3 ownScale;
 
+    //넉백 관련
+    public bool knockback = false;
+    public float knockbackTime = 0.5f;
+    public float knockbackTimer = 0;
+    public float frictionRate = 0.95f;
+
+    //슬로우 관련
+    public float moveSpeedValue = 0;
+    public bool frozen = false;
+    public float freezeTime = 3f;
+    public float freezeTimer = 0;
+
+
     [SerializeField]
     public float attackDamage;
+
     
     //Transform playerCenter;
     //float playerRadius;
@@ -51,17 +65,51 @@ public class enemy_base : Creture
     }
     protected void moveToPlayer()
     {
-        if (player)
+        //상태이상 처리
+        moveSpeedValue = 0;
+        if (frozen)
+        {
+            moveSpeedValue -= 0.25f;
+            this.GetComponent<SpriteRenderer>().color = Color.blue;
+            freezeTimer += Time.deltaTime;
+            if(freezeTimer >= freezeTime)
+            {
+                frozen = false;
+                freezeTimer = 0;
+            }
+        }
+        else
+            this.GetComponent<SpriteRenderer>().color = Color.white;
+            
+
+        if (player && !knockback)
         {
             Vector3 direction = player.transform.position - transform.position;
             direction.Normalize();
             // 적을 플레이어 방향으로 이동시킴
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(direction * (speed * (1 + moveSpeedValue)) * Time.deltaTime);
             if (direction.x < 0)
                 flipE(false);
             else
                 flipE(true);
         }
+        else if (knockback)
+        {
+            knockbackTimer += Time.deltaTime;
+            this.transform.GetComponent<Rigidbody2D>().velocity *= frictionRate;
+            if (knockbackTimer >= knockbackTime)
+            {
+                knockback = false;
+                knockbackTimer = 0;
+                this.transform.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            }
+        }
+    }
+
+    public void Knockback(Vector2 dir, float pow)
+    {
+        this.transform.GetComponent<Rigidbody2D>().velocity = dir * pow;
+        knockback = true;
     }
    
 public void flipE(bool a = true)
