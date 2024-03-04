@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         init();
-
+        
     }
 
     // Update is called once per frame
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             GameStart();
 
             isStart = true;
+            
         }
         if (isGaming)
         {
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
                 currentSpawnRate += spawnRate;
                 for (int i = 0; i < player.Length; i++)
                 {
-                    SpawnMonster(i);
+                    //SpawnMonster(i);
 
                 }
                 if (spawnRate > 0.2f)

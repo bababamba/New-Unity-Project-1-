@@ -133,13 +133,17 @@ public void flipE(bool a = true)
     }*/
     void OnCollisionStay2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject);
         if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("ItemObject") || collision.gameObject.CompareTag("Structure"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            playerScript.takeDamage(attackDamage);
+            Debug.Log(collision.gameObject.GetComponent<Player>());
+
+            collision.gameObject.GetComponent<Player>().takeDamage(attackDamage);
+            
         }
     }
     void OnControllerColliderHit(ControllerColliderHit hit)
