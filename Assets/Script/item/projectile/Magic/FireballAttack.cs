@@ -21,7 +21,6 @@ public class FireballAttack : AttackBase
     protected override void Update()
     {
         base.Update();
-        //this.transform.Translate(target.transform.position);
     }
 
     // Update is called once per frame

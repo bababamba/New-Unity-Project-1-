@@ -60,7 +60,6 @@ public class Player : Creture
     {//위치 동기화
         UpdateHealthBar();
 
-
         if (playerDirection.x > 0)
             flip(false);
         else
