@@ -6,9 +6,12 @@ public class ShieldAttack : AttackBase
 {    //maxLifetime, maxLifePen,dmg
     // Start is called before the first frame update
     public float angle = 0;
-    public float spinSpeed = 0.1f;
+    public float spinSpeed;
+    public float radius;
     protected override void Start()
     {
+        radius = 2;
+        spinSpeed = 0.05f;
         maxLifetime = 5;
         dmg = 10;
         type = Type.MELEE;
@@ -19,8 +22,8 @@ public class ShieldAttack : AttackBase
     protected override void Update()
     {
         base.Update();
-        angle += spinSpeed;
-        this.transform.position = new Vector2(player.transform.position.x + Mathf.Cos(angle), player.transform.position.y + Mathf.Sin(angle));
+        angle += this.spinSpeed;
+        this.transform.position = new Vector2(player.transform.position.x + radius * Mathf.Cos(angle), player.transform.position.y + radius * Mathf.Sin(angle));
     }
 
     // Update is called once per frame

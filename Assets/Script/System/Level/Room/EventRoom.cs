@@ -39,4 +39,8 @@ public class EventRoom : Room
             // UI에서 버튼을 눌러 Execute(선택지 번호)를 전달한다.
             // 이벤트의 해당 번호에 대한 선택지 결과를 제공한다.
     }
+
+
+
+
 }

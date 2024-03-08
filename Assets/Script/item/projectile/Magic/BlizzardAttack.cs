@@ -6,7 +6,7 @@ public class BlizzardAttack : AttackBase
 {
     protected override void Start()
     {
-        maxLifetime = 3f;
+        maxLifetime = 1f;
         dmg = 10;
         type = Type.ICE;
         base.Start();

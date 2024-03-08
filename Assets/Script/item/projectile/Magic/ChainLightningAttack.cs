@@ -12,7 +12,7 @@ public class ChainLightningAttack : AttackBase
 
     protected override void Start()
     {
-        maxLifetime = 0.25f;
+        maxLifetime = 0.125f;
         type = Type.ELEC;
         base.Start();
 

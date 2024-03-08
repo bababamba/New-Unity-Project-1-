@@ -29,8 +29,8 @@ public class ThunderBolt : weapon_base
 
     protected override void itemTrigger()
     {
-        GameObject leftEffect = Instantiate(bullet, player.transform.position - new Vector3(3, 0, 0), Quaternion.identity);
-        GameObject rightEffect = Instantiate(bullet, player.transform.position + new Vector3(3, 0, 0), Quaternion.identity);
+        GameObject leftEffect = Instantiate(bullet, player.transform.position - new Vector3(5.5f, 0, 0), Quaternion.identity);
+        GameObject rightEffect = Instantiate(bullet, player.transform.position + new Vector3(5.5f, 0, 0), Quaternion.identity);
         leftScript = leftEffect.GetComponent<ThunderBoltAttack>();
         rightScript = rightEffect.GetComponent<ThunderBoltAttack>();
         leftScript.player = player;

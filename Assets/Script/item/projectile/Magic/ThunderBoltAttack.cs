@@ -18,9 +18,9 @@ public class ThunderBoltAttack : AttackBase
     {
         base.Update();
         if (left)
-            this.transform.position = player.transform.position - new Vector3(3, 0, 0);
+            this.transform.position = player.transform.position - new Vector3(5.25f, 0, 0);
         else
-            this.transform.position = player.transform.position + new Vector3(3, 0, 0);
+            this.transform.position = player.transform.position + new Vector3(5.25f, 0, 0);
     }
 
     // Update is called once per frame
