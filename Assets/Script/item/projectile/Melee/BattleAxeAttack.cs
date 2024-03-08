@@ -7,7 +7,7 @@ public class BattleAxeAttack : AttackBase
     // Start is called before the first frame update
     protected override void Start()
     {
-        maxLifetime = 0.25f;
+        maxLifetime = 1f;
         dmg = 10;
         type = Type.MELEE;
         knockbackForce = 0.1f;

@@ -141,8 +141,8 @@ public void flipE(bool a = true)
         else if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log(collision.gameObject.GetComponent<Player>());
-
-            collision.gameObject.GetComponent<Player>().takeDamage(attackDamage);
+            if(attackDamage>0)
+                collision.gameObject.GetComponent<Player>().takeDamage(attackDamage);
             
         }
     }
