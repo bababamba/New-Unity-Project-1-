@@ -133,7 +133,7 @@ public void flipE(bool a = true)
     }*/
     void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject);
+        //Debug.Log(collision.gameObject);
         if (collision.gameObject.CompareTag("Item") || collision.gameObject.CompareTag("ItemObject") || collision.gameObject.CompareTag("Structure"))
         {
             Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
@@ -178,5 +178,6 @@ public void flipE(bool a = true)
         player = gameManager.FindPlayerByNumber(P);
         playerScript = player.GetComponent<Player>();
     }
+
 
 }

@@ -58,7 +58,8 @@ public class Player : Creture
     // Update is called once per frame
     private void Update()
     {//위치 동기화
-        UpdateHealthBar();
+        if(!playerDie)
+            UpdateHealthBar();
 
         if (playerDirection.x > 0)
             flip(false);
