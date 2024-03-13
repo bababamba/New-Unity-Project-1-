@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class Level : MonoBehaviour
@@ -11,17 +12,22 @@ public class Level : MonoBehaviour
     
     public Random random = new Random();
     public GameObject roomObject;
+    public Image LineImage;
+
+    public Canvas[] floor;
 
     // Start is called before the first frame update
     void Start()
     {
+        floor = GetComponentsInChildren<Canvas>();
+
         //실제 레벨에 표시될 폭(층당 최대 방 수), 높이(층 수)를 입력
-        width = 7;
+        width = 5;
         height = 15;
 
         rooms = new Room[width, height];
         GenerateLevel();
-        PrintLevel();
+        //PrintLevel();
     }
 
 
@@ -100,7 +106,9 @@ public class Level : MonoBehaviour
                 if (!rooms[i, j].isAlone())
                 {
                     //방을 표시하는 오브젝트는 가능한 3방향(좌, 우, 중앙)에 대한 연결용 오브젝트 보유
-                    GameObject room = Instantiate(roomObject, new Vector3(i * 2, j * 2, 0), Quaternion.identity);
+                    GameObject room = Instantiate(roomObject);
+                    room.transform.SetParent(floor[height - j].transform);
+                    room.GetComponent<RectTransform>().anchoredPosition = new Vector2((i - 2) * 200, 0);
                     curFloor[i] = room;
                     ConnectionLine[] lines = curFloor[i].GetComponentsInChildren<ConnectionLine>();
                     for(int k = 0; k < lines.Length; k++)

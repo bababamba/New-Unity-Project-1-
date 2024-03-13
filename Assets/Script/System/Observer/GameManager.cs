@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     void ReadyToStart()
     {
-        UIM.inventoryObject.GetComponent<inventory>().AcquireItem(itemM.items[0]);
+        //UIM.inventoryObject.GetComponent<inventory>().AcquireItem(itemM.items[0]);
         //Audio_Manager.Instance.BGM_Title();
     }
     void init()

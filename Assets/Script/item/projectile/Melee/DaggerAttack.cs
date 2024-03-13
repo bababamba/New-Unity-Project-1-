@@ -7,7 +7,7 @@ public class DaggerAttack : AttackBase
     // Start is called before the first frame update
     protected override void Start()
     {
-        maxLifetime = 0.5f;
+        maxLifetime = 0.125f;
         dmg = 10;
         type = Type.MELEE;
         knockbackForce = 10f;

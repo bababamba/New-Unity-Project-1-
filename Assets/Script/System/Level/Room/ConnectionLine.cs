@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConnectionLine : MonoBehaviour
 {
-    private float lineWidth = 0.1f;
-    private LineRenderer lineRenderer = new LineRenderer();
-    private Vector2[] linePosition = new Vector2[2];
-
-    private ConnectionLine connectedObject;
-
     public Room room;
+    public Sprite LineImage;
+
     
     // Start is called before the first frame update
     void Start()
@@ -19,24 +16,32 @@ public class ConnectionLine : MonoBehaviour
         //Debug.Log(this.transform.position);
     }
 
-    public void Init()
-    {
-        lineRenderer = GetComponent<LineRenderer>();
-        linePosition[0] = this.transform.position;
-
-        lineRenderer.enabled = false;
-        lineRenderer.material.color = Color.black;
-        lineRenderer.widthMultiplier = lineWidth;
-        lineRenderer.positionCount = linePosition.Length;
-    }
-
     public void Connect(GameObject target)
     {
-        Init();
-        lineRenderer.enabled = true; 
-        linePosition[1] = target.transform.position;
+        GameObject line = new GameObject();
+        line.AddComponent<Image>();
+        RectTransform rect = line.GetComponent<RectTransform>();
 
-        lineRenderer.SetPosition(0, linePosition[0]);
-        lineRenderer.SetPosition(1, linePosition[1]);
+        line.GetComponent<Image>().sprite = LineImage;
+        float dir = (target.GetComponent<RectTransform>().anchoredPosition.x - this.GetComponent<RectTransform>().anchoredPosition.x);
+        float angle;
+        if (dir == 0)
+            angle = 90;
+        else if (dir > 0)
+            angle = -45;
+        else
+            angle = 45;
+
+        rect.SetParent(this.transform);
+
+        rect.anchoredPosition = Vector3.zero;
+        rect.rotation = Quaternion.Euler(0, 0, angle);
+        rect.localScale = new Vector3(3, 0.5f, 1);
+
+        
     }
+
+    
+
+
 }

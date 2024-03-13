@@ -14,7 +14,7 @@ public class Dagger : weapon_base
         add = 0.1f;
         base.Start();
         itemNum = 0;
-        Maxcooldown = 0.5f;
+        Maxcooldown = 0.25f;
         itemName = "´Ü°Ë";
 
         itemCaption = "";
