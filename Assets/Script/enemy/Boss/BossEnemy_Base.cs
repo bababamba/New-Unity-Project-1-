@@ -76,6 +76,10 @@ public class BossEnemy_Base : enemy_base
             case 2: gimick2(); break;
             case 3: gimick3(); break;
             case 4: gimick4(); break;
+            case 5: gimick5(); break;
+            case 6: gimick6(); break;
+            case 7: gimick7(); break;
+            case 8: gimick8(); break;
         }
         
     } 
@@ -98,6 +102,61 @@ public class BossEnemy_Base : enemy_base
         isGimickEnd = true;
 
     }
+    protected virtual void gimick5()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick6()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick7()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick8()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick9()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick10()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick11()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick12()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick13()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick14()
+    {
+        isGimickEnd = true;
+
+    }
+    protected virtual void gimick15()
+    {
+        isGimickEnd = true;
+
+    }
 
     protected virtual void initBossEnemy(bool canM, float timerM)
     {
@@ -115,5 +174,9 @@ public class BossEnemy_Base : enemy_base
         canMove = true;
 
 
+    }
+    public override void takeDamage(float dmg)
+    {
+        base.takeDamage(dmg);
     }
 }

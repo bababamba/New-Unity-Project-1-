@@ -6,6 +6,7 @@ public class enemyExplosionBase : MonoBehaviour
 {
     float lifeTime;
     float dmgDuration = 0;
+    public Collider2D[] colliders;
     // dmg, maxLifeTime, maxDmgDuration, effectTime
     protected float dmg = 1;
     protected float maxLifeTime = 1;
@@ -31,12 +32,13 @@ public class enemyExplosionBase : MonoBehaviour
             if (dmgDuration <= 0)
             {
                 Vector2 bulletPosition = transform.position;
-                Collider2D[] colliders = Physics2D.OverlapAreaAll(transform.position - GetComponent<Collider2D>().bounds.extents, transform.position + GetComponent<Collider2D>().bounds.extents);
+                colliders = Physics2D.OverlapAreaAll(transform.position - GetComponent<Collider2D>().bounds.extents, transform.position + GetComponent<Collider2D>().bounds.extents);
                 foreach (Collider2D collider in colliders)
                 {
-
+                    
                     if (collider.CompareTag("Player"))
                     {
+                        Debug.Log(collider);
                         Player player = collider.GetComponent<Player>();
                         if (player != null)
                         {
