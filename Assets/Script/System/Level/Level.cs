@@ -16,6 +16,11 @@ public class Level : MonoBehaviour
 
     public Canvas[] floor;
 
+    public const float EVENT = 0.2f;
+    public const float ELITE = 0.1f;
+    public const float SHOP = 0.05f;
+    public const float FIREPLACE = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,7 @@ public class Level : MonoBehaviour
         rooms = new Room[width, height];
         GenerateLevel();
         //PrintLevel();
+        this.GetComponent<RectTransform>().SetAsLastSibling();
     }
 
 
@@ -41,32 +47,15 @@ public class Level : MonoBehaviour
                 rooms[i, j] = new Room(i, j);
             }
         }
-
-        //2. 랜덤 연결 만들기
         ConnectRooms();
 
-        //3. 비율에 맞게 방 역할 할당하기
+        SetRooms();
 
-        //3-1. 유효한 방(다른 방과 연결되어 있고, 0층(실제 미사용) 및 최종층(모닥불 고정)을 제외한 층에 해당하는 방)의 수 산정
-        int available = 0;
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                if (!rooms[i, j].isAlone())
-                {
-                    rooms[i, j].type = Room.RoomType.COMBAT;
-                    if (j != 0 || j != height)
-                        available++;
-                }
-            }
-        }
-
+        PrintRooms();
     }
 
     public void ConnectRooms()
     {
-        
         for (int i = 0; i < width; i++)
         {
             int temp_i = i;
@@ -94,33 +83,128 @@ public class Level : MonoBehaviour
                 room = rooms[temp_i, j];
             }
             //Debug.Log("Line " + i + "complete.");
+        }   
+    }
+
+    public void SetRooms()
+    {
+        // 0층은 실제 미사용, 1층은 일반 전투 고정
+        // 14층은 보스 직전 모닥불, 15층은 보스 고정
+        // 중간 층이 될 8층에 보물상자 배치 고정
+        int available = 0;
+        List<Room> availableRooms = new List<Room>();
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 1; j < height; j++)
+            {
+                if (!rooms[i, j].isAlone())
+                {
+                    if (j == 1)
+                        rooms[i, j].type = Room.RoomType.COMBAT;
+                    else if (j == 8)
+                        rooms[i, j].type = Room.RoomType.CHEST;
+                    else if (j == 14)
+                        rooms[i, j].type = Room.RoomType.FIREPLACE;
+                    else
+                    {
+                        rooms[i, j].type = Room.RoomType.COMBAT;
+                        availableRooms.Add(rooms[i, j]);
+                        available++;
+                    }
+                }
+            }
         }
-        
+
+        //이벤트, 엘리트, 상점, 불 순으로 적용
+        int eventRooms = (int)(available * EVENT);
+        int eliteRooms = (int)(available * ELITE);
+        int shopRooms = (int)(available * SHOP);
+        int fireplaceRooms = (int)(available * FIREPLACE);
+
+        Debug.Log("Event Rooms : " + eventRooms);
+        Debug.Log("Elite Rooms : " + eliteRooms);
+        Debug.Log("Shop Rooms : " + shopRooms);
+        Debug.Log("Fireplace Rooms : " + fireplaceRooms);
+
+        for (int i = 0; i < eventRooms; i++)
+        {
+            Room room = availableRooms[random.Next(0, availableRooms.Count)];
+            room.type = Room.RoomType.EVENT;
+            availableRooms.Remove(room);
+        }
+        for (int i = 0; i < eliteRooms; i++)
+        {
+            Room room = availableRooms[random.Next(0, availableRooms.Count)];
+            room.type = Room.RoomType.ELITE;
+            availableRooms.Remove(room);
+        }
+        for (int i = 0; i < shopRooms; i++)
+        {
+            Room room = availableRooms[random.Next(0, availableRooms.Count)];
+            room.type = Room.RoomType.MERCHANT;
+            availableRooms.Remove(room);
+        }
+        for (int i = 0; i < fireplaceRooms; i++)
+        {
+            Room room = availableRooms[random.Next(0, availableRooms.Count)];
+            room.type = Room.RoomType.FIREPLACE;
+            availableRooms.Remove(room);
+        }
+
+    }
+
+    public void PrintRooms()
+    {
         GameObject[] prevFloor = new GameObject[width];
         GameObject[] curFloor = new GameObject[width];
 
-        for(int j = 1; j < height; j++)
+        for (int j = 1; j < height; j++)
         {
-            for(int i = 0; i < width; i++)
+            for (int i = 0; i < width; i++)
             {
                 if (!rooms[i, j].isAlone())
                 {
                     //방을 표시하는 오브젝트는 가능한 3방향(좌, 우, 중앙)에 대한 연결용 오브젝트 보유
                     GameObject room = Instantiate(roomObject);
                     room.transform.SetParent(floor[height - j].transform);
+                    switch (rooms[i, j].type)
+                    {
+                        case Room.RoomType.COMBAT:
+                            room.GetComponent<RoomObject>().SetImage(0);
+                            break;
+                        case Room.RoomType.EVENT:
+                            room.GetComponent<RoomObject>().SetImage(1);
+                            break;
+                        case Room.RoomType.ELITE:
+                            room.GetComponent<RoomObject>().SetImage(2);
+                            break;
+                        case Room.RoomType.CHEST:
+                            room.GetComponent<RoomObject>().SetImage(3);
+                            break;
+                        case Room.RoomType.MERCHANT:
+                            room.GetComponent<RoomObject>().SetImage(3);
+                            break;
+                        case Room.RoomType.FIREPLACE:
+                            room.GetComponent<RoomObject>().SetImage(4);
+                            break;
+                        default:
+                            break;
+                    }
+
                     room.GetComponent<RectTransform>().anchoredPosition = new Vector2((i - 2) * 200, 0);
                     curFloor[i] = room;
                     ConnectionLine[] lines = curFloor[i].GetComponentsInChildren<ConnectionLine>();
-                    for(int k = 0; k < lines.Length; k++)
+                    room.GetComponent<RectTransform>().SetAsLastSibling();
+                    for (int k = 0; k < lines.Length; k++)
                     {
                         lines[k].room = rooms[i, j];
                     }
                 }
             }
-            if(j > 1)
+            if (j > 1)
             {
                 //prevFloor에서 curFloor로 향하는 연결 생성
-                for(int n = 0; n < prevFloor.Length; n++)
+                for (int n = 0; n < prevFloor.Length; n++)
                 {
                     if (prevFloor[n] != null)
                     {
@@ -130,12 +214,12 @@ public class Level : MonoBehaviour
                             if (r != null)
                             {
                                 if (r.x < lines[0].room.x)
-                                    lines[0].Connect(curFloor[r.x]);
+                                    lines[0].Connect(curFloor[r.x], -1);
                                 else if (r.x == lines[0].room.x)
-                                    lines[1].Connect(curFloor[r.x]);
+                                    lines[1].Connect(curFloor[r.x], 0);
                                 else if (r.x > lines[0].room.x)
-                                    lines[2].Connect(curFloor[r.x]);
-                            } 
+                                    lines[2].Connect(curFloor[r.x], 1);
+                            }
                         }
                     }
                 }
