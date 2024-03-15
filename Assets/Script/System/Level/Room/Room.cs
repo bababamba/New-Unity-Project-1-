@@ -11,7 +11,9 @@ public class Room
         ELITE = 2,
         EVENT = 3,
         MERCHANT = 4,
-        BOSS = 5
+        BOSS = 5,
+        CHEST = 6,
+        FIREPLACE = 7
     }
     public RoomType type = RoomType.EMPTY;
 
