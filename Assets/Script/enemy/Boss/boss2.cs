@@ -26,7 +26,7 @@ public class boss2 : BossEnemy_Base
         this.init(4000, 2, 2);
         numberOfGimick = 2;
         mustGimick = 8;
-        initBossEnemy(false, 50);
+        initBossEnemy(false, 3);
     }
 
     // Update is called once per frame
@@ -84,7 +84,7 @@ public class boss2 : BossEnemy_Base
             for (int i = 0; i < wallCount; i++)
             {
                 float angle = i * 360f / wallCount;
-                Vector3 spawnPosition = transform.position + Quaternion.Euler(0f, 0f, angle) * Vector3.right * radius;
+                Vector3 spawnPosition = player.transform.position + Quaternion.Euler(0f, 0f, angle) * Vector3.right * radius;
 
                 GameObject wall = Instantiate(wallPrefab, spawnPosition, Quaternion.identity);
                 wall.transform.SetParent(transform);
