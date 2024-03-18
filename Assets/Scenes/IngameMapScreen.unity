@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd6f21fecb1a6b4d9dd30da8fc191d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EventData: {fileID: 4900000, guid: 34ec680f495416a4b884f817bcbde5f2, type: 3}
   PoPUpScreen:
   - {fileID: 186146200}
   - {fileID: 1941522558}
@@ -1253,6 +1254,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6789810530968995920, guid: b79e9d9b473888f4087a351e18791702, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789810530968995920, guid: b79e9d9b473888f4087a351e18791702, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -499.26904
+      objectReference: {fileID: 0}
     - target: {fileID: 6789810530968995921, guid: b79e9d9b473888f4087a351e18791702, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -1276,6 +1285,14 @@ PrefabInstance:
     - target: {fileID: 6789810530988172088, guid: b79e9d9b473888f4087a351e18791702, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789810530994698809, guid: b79e9d9b473888f4087a351e18791702, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789810530994698809, guid: b79e9d9b473888f4087a351e18791702, type: 3}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6789810530994698811, guid: b79e9d9b473888f4087a351e18791702, type: 3}
       propertyPath: m_Layer
