@@ -14,14 +14,14 @@ public class EventUI : MonoBehaviour
     public string[] option;
     public string[] AfterEventDescription;
 
-    private void Start()
+    void Start()
     {
         this.gameObject.SetActive(false);
     }
 
-    public void Init()
+    public void Close()
     {
-        
+        MapUIManager.manager.CloseUI(0);
     }
 
     public void Execute(int eventNum, int optionNum)

@@ -5,21 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
-    public void ToMain()
-    {
-        // 특정 씬으로 이동
-        SceneManager.LoadScene("Scenes/Main Screen");
-    }
-
-    public void Init()
-    {
-        this.gameObject.SetActive(true);
-        this.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-    }
-
     private void Start()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void ToMain()
+    {
+        SceneManager.LoadScene("Scenes/Main Screen");
+    }
+    public void Resume()
+    {
+        MapUIManager.manager.CloseUI(2);
     }
 
 }

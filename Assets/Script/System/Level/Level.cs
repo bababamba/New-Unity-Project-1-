@@ -36,6 +36,25 @@ public class Level : MonoBehaviour
         this.GetComponent<RectTransform>().SetAsLastSibling();
     }
 
+    public void Disable()
+    {
+        foreach(Canvas c in floor)
+        {
+            c.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+        GetComponentInChildren<Scrollbar>().interactable = false;
+        GetComponent<Image>().raycastTarget = false;
+    }
+
+    public void Enable()
+    {
+        foreach (Canvas c in floor)
+        {
+            c.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        GetComponentInChildren<Scrollbar>().interactable = true;
+        GetComponent<Image>().raycastTarget = true;
+    }
 
     public void GenerateLevel()
     {
@@ -121,10 +140,10 @@ public class Level : MonoBehaviour
         int shopRooms = (int)(available * SHOP);
         int fireplaceRooms = (int)(available * FIREPLACE);
 
-        Debug.Log("Event Rooms : " + eventRooms);
+        /*Debug.Log("Event Rooms : " + eventRooms);
         Debug.Log("Elite Rooms : " + eliteRooms);
         Debug.Log("Shop Rooms : " + shopRooms);
-        Debug.Log("Fireplace Rooms : " + fireplaceRooms);
+        Debug.Log("Fireplace Rooms : " + fireplaceRooms);*/
 
         for (int i = 0; i < eventRooms; i++)
         {
@@ -190,6 +209,7 @@ public class Level : MonoBehaviour
                         default:
                             break;
                     }
+                    room.GetComponent<RoomObject>().roomType = rooms[i, j].type;
 
                     room.GetComponent<RectTransform>().anchoredPosition = new Vector2((i - 2) * 200, 0);
                     curFloor[i] = room;

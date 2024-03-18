@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class ShopUI : MonoBehaviour
 {
-    
+    void Start()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void Close()
+    {
+        MapUIManager.manager.CloseUI(1);
+    }
 
 
 
