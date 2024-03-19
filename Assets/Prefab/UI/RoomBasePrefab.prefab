@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0434b926dabae41867ff2d2ca80050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 0
   Images:
   - {fileID: 21300000, guid: 7ba4b3fa52573c34abdc67ff223fd49b, type: 3}
   - {fileID: 21300000, guid: b4e0513e1946c4c4f8174709458cbda8, type: 3}
@@ -103,7 +104,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1247300182000171477}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8217537610781320184}
+        m_TargetAssemblyTypeName: RoomObject, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &3158880764078593667
 CanvasRenderer:
   m_ObjectHideFlags: 0
