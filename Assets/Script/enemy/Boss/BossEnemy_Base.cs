@@ -13,6 +13,8 @@ public class BossEnemy_Base : enemy_base
     protected bool isGimickEnd = true;
     protected int mustGimick = 0;
 
+    protected bool isDead = false;
+
     protected int lastGimick = 1;
     private System.Random randomNumber = new System.Random();
     // Start is called before the first frame update
@@ -25,28 +27,30 @@ public class BossEnemy_Base : enemy_base
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
-        initE(0);
-        if (canMove)
-            moveToPlayer();
-        
-        //if(timer>=0)
+        if (!isDead)
+        {
+            base.Update();
+            initE(0);
+            if (canMove)
+                moveToPlayer();
+
+            //if(timer>=0)
             timer -= Time.deltaTime;
 
-        if (isGimickEnd && timer < 0)
+            if (isGimickEnd && timer < 0)
 
-        {
-            if (mustGimick == 0)
-                ChooseGimick();
-            else
             {
-                ActivateGimick(mustGimick);
-                mustGimick = 0;
+                if (mustGimick == 0)
+                    ChooseGimick();
+                else
+                {
+                    ActivateGimick(mustGimick);
+                    mustGimick = 0;
+                }
+                timer = timerMax;
             }
-            timer = timerMax;
+            //Debug.Log(lastGimick + " " + mustGimick + " " + isGimickEnd + " " );
         }
-        //Debug.Log(lastGimick + " " + mustGimick + " " + isGimickEnd + " " );
-
     }
     protected virtual void ChooseGimick()
     {
@@ -178,5 +182,12 @@ public class BossEnemy_Base : enemy_base
     public override void takeDamage(float dmg)
     {
         base.takeDamage(dmg);
+    }
+    public override void death()
+    {
+        isDead = true;
+        for (int i = 0; i < this.transform.childCount; i++)
+            if (this.transform.GetChild(i).GetComponent<Creture>())
+                this.transform.GetChild(i).GetComponent<Creture>().death();
     }
 }

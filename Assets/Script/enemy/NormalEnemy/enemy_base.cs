@@ -61,7 +61,8 @@ public class enemy_base : Creture
     {
         base.death();
         gameManager.killCountUp();
-        GameObject itemDropped = Instantiate(dropped, this.transform.position, Quaternion.identity);
+        if(dropped != null)
+           Instantiate(dropped, this.transform.position, Quaternion.identity);
     }
     protected void moveToPlayer()
     {

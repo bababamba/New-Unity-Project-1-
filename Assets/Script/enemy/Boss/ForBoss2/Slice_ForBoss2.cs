@@ -5,13 +5,14 @@ using UnityEngine;
 public class Slice_ForBoss2 : enemyExplosionBase
 {
     bool isTriggered = false;
-    public float timeLimit = 1f;
+    public float timeLimit = 0.5f;
     // Start is called before the first frame update
     protected override void Start()
     {
        
         dmg = 20;
         forEffect = true;
+        maxLifeTime = 0;
         StartCoroutine(timer());
         this.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.5f);
         base.Start();

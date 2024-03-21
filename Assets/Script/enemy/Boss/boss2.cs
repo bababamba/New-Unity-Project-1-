@@ -48,11 +48,16 @@ public class boss2 : BossEnemy_Base
     }
     protected override void gimick2()
     {
-        float randomRotation = Random.Range(minRotation, maxRotation);
+        float randomRotation = Random.Range(0, 2);
         Vector3 spawnPosition = new Vector3(player.transform.position.x , player.transform.position.y , player.transform.position.z);
 
-        Instantiate(Slicer, spawnPosition, Quaternion.Euler(0, 0, randomRotation));
-     
+        //Instantiate(Slicer, spawnPosition, Quaternion.Euler(0, 0, randomRotation));
+        if (randomRotation == 0)
+        {
+            Instantiate(Slicer, spawnPosition, Quaternion.Euler(0, 0, 90));
+        }
+        else
+            Instantiate(Slicer, spawnPosition, Quaternion.Euler(0, 0, 0));
         base.gimick2();
     }
     protected override void gimick3()
@@ -98,7 +103,7 @@ public class boss2 : BossEnemy_Base
                 if (this.transform.GetChild(i).GetComponent<Wall_Unit>())
                     this.transform.GetChild(i).GetComponent<Wall_Unit>().OnActive();
         }
-        base.gimick4();
+        base.gimick8();
     }
     public override void takeDamage(float dmg)
     {
