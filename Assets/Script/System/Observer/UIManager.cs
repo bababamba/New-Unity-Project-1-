@@ -43,16 +43,19 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        // 플레이어 오브젝트에서 ExpController 스크립트를 찾아서 exp와 maxExp 값을 가져옵니다.
-        gameManagerScript = gameManager.GetComponent<GameManager>();
-        inventory = inventoryObject.GetComponent<inventory>();
-        if (gameManagerScript != null)
+        if (SceneManager.GetActiveScene().name == "maingame")
         {
-            gold = gameManagerScript.goldEarned;
-            exp = gameManagerScript.exp;
-            maxExp = gameManagerScript.maxExp;
-            expPercentNumber = exp / maxExp * 100f;
-            expPercent.text = expPercentNumber.ToString() + "%";
+            // 플레이어 오브젝트에서 ExpController 스크립트를 찾아서 exp와 maxExp 값을 가져옵니다.
+            gameManagerScript = gameManager.GetComponent<GameManager>();
+            inventory = inventoryObject.GetComponent<inventory>();
+            if (gameManagerScript != null)
+            {
+                gold = gameManagerScript.goldEarned;
+                exp = gameManagerScript.exp;
+                maxExp = gameManagerScript.maxExp;
+                expPercentNumber = exp / maxExp * 100f;
+                expPercent.text = expPercentNumber.ToString() + "%";
+            }
         }
         // 버튼 클릭 시 함수를 연결합니다.
         resumeButton.onClick.AddListener(ResumeGame);
@@ -68,10 +71,13 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        exp = gameManagerScript.exp;
-        maxExp = gameManagerScript.maxExp;
-        expPercentNumber = exp / maxExp * 100f;
-        goldUI.text = gold.ToString();
+        if (SceneManager.GetActiveScene().name == "maingame")
+        {
+            exp = gameManagerScript.exp;
+            maxExp = gameManagerScript.maxExp;
+            expPercentNumber = exp / maxExp * 100f;
+            goldUI.text = gold.ToString();
+        }
         // 현재 경험치(exp)와 최대 경험치(maxExp) 값을 기반으로 게이지 바의 값을 업데이트합니다.
         if (expSlider != null)
         {
@@ -145,12 +151,15 @@ public class UIManager : MonoBehaviour
     // 레벨업 버튼을 누를 때 실행될 함수들입니다.
     public void LevelUpStart()
     {
-        List<item_base> item_selected = itemManagerScript.forLevelUP();
+        if (SceneManager.GetActiveScene().name == "maingame")
+        {
+            List<item_base> item_selected = itemManagerScript.forLevelUP();
 
-        levelUpUIScript.OpenLevelUP();
-        
-        levelUpUIScript.setItems(item_selected[0], item_selected[1], item_selected[2]);
-        PauseGame();
+            levelUpUIScript.OpenLevelUP();
+
+            levelUpUIScript.setItems(item_selected[0], item_selected[1], item_selected[2]);
+            PauseGame();
+        }
         
     }
     public void LevelUp()
