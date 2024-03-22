@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class MapUIManager : MonoBehaviour
@@ -14,14 +15,20 @@ public class MapUIManager : MonoBehaviour
     public static MapUIManager manager;
     public Random random = new Random();
 
+    public static Level level;
+
     private bool isAnyUIOpen = false;
 
-    void Start()
+    void Awake()
     {
         if (manager == null)
             manager = this;
         else if (manager != this)
             Destroy(this);
+
+        if(level == null)
+            level = this.GetComponentInChildren<Level>();
+            
     }
 
     void Update()
@@ -95,5 +102,10 @@ public class MapUIManager : MonoBehaviour
         }
 
         return eventdata;
+    }
+
+    public void ToCombatScene()
+    {
+        SceneManager.LoadScene("maingame");
     }
 }

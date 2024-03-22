@@ -13,7 +13,6 @@ public class Sword  : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
-        add = 0.1f;
         base.Start();
         itemNum = 0;
         Maxcooldown = 2;
@@ -26,8 +25,8 @@ public class Sword  : weapon_base
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "전방을 베어" + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 입히고, 다음 공격은 전방을 찔러 "
-            + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 준다.";
+        itemText = "전방을 베어" + basic_attack + " + " + baseDmg + "만큼의 피해를 입히고, 다음 공격은 전방을 찔러 "
+            + basic_attack + " + " + baseDmg + "만큼의 피해를 준다.";
         
         base.Update();
     }
@@ -59,8 +58,6 @@ public class Sword  : weapon_base
     public override void levelUp()
     {
         base.levelUp();
-        basic_attack += 5;
-        add += 0.05f;
     }
 
 

@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0
   height: 0
-  roomObject: {fileID: 3635803864171170473, guid: b2f61f974580f5d4fa0c03cd8241b691, type: 3}
+  roomObject: {fileID: 3635803864171170473, guid: d85612bb4d6cbab4fb57c391b2a11016, type: 3}
   LineImage: {fileID: 0}
   floor: []
 --- !u!1 &4164732804011093120

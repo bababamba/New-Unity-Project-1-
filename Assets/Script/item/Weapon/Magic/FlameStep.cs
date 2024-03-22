@@ -11,7 +11,6 @@ public class FlameStep : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
-        add = 0.1f;
         base.Start();
         itemNum = 0;
         Maxcooldown = 0.25f;
@@ -35,8 +34,6 @@ public class FlameStep : weapon_base
     public override void levelUp()
     {
         base.levelUp();
-        basic_attack += 5;
-        add += 0.05f;
     }
 
 }

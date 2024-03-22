@@ -12,7 +12,6 @@ public class Shield : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
-        add = 0.1f;
         base.Start();
         itemNum = 0;
         Maxcooldown = 10;
@@ -26,7 +25,7 @@ public class Shield : weapon_base
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "플레이어 주위를 돌며" + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 입히는 방패를 소환한다.";
+        itemText = "플레이어 주위를 돌며" + basic_attack + " + "   + "만큼의 피해를 입히는 방패를 소환한다.";
         base.Update();
     }
     protected override void itemTrigger()
@@ -45,8 +44,6 @@ public class Shield : weapon_base
     public override void levelUp()
     {
         base.levelUp();
-        basic_attack += 5;
-        add += 0.05f;
     }
 
 

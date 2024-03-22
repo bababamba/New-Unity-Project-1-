@@ -11,7 +11,6 @@ public class Dagger : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
-        add = 0.1f;
         base.Start();
         itemNum = 0;
         Maxcooldown = 0.25f;
@@ -23,7 +22,7 @@ public class Dagger : weapon_base
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "진행 방향으로 단검을 찔러 " + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 준다.";
+        itemText = "진행 방향으로 단검을 찔러 " + basic_attack + " + " + "만큼의 피해를 준다.";
         base.Update();
     }
     protected override void itemTrigger()
@@ -39,8 +38,6 @@ public class Dagger : weapon_base
     public override void levelUp()
     {
         base.levelUp();
-        basic_attack += 5;
-        add += 0.05f;
     }
 
 

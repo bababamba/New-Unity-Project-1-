@@ -11,7 +11,6 @@ public class Hammer : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
-        add = 0.1f;
         base.Start();
         itemNum = 0;
         Maxcooldown = 5;
@@ -23,7 +22,7 @@ public class Hammer : weapon_base
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "전방에 망치를 내려쳐 " + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 주고 크게 밀쳐낸다.";
+        itemText = "전방에 망치를 내려쳐 " + basic_attack + " + " + "만큼의 피해를 주고 크게 밀쳐낸다.";
         base.Update();
     }
     protected override void itemTrigger()
@@ -40,8 +39,6 @@ public class Hammer : weapon_base
     public override void levelUp()
     {
         base.levelUp();
-        basic_attack += 5;
-        add += 0.05f;
     }
 
 

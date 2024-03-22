@@ -35,9 +35,7 @@ public class Player : Creture
     public bool isBarrier = false;
     private void Awake()
     {
-
-        
-        this.init(100, 10, 1);
+        PlayerData.data.GivePlayerData(this);
         VJ.speed = this.speed;
         
         gameObject.tag = "Player";

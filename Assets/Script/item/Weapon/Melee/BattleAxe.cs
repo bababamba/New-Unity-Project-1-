@@ -11,7 +11,6 @@ public class BattleAxe : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
-        add = 0.1f;
         base.Start();
         itemNum = 0;
         Maxcooldown = 6;
@@ -23,7 +22,7 @@ public class BattleAxe : weapon_base
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "주변 원형 범위에 도끼를 휘둘러" + basic_attack + " + " + add * playerScript.ad + "만큼의 피해를 준다.";
+        itemText = "주변 원형 범위에 도끼를 휘둘러" + basic_attack + " + " + "만큼의 피해를 준다.";
         base.Update();
     }
     protected override void itemTrigger()
@@ -39,8 +38,6 @@ public class BattleAxe : weapon_base
     public override void levelUp()
     {
         base.levelUp();
-        basic_attack += 5;
-        add += 0.05f;
     }
 
 

@@ -8,7 +8,7 @@ public class Creture : Damageable
     protected int type;
     protected GameObject Manager;
     protected GameManager gameManager;
-    protected void init(int max, float speed, int type)// 최대체력, 속도, 유형
+    public void init(int max, float speed, int type)// 최대체력, 속도, 유형
     {
         Manager = GameObject.Find("GameManager");
         gameManager = Manager.GetComponent<GameManager>();
