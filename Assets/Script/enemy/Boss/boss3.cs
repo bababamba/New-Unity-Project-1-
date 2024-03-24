@@ -15,13 +15,14 @@ public class boss3 : BossEnemy_Base
     public bool parry = false;
     public GameObject Slicer;
     public float parryTimer;
+    public boss3_2 friend;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         this.init(1000, 4, 2);
-        numberOfGimick = 3;
+        numberOfGimick = 2;
         mustGimick = 0;
         initBossEnemy(true, 2);
     }
@@ -55,7 +56,7 @@ public class boss3 : BossEnemy_Base
 
         GameObject Blade = Instantiate(Garen, this.transform.position, Quaternion.identity);
         Blade.transform.SetParent(this.transform);
-        this.speed = speed*2;
+        this.speed +=4;
         StartCoroutine(Boost());
         
     }
@@ -142,7 +143,7 @@ public class boss3 : BossEnemy_Base
     IEnumerator Boost()
     {
         yield return new WaitForSeconds(4f);
-        speed = 4f;
+        speed -= 4f;
         base.gimick2();
         timer = 1f;
     }
@@ -181,5 +182,20 @@ public class boss3 : BossEnemy_Base
         else
             Instantiate(Slicer, spawnPosition, Quaternion.Euler(0, 0, 0));
         
+    }
+    public override void death()
+    {
+        if (friend)
+        {
+            friend.Ragemode();
+        }
+        base.death();
+    }
+    public void Ragemode()
+    {
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1f);
+        this.addCurHP(500);
+        this.speed = 6;
+        numberOfGimick = 3;
     }
 }
