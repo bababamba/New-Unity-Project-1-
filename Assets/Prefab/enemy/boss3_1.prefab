@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8045248063634493723}
+  speed: 0
   dropped: {fileID: 0}
   healthBar: {fileID: 8045248064601402089}
   knockback: 0

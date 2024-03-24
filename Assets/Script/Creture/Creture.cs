@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Creture : Damageable
 {
-    protected float speed;
+    public float speed;
     protected int type;
     protected GameObject Manager;
     protected GameManager gameManager;

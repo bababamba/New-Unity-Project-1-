@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public float currentSpawnRate = 1f;
 
     public GameObject[] player;
+    Player playerScript;
 
     bool isStart = false;
 
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player");
         UIM = UIManagerObject.GetComponent<UIManager>();
         itemM = itemManagerObject.GetComponent<itemManager>();
-
+        playerScript = player[0].GetComponent<Player>();
         killCount = 0;
         goldEarned = 0;
         isGaming = true;
@@ -299,11 +300,14 @@ public class GameManager : MonoBehaviour
         isGaming = false;
         goldEarn(100);
         UIM.LevelUpStart();
+        PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, getGoldEarned());
         StartCoroutine(GotoMap());
     }
     IEnumerator GotoMap()
     {
         yield return new WaitForSeconds(1f);
+        
+       
         SceneManager.LoadScene("IngameMapScreen");
     }
 

@@ -37,7 +37,7 @@ public class PlayerData : MonoBehaviour
         // 최초 한정 초기 데이터 입력
         if (!initialized)
         {
-            CreatePlayerData(100, 10, 100);
+            CreatePlayerData(100,100, 10, 100);
         }
 
         
@@ -60,9 +60,9 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public void CreatePlayerData(int hpValue, int speedValue, int goldValue)
+    public void CreatePlayerData(int hpValue,int maxHpValue,  float speedValue, int goldValue)
     {
-        maxHP = hpValue;
+        maxHP = maxHpValue;
         curHP = hpValue;
         speed = speedValue;
         gold = goldValue;

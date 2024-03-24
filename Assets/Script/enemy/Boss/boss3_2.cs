@@ -15,6 +15,8 @@ public class boss3_2 : BossEnemy_Base
 
     [SerializeField] GameObject thunder;
 
+    public boss3 friend;
+
     float teleCooldown = 10f;
 
     // Start is called before the first frame update
@@ -128,5 +130,20 @@ public class boss3_2 : BossEnemy_Base
         Vector3 randomPoint = startPoint + (randomRatio * (endPoint - startPoint));
 
         return randomPoint;
+    }
+    public override void death()
+    {
+        if (friend)
+        {
+            friend.Ragemode();
+        }
+        base.death();
+    }
+    public void Ragemode()
+    {
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1f);
+        this.addCurHP(350);
+        this.speed = 1;
+        timerMax = 1;
     }
 }
