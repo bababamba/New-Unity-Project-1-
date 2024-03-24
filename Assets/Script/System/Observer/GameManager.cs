@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -30,10 +30,13 @@ public class GameManager : MonoBehaviour
     public GameObject[] player;
 
     bool isStart = false;
+
+    public int KillGoal;
     // Start is called before the first frame update
     void Start()
     {
         init();
+        KillGoal = 10;
         
     }
 
@@ -56,16 +59,16 @@ public class GameManager : MonoBehaviour
                 currentSpawnRate += spawnRate;
                 for (int i = 0; i < player.Length; i++)
                 {
-                    //SpawnMonster(i);
+                    SpawnMonster(i);
 
                 }
                 if (spawnRate > 0.2f)
                     spawnRate -= 0.001f;
 
             }
+            GameClearCheck(1);
         }
-        else
-            GameStart();
+        
 
     }
 
@@ -90,12 +93,13 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         isGaming = true;
+        killCountReset();
     }
 
 
     public void expUp(float earned)
     {
-        exp += earned;
+        goldEarn((int)earned);
         while (exp >= maxExp)
         {
 
@@ -108,9 +112,24 @@ public class GameManager : MonoBehaviour
     {
         killCount++;
     }
+    public void killCountReset()
+    {
+        killCount = 0;
+    }
     public void goldEarn(int gold)
     {
         goldEarned += gold;
+    }
+    public bool goldLostCheck(int value)
+    {
+        if (goldEarned - value >= 0)
+            return true;
+        else
+            return false;
+    }
+    public void goldLost(int value)
+    {
+        goldEarned -= value;
     }
     public int getKillCount()
     {
@@ -266,7 +285,27 @@ public class GameManager : MonoBehaviour
             return player[0].transform;
         else return self;
     }
+    void GameClearCheck(int type)
+    {
+        switch (type)
+        {
+            case 1: if (killCount >= KillGoal) GameClear(); break;
+            default:Debug.Log("GameCleaCheckFail_UnknownType"); break;
+        }
+    }
 
+    public void GameClear()
+    {
+        isGaming = false;
+        goldEarn(100);
+        UIM.LevelUpStart();
+        StartCoroutine(GotoMap());
+    }
+    IEnumerator GotoMap()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("IngameMapScreen");
+    }
 
 
 
