@@ -56,11 +56,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomType: 0
   Images:
-  - {fileID: 21300000, guid: 7ba4b3fa52573c34abdc67ff223fd49b, type: 3}
-  - {fileID: 21300000, guid: 0bca9375bd7e2be43b8ea9044c6dc4fe, type: 3}
-  - {fileID: 21300000, guid: 6558d37c73604324880cc2235b89b598, type: 3}
-  - {fileID: 21300000, guid: b4e0513e1946c4c4f8174709458cbda8, type: 3}
-  - {fileID: 21300000, guid: a0acae5a0497a114d9616dbc33742bc5, type: 3}
+  - {fileID: 21300000, guid: 8a535c23c57a3464785b9441dffdd9db, type: 3}
+  - {fileID: 21300000, guid: ca43d927813230f44829dca7fff65e0d, type: 3}
+  - {fileID: 21300000, guid: 1bfcc1660c52ff441b5335c901758bd7, type: 3}
+  - {fileID: 21300000, guid: b555cdf70f36fa746b05081f13205258, type: 3}
+  - {fileID: 21300000, guid: 5e21c1ffb7b687940a39efef772e1efb, type: 3}
+  position: 0000000000000000
 --- !u!114 &4856853223595724256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,10 +167,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomPrefab (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4229472633612435823, guid: 671116d9539072248b68ac71d54bbe7f, type: 3}
-      propertyPath: LineImage
-      value: 
-      objectReference: {fileID: 21300000, guid: 65d294a1dc6697648b61a11b4f5e7225, type: 3}
     - target: {fileID: 7573672199204005702, guid: 671116d9539072248b68ac71d54bbe7f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -272,10 +269,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 4229472633612435823, guid: 671116d9539072248b68ac71d54bbe7f, type: 3}
-      propertyPath: LineImage
-      value: 
-      objectReference: {fileID: 21300000, guid: 65d294a1dc6697648b61a11b4f5e7225, type: 3}
     - target: {fileID: 7573672199204005702, guid: 671116d9539072248b68ac71d54bbe7f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -378,10 +371,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomPrefab (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4229472633612435823, guid: 671116d9539072248b68ac71d54bbe7f, type: 3}
-      propertyPath: LineImage
-      value: 
-      objectReference: {fileID: 21300000, guid: 65d294a1dc6697648b61a11b4f5e7225, type: 3}
     - target: {fileID: 7573672199204005702, guid: 671116d9539072248b68ac71d54bbe7f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

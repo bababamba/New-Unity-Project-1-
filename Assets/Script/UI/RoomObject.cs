@@ -18,8 +18,10 @@ public class RoomObject : MonoBehaviour
 
     public void OnClick()
     {
-        Level.level.lastRoom[0] = position[0];
-        Level.level.lastRoom[1] = position[1];
+        PlayerData.data.lastRoom[0] = position[0];
+        PlayerData.data.lastRoom[1] = position[1];
+        PlayerData.data.curFloor++;
+        PlayerData.data.UpdateMapData();
 
         switch (roomType)
         {

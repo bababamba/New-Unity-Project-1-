@@ -11,7 +11,7 @@ public class PlayerData : MonoBehaviour
     public int curHP;
     public float speed;
 
-    public int gold;
+    public int gold = 0;
     public weapon_base[] weapons = new weapon_base[11];
     public Player player;
 
@@ -19,6 +19,7 @@ public class PlayerData : MonoBehaviour
 
     public Room[,] rooms;
     public int[] lastRoom = new int[2];
+    public int curFloor;
     public bool savedLevelData = false;
 
 
@@ -37,7 +38,7 @@ public class PlayerData : MonoBehaviour
         // 최초 한정 초기 데이터 입력
         if (!initialized)
         {
-            CreatePlayerData(100, 10, 100);
+            CreatePlayerData(100, 10, 999);
         }
 
         
@@ -48,15 +49,17 @@ public class PlayerData : MonoBehaviour
     {
         if(!savedLevelData)
         {
-            rooms = new Room[Level.level.width, Level.level.height];
+            rooms = new Room[Level.level.width, Level.level.height + 1];
             rooms = Level.level.rooms;
             lastRoom = Level.level.lastRoom;
+            curFloor = Level.level.curFloor;
             savedLevelData = true;
         }
         else
         {
             Level.level.rooms = rooms;
             Level.level.lastRoom = lastRoom;
+            Level.level.curFloor = curFloor;
         }
     }
 
@@ -73,6 +76,7 @@ public class PlayerData : MonoBehaviour
             weapon.active = false;
         }
         weapons[4].active = true;
+        weapons[4].level = 4;
 
         initialized = true;
     }

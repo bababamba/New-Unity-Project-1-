@@ -30,10 +30,10 @@ public class itemManager : MonoBehaviour
         }
 
 
-        if(items[0].active == true && items[1].active == true)
+        /*if(items[0].active == true && items[1].active == true)
         {
             synergies[0].active = true;
-        }
+        }*/
 
     }
     public void init(GameObject p)

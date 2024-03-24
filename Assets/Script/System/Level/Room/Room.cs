@@ -45,5 +45,12 @@ public class Room
         return this.nextRooms.Count + this.prevRooms.Count <= 0;
     }
 
+    public bool Equals(Room room)
+    {
+        if (x == room.x && y == room.y && type == room.type && accessible == room.accessible)
+            return true;
+        else
+            return false;
+    }
 
 }

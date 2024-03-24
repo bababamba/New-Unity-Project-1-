@@ -40,6 +40,7 @@ public class ShopUI : MonoBehaviour
     void Update()
     {
         //골드 창에 현재 골드 계속 갱신 필요
+        this.transform.Find("GoldBar").GetComponentInChildren<Text>().text = "Gold : " + PlayerData.data.gold;
     }
 
     public void OpenShop()
@@ -56,21 +57,36 @@ public class ShopUI : MonoBehaviour
             {
                 thumbnails[count].sprite = images[(int)products[j + (i * 3)]];
                 // 플레이어 연동해서 레벨 비례 가격 책정
-                //buttons[count].GetComponentInChildren<Text>().text = 
+                buttons[count].GetComponentInChildren<Text>().text = (PlayerData.data.weapons[(int)products[j + (i * 3)]].level * 100) + "G";
+                buttons[count].GetComponentInChildren<Text>().fontSize = 30;
                 count++;
             }
         }
             
     }
 
-    public void Purchase()
+    public bool Purchase(int num)
     {
         // 플레이어 연동해서 상품 가격과 비교, 돈이 없으면 그냥 무시 = return
         // 돈이 있으면 썸네일 이미지 색 어둡게, 버튼 못누르게 변경
         // 플레이어 무기 레벨도 +1 해줘야 함
+        if(PlayerData.data.gold >= 100 * PlayerData.data.weapons[(int)products[num]].level)
+        {
+            PlayerData.data.gold -= 100 * PlayerData.data.weapons[(int)products[num]].level;
+            if (PlayerData.data.weapons[(int)products[num]].active == false)
+                PlayerData.data.weapons[(int)products[num]].active = true;
+            else
+                PlayerData.data.weapons[(int)products[num]].levelUp();
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not Enough Gold.");
+            return false;
+        }
     }
 
-
+    
     public void Close()
     {
         for (int i = 0; i <= 11; i++)

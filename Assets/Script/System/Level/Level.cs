@@ -39,7 +39,7 @@ public class Level : MonoBehaviour
         width = 5;
         height = 15;
 
-        rooms = new Room[width, height];
+        rooms = new Room[width, height + 1];
         if (PlayerData.data.savedLevelData == false)
         {
             Debug.Log("1st Map Gen");
@@ -48,27 +48,39 @@ public class Level : MonoBehaviour
         PlayerData.data.UpdateMapData();
 
         this.GetComponent<RectTransform>().SetAsLastSibling();
+        UpdateMap(false);
 
-        if (lastRoom != null)
+        PrintRooms();
+        //PrintLevel();
+    }
+
+    public void UpdateMap(bool refresh)
+    {
+        if(curFloor == height)
+        {
+            rooms[0, height].accessible = true;
+        }
+        else if (curFloor == 1)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                rooms[i, 1].accessible = true;
+            }
+        }
+        else if (lastRoom != null)
         {
             foreach (Room r in rooms)
             {
                 foreach (Room r2 in rooms[lastRoom[0], lastRoom[1]].nextRooms)
                 {
                     if (r.Equals(r2))
+                    {
                         r.accessible = true;
+                    }
                 }
             }
         }
-        if(curFloor == 1)
-        {
-            for (int i = 0; i < width; i++)
-            {
-                rooms[i, 1].accessible = true;
-                Debug.Log(i);
-            }
-        }
-
+        
         for (int i = 0; i < floor.Length; i++)
         {
             if (floor.Length - i == curFloor)
@@ -77,21 +89,25 @@ public class Level : MonoBehaviour
                 floor[i].GetComponent<CanvasGroup>().interactable = false;
         }
 
-
-
-
-
-
-
-
-
-        PrintRooms();
-        //PrintLevel();
+        if(refresh)
+        {
+            foreach(Canvas c in floor)
+            {
+                foreach(RoomObject r in c.GetComponentsInChildren<RoomObject>())
+                {
+                    if (rooms[r.position[0], r.position[1]].accessible)
+                        r.GetComponent<Button>().interactable = true;
+                    else
+                        r.GetComponent<Button>().interactable = false;
+                }
+            }
+        }
     }
 
     void Update()
     {
-
+        //PlayerData.data.UpdateMapData();
+        UpdateMap(true);
     }
 
     public void Disable()
@@ -119,7 +135,7 @@ public class Level : MonoBehaviour
         //1. 임시 방 만들기
         for(int i = 0; i < width; i++)
         {
-            for (int j = 0; j < height; j++)
+            for (int j = 0; j < height + 1; j++)
             {
                 rooms[i, j] = new Room(i, j);
             }
@@ -138,8 +154,13 @@ public class Level : MonoBehaviour
             int temp_i = i;
             int j = 0;
             Room room = rooms[i, j];
-            while (j < height - 1)
+            while (j < height)
             {
+                if(j == height)
+                {
+                    room.Connect(room, rooms[0, j + 1]);
+                    break;
+                }
                 //최대 좌우 1칸 범위 내의 다음 층 방을 1개 선정
                 int num;
                 if (temp_i == 0)//가장 왼쪽일 경우 왼쪽 루트 불가
@@ -191,7 +212,7 @@ public class Level : MonoBehaviour
                 }
             }
         }
-
+        rooms[0, height].type = Room.RoomType.BOSS;
         //이벤트, 엘리트, 상점, 불 순으로 적용
         int eventRooms = (int)(available * EVENT);
         int eliteRooms = (int)(available * ELITE);
@@ -282,11 +303,10 @@ public class Level : MonoBehaviour
                     if (rooms[i, j].accessible == false)
                     {
                         room.GetComponent<Button>().interactable = false;
-                        if (j == 1)
-                            Debug.Log(".");
                     }
                 }
             }
+
             if (j > 1)
             {
                 //prevFloor에서 curFloor로 향하는 연결 생성
@@ -314,6 +334,15 @@ public class Level : MonoBehaviour
             prevFloor = curFloor;
             curFloor = new GameObject[width];
         }
+        GameObject bossRoom = Instantiate(roomObject);
+        bossRoom.transform.SetParent(floor[0].transform);
+        bossRoom.GetComponent<RoomObject>().position[0] = 0;
+        bossRoom.GetComponent<RoomObject>().position[1] = height;
+
+        bossRoom.GetComponent<RoomObject>().SetImage(0);
+        bossRoom.GetComponent<RoomObject>().roomType = rooms[0, height].type;
+        bossRoom.GetComponent<RectTransform>().anchoredPosition = new Vector2(((width / 2) - 2) * 200, 0);
+
 
     }
 

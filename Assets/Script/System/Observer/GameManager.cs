@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         init();
-        KillGoal = 10;
+        KillGoal = 1;
         
     }
 

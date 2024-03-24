@@ -287,7 +287,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6181959108056063180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,4 +303,12 @@ MonoBehaviour:
   owner: {fileID: 8541481685994961876}
   dropped: {fileID: 1683565487938445909, guid: de6de156ad181f24ba029ee628e3ce1d, type: 3}
   healthBar: {fileID: 8541481685889743804}
+  knockback: 0
+  knockbackTime: 0.5
+  knockbackTimer: 0
+  frictionRate: 0.95
+  moveSpeedValue: 0
+  frozen: 0
+  freezeTime: 3
+  freezeTimer: 0
   attackDamage: 0

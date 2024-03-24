@@ -3940,6 +3940,7 @@ MonoBehaviour:
   spawnRate: 1
   currentSpawnRate: 1
   player: []
+  KillGoal: 0
 --- !u!4 &1554358086
 Transform:
   m_ObjectHideFlags: 0
@@ -5058,11 +5059,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246ed3a1281e54b419976b74b5649a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastRoom: 0000000000000000
   width: 0
   height: 0
   roomObject: {fileID: 0}
   LineImage: {fileID: 0}
   floor: []
+  curFloor: 1
 --- !u!4 &2016266245
 Transform:
   m_ObjectHideFlags: 0
@@ -5549,6 +5552,10 @@ PrefabInstance:
     - target: {fileID: 2207641400073810419, guid: 6b493b1d7da1ee34b94c56aef8fcdd3a, type: 3}
       propertyPath: m_Name
       value: boss3_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207641400073810419, guid: 6b493b1d7da1ee34b94c56aef8fcdd3a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2207641400073810420, guid: 6b493b1d7da1ee34b94c56aef8fcdd3a, type: 3}
       propertyPath: m_RootOrder
