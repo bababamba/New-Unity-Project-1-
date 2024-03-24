@@ -17,7 +17,9 @@ public class PlayerData : MonoBehaviour
 
     public bool initialized = false;
 
-
+    public Room[,] rooms;
+    public int[] lastRoom = new int[2];
+    public bool savedLevelData = false;
 
 
 
@@ -38,8 +40,24 @@ public class PlayerData : MonoBehaviour
             CreatePlayerData(100, 10, 100);
         }
 
+        
 
+    }
 
+    public void UpdateMapData()
+    {
+        if(!savedLevelData)
+        {
+            rooms = new Room[Level.level.width, Level.level.height];
+            rooms = Level.level.rooms;
+            lastRoom = Level.level.lastRoom;
+            savedLevelData = true;
+        }
+        else
+        {
+            Level.level.rooms = rooms;
+            Level.level.lastRoom = lastRoom;
+        }
     }
 
     public void CreatePlayerData(int hpValue, int speedValue, int goldValue)
@@ -68,9 +86,8 @@ public class PlayerData : MonoBehaviour
         foreach (weapon_base weapon in weapons)
         {
             Instantiate(weapon, inventory);
-        }    
+        }
+        this.player = p;
     }
-
-
 
 }

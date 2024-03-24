@@ -68,18 +68,23 @@ public class EventUI : MonoBehaviour
             switch (EventNum)
             {
                 case 0:
+                    // 보유한 랜덤 무기 업글
                     ChangeScreen(optionNum);
                     break;
                 case 1:
+                    // 보유무기 1종, 미보유 무기 1종 선택 후, 보유무기는 1렙 미보유로 변경 / 미보유무기는 보유 n렙(보유무기렙)으로 변경
                     ChangeScreen(optionNum);
                     break;
                 case 2:
+                    // 가장 낮은 무기렙 * 100 지급. 해당 무기는 1렙 미보유로 변경
                     ChangeScreen(optionNum);
                     break;
                 case 3:
+                    // 골드 일정범위 내에서 지급. 최대체력 20%데미지
                     ChangeScreen(optionNum);
                     break;
                 case 4:
+                    // 다음층 대신 보스층 활성화
                     ChangeScreen(optionNum);
                     break;
                 default:
@@ -94,4 +99,5 @@ public class EventUI : MonoBehaviour
             MapUIManager.manager.CloseUI(0);
         }
     }
+
 }

@@ -18,7 +18,7 @@ public class item_base : MonoBehaviour
     protected GameObject Manager;
     protected GameManager gameManager;
     protected bool isPassive;
-    protected int level = 1;
+    public int level = 1;
     [SerializeField]
     protected bool CooldownOff = false;
     public Sprite itemImage;

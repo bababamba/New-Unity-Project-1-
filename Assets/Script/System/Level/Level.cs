@@ -6,7 +6,10 @@ using Random = System.Random;
 
 public class Level : MonoBehaviour
 {
+    public static Level level;
+
     public Room[,] rooms;
+    public int[] lastRoom = new int[2];
     public int width;
     public int height;  
     
@@ -15,6 +18,7 @@ public class Level : MonoBehaviour
     public Image LineImage;
 
     public Canvas[] floor;
+    public int curFloor = 1;
 
     public const float EVENT = 0.2f;
     public const float ELITE = 0.1f;
@@ -24,6 +28,11 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (level == null)
+            level = this;
+        else if (level != this)
+            Destroy(this);
+
         floor = GetComponentsInChildren<Canvas>();
 
         //실제 레벨에 표시될 폭(층당 최대 방 수), 높이(층 수)를 입력
@@ -31,9 +40,58 @@ public class Level : MonoBehaviour
         height = 15;
 
         rooms = new Room[width, height];
-        GenerateLevel();
-        //PrintLevel();
+        if (PlayerData.data.savedLevelData == false)
+        {
+            Debug.Log("1st Map Gen");
+            GenerateLevel();
+        }
+        PlayerData.data.UpdateMapData();
+
         this.GetComponent<RectTransform>().SetAsLastSibling();
+
+        if (lastRoom != null)
+        {
+            foreach (Room r in rooms)
+            {
+                foreach (Room r2 in rooms[lastRoom[0], lastRoom[1]].nextRooms)
+                {
+                    if (r.Equals(r2))
+                        r.accessible = true;
+                }
+            }
+        }
+        if(curFloor == 1)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                rooms[i, 1].accessible = true;
+                Debug.Log(i);
+            }
+        }
+
+        for (int i = 0; i < floor.Length; i++)
+        {
+            if (floor.Length - i == curFloor)
+                floor[i].GetComponent<CanvasGroup>().interactable = true;
+            else
+                floor[i].GetComponent<CanvasGroup>().interactable = false;
+        }
+
+
+
+
+
+
+
+
+
+        PrintRooms();
+        //PrintLevel();
+    }
+
+    void Update()
+    {
+
     }
 
     public void Disable()
@@ -70,7 +128,7 @@ public class Level : MonoBehaviour
 
         SetRooms();
 
-        PrintRooms();
+        //PrintRooms();
     }
 
     public void ConnectRooms()
@@ -186,6 +244,8 @@ public class Level : MonoBehaviour
                     //방을 표시하는 오브젝트는 가능한 3방향(좌, 우, 중앙)에 대한 연결용 오브젝트 보유
                     GameObject room = Instantiate(roomObject);
                     room.transform.SetParent(floor[height - j].transform);
+                    room.GetComponent<RoomObject>().position[0] = i;
+                    room.GetComponent<RoomObject>().position[1] = j;
                     switch (rooms[i, j].type)
                     {
                         case Room.RoomType.COMBAT:
@@ -218,6 +278,12 @@ public class Level : MonoBehaviour
                     for (int k = 0; k < lines.Length; k++)
                     {
                         lines[k].room = rooms[i, j];
+                    }
+                    if (rooms[i, j].accessible == false)
+                    {
+                        room.GetComponent<Button>().interactable = false;
+                        if (j == 1)
+                            Debug.Log(".");
                     }
                 }
             }

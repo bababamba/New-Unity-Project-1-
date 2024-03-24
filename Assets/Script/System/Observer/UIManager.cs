@@ -141,7 +141,7 @@ public class UIManager : MonoBehaviour
     {
         // 메인메뉴로 돌아가거나 추가적인 기능을 수행합니다.
         Debug.Log("Returning to main menu.");
-        SceneManager.LoadScene("Scenes/mainmenu");
+        SceneManager.LoadScene("Scenes/IngameMapScreen");
     }
     public int chooseNumber(int a)
     {

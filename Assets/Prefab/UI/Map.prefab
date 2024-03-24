@@ -1495,11 +1495,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 246ed3a1281e54b419976b74b5649a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastRoom: 0000000000000000
   width: 0
   height: 0
   roomObject: {fileID: 3635803864171170473, guid: d85612bb4d6cbab4fb57c391b2a11016, type: 3}
   LineImage: {fileID: 0}
   floor: []
+  curFloor: 1
 --- !u!1 &4164732804011093120
 GameObject:
   m_ObjectHideFlags: 0

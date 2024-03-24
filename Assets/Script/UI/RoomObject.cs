@@ -8,6 +8,8 @@ public class RoomObject : MonoBehaviour
     public Room.RoomType roomType;
     public Sprite[] Images;
 
+    public int[] position = new int[2];
+
     public void SetImage(int num)
     {
         this.GetComponent<Image>().sprite = Images[num];
@@ -16,6 +18,9 @@ public class RoomObject : MonoBehaviour
 
     public void OnClick()
     {
+        Level.level.lastRoom[0] = position[0];
+        Level.level.lastRoom[1] = position[1];
+
         switch (roomType)
         {
             case Room.RoomType.COMBAT:
