@@ -3932,7 +3932,13 @@ MonoBehaviour:
   maxExp: 0
   isPlayerActive: 0
   enemies: []
-  enemy: {fileID: 8541481685994961876, guid: 81663896aa3b8e94ea7d48c1897b53f5, type: 3}
+  enemy:
+  - {fileID: 8541481685994961876, guid: 81663896aa3b8e94ea7d48c1897b53f5, type: 3}
+  - {fileID: 6453408584944875122, guid: 2c02a342bbd346349a30bfc80648e628, type: 3}
+  - {fileID: 5650278071219450078, guid: 6b1759369d635294fa2c57d345ba2f0c, type: 3}
+  - {fileID: 3754300673077965393, guid: c5a322b4690a7d64fb9dba6e275f44d5, type: 3}
+  - {fileID: 199326273950236209, guid: ffd233b9784a8a34cbc5aa526828dc95, type: 3}
+  - {fileID: 4645984977966861272, guid: 159115cdc360bf84f98a40d72c95a0ce, type: 3}
   UIManagerObject: {fileID: 1436842561}
   itemManagerObject: {fileID: 574414238}
   minDistance: 13
@@ -3941,6 +3947,7 @@ MonoBehaviour:
   currentSpawnRate: 1
   player: []
   KillGoal: 0
+  poolNumber: 1
 --- !u!4 &1554358086
 Transform:
   m_ObjectHideFlags: 0

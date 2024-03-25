@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
 public class GameManager : MonoBehaviour
 {
     public bool isGaming = false;
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
     public float maxExp;
     public bool isPlayerActive = false;
     public GameObject[] enemies;
-    public GameObject enemy;
+    public GameObject[] enemy;
     public GameObject UIManagerObject;
     public GameObject itemManagerObject;
 
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
     bool isStart = false;
 
     public int KillGoal;
+
+    int[,] monsterPool = { { 1, 0, 0, 0, 0, 0 }, { 10, 1, 0, 0, 0, 0 }, { 20, 4, 1, 0, 0, 0 }, { 20, 1, 0, 1, 0, 0 } };
+    public int poolNumber = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -244,7 +248,10 @@ public class GameManager : MonoBehaviour
     {
         Vector2 playerPosition = player[playerNumber].transform.position;
         Vector2 spawnPosition = GetRandomSpawnPosition(playerPosition);
-        GameObject spawnedEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+
+        int randomEnemySpawn = GetRandomIndex(monsterPool);
+
+        GameObject spawnedEnemy = Instantiate(enemy[randomEnemySpawn], spawnPosition, Quaternion.identity);
         while (IsOverlappingTree(spawnedEnemy))
         {
             spawnedEnemy.transform.position = GetRandomSpawnPosition(playerPosition);
@@ -253,6 +260,31 @@ public class GameManager : MonoBehaviour
         spawnedEnemy.GetComponent<enemy_base>().initE(playerNumber);
 
 
+    }
+    int GetRandomIndex(int[,] probs)
+    {
+        int totalWeight = 0;
+
+        for (int i = 0; i < 6; i++)
+        {
+            totalWeight += probs[poolNumber, i];
+        }
+
+        int randomNumber = Random.Range(1, totalWeight + 1);
+   
+        int cumulativeWeight = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            
+            cumulativeWeight += probs[poolNumber,i];
+ 
+            if (randomNumber <= cumulativeWeight)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     private Vector2 GetRandomSpawnPosition(Vector2 playerPosition)
@@ -305,7 +337,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator GotoMap()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         
        
         SceneManager.LoadScene("IngameMapScreen");
