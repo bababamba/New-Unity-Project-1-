@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         init();
         KillGoal = 1;
-        
+        poolNumber = PlayerData.data.enemyPool;
     }
 
     // Update is called once per frame

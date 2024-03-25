@@ -29,10 +29,9 @@ public class ShopUI : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i <= 11; i++)
+        for (int i = 0; i < 11; i++)
             products.Add((Product)i);
-        shelf = GetComponentsInChildren<Canvas>();
-
+        shelf = this.transform.Find("ItemScreen").GetComponentsInChildren<Canvas>();
 
         this.gameObject.SetActive(false);
     }
@@ -45,24 +44,22 @@ public class ShopUI : MonoBehaviour
 
     public void OpenShop()
     {
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i < 5; i++)
             products.RemoveAt(random.Next(0, products.Count));
 
-        for(int i = 0; i < shelf.Length - 1; i++)
+        for(int i = 0; i < shelf.Length; i++)
         {
-            Image[] thumbnails = shelf[i + 1].GetComponentsInChildren<Image>();
-            Button[] buttons = shelf[i + 1].GetComponentsInChildren<Button>();
-            int count = 0;
+            Image[] thumbnails = shelf[i].GetComponentsInChildren<Image>();
+            Button[] buttons = shelf[i].GetComponentsInChildren<Button>();
             for(int j = 0; j < 3; j++)
             {
-                thumbnails[count].sprite = images[(int)products[j + (i * 3)]];
+                thumbnails[j].sprite = images[(int)products[j + (i * 3)]];
                 // 플레이어 연동해서 레벨 비례 가격 책정
-                buttons[count].GetComponentInChildren<Text>().text = (PlayerData.data.weapons[(int)products[j + (i * 3)]].level * 100) + "G";
-                buttons[count].GetComponentInChildren<Text>().fontSize = 30;
-                count++;
+                buttons[j].GetComponentInChildren<Text>().text = (PlayerData.data.weapons[(int)products[j + (i * 3)]].level * 100) + "G";
+                buttons[j].GetComponentInChildren<Text>().fontSize = 30;
             }
         }
-            
+         //Debug.Log(products.Count);   
     }
 
     public bool Purchase(int num)
@@ -89,7 +86,8 @@ public class ShopUI : MonoBehaviour
     
     public void Close()
     {
-        for (int i = 0; i <= 11; i++)
+        products = new List<Product>();
+        for (int i = 0; i < 11; i++)
             products.Add((Product)i);
 
         MapUIManager.manager.CloseUI(1);

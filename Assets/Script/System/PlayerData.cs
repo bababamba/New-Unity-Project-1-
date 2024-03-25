@@ -21,14 +21,14 @@ public class PlayerData : MonoBehaviour
     public int[] lastRoom = new int[2];
     public int curFloor;
     public bool savedLevelData = false;
-
+    public int enemyPool;
 
 
     void Awake()
     {
         // ΩÃ±€≈Ê
         if (data != null)
-            Destroy(this);
+            Destroy(this.gameObject);
         else
             data = this;
 
@@ -40,6 +40,8 @@ public class PlayerData : MonoBehaviour
         {
             CreatePlayerData(100,100, 10, 999);
         }
+
+
 
         
 

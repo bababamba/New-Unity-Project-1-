@@ -50,12 +50,23 @@ public class MapUIManager : MonoBehaviour
         if(isAnyUIOpen)
             return;
 
-        PoPUpScreen[num].SetActive(true);
+        if (num == 5 || num == 6)
+            PoPUpScreen[0].SetActive(true);
+        else
+            PoPUpScreen[num].SetActive(true);
         if (num == 0)
             PoPUpScreen[num].GetComponent<EventUI>().Init(random.Next(0, 5));
+            //PoPUpScreen[num].GetComponent<EventUI>().Init(3);
         else if (num == 1)
             PoPUpScreen[num].GetComponent<ShopUI>().OpenShop();
-        PoPUpScreen[num].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        else if (num == 5)
+            PoPUpScreen[0].GetComponent<EventUI>().Init(5);
+        else if (num == 6)
+            PoPUpScreen[0].GetComponent<EventUI>().Init(6);
+        if (num == 5 || num == 6)
+            PoPUpScreen[0].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        else
+            PoPUpScreen[num].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
 
         isAnyUIOpen = true;
     }
@@ -106,6 +117,8 @@ public class MapUIManager : MonoBehaviour
 
     public void ToCombatScene()
     {
+        int num = random.Next(0, 4);
+        PlayerData.data.enemyPool = num;
         SceneManager.LoadScene("maingame");
     }
 }

@@ -42,7 +42,6 @@ public class Level : MonoBehaviour
         rooms = new Room[width, height + 1];
         if (PlayerData.data.savedLevelData == false)
         {
-            Debug.Log("1st Map Gen");
             GenerateLevel();
         }
         PlayerData.data.UpdateMapData();
@@ -59,6 +58,7 @@ public class Level : MonoBehaviour
         if(curFloor == height)
         {
             rooms[0, height].accessible = true;
+            Debug.Log(",");
         }
         else if (curFloor == 1)
         {
@@ -80,7 +80,7 @@ public class Level : MonoBehaviour
                 }
             }
         }
-        
+        /*
         for (int i = 0; i < floor.Length; i++)
         {
             if (floor.Length - i == curFloor)
@@ -88,7 +88,7 @@ public class Level : MonoBehaviour
             else
                 floor[i].GetComponent<CanvasGroup>().interactable = false;
         }
-
+        */
         if(refresh)
         {
             foreach(Canvas c in floor)
