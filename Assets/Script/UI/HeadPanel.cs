@@ -7,14 +7,20 @@ public class HeadPanel : MonoBehaviour
 {
     public void Disable()
     {
-        GetComponentInChildren<Image>().raycastTarget = false;
+        this.transform.Find("Background").GetComponent<Image>().raycastTarget = false;
         GetComponentInChildren<Button>().interactable = false;
     }
 
     public void Enable()
     {
-        GetComponentInChildren<Image>().raycastTarget = true;
+        this.transform.Find("Background").GetComponent<Image>().raycastTarget = true;
         GetComponentInChildren<Button>().interactable = true;
+    }
+
+    void Update()
+    {
+        this.transform.Find("HPText").GetComponent<Text>().text = PlayerData.data.curHP + " / " + PlayerData.data.maxHP;
+        this.transform.Find("GoldText").GetComponent<Text>().text = PlayerData.data.gold + "";
     }
 
     public void OnClick()

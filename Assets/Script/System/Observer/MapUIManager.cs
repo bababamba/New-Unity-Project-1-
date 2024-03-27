@@ -55,8 +55,8 @@ public class MapUIManager : MonoBehaviour
         else
             PoPUpScreen[num].SetActive(true);
         if (num == 0)
-            PoPUpScreen[num].GetComponent<EventUI>().Init(random.Next(0, 5));
-            //PoPUpScreen[num].GetComponent<EventUI>().Init(3);
+            //PoPUpScreen[num].GetComponent<EventUI>().Init(random.Next(0, 5));
+            PoPUpScreen[num].GetComponent<EventUI>().Init(3);
         else if (num == 1)
             PoPUpScreen[num].GetComponent<ShopUI>().OpenShop();
         else if (num == 5)
