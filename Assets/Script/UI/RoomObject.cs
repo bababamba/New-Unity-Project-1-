@@ -41,10 +41,10 @@ public class RoomObject : MonoBehaviour
                 MapUIManager.manager.OpenUI(1);
                 break;
             case Room.RoomType.FIREPLACE:
-                MapUIManager.manager.OpenUI(0);
+                MapUIManager.manager.OpenUI(6);
                 break;
             case Room.RoomType.CHEST:
-                MapUIManager.manager.OpenUI(0);
+                MapUIManager.manager.OpenUI(5);
                 break;
             default:
                 break;

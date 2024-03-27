@@ -23,7 +23,7 @@ public class Room
     public int x;
     public int y;
 
-    public bool accessible = false;
+    public bool accessible = true;
 
     public Room(int x, int y)
     {
