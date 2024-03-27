@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Audio_Manager : MonoBehaviour
 {
     public static Audio_Manager Instance;
-
+    [SerializeField] GameObject OptionPopUp;
+    float BGMVolume = 0.8f;
+    float SFXVolume = 0.8f;
     void Awake()
     {
 
@@ -14,10 +16,10 @@ public class Audio_Manager : MonoBehaviour
         if(Instance == null)
             Instance = this;
 
-        if(bgmSlider != null)
-            bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume", 0.8f);
+        if (bgmSlider != null)
+            bgmSlider.value = BGMVolume;
         if(sfxSlider != null)
-            sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
+            sfxSlider.value = SFXVolume;
     }
 
     void Update()
@@ -36,18 +38,25 @@ public class Audio_Manager : MonoBehaviour
     public AudioClip test1;
     //Audio_Manager.Instance.BGM_Title();
     //Audio_Manager.Instance.SFX_ButtonClick();
-
+    public void OptionPopUpOn()
+    {
+        OptionPopUp.SetActive(true);
+    }
+    public void OptionPopUpOff()
+    {
+        OptionPopUp.SetActive(false);
+    }
 
     public void SetBGMVolume(float volume)
     {
         bgmSource.volume = volume;
-        PlayerPrefs.SetFloat("BGMVolume", volume);
+        BGMVolume = volume;
     }
 
     public void SetSFXVolume(float volume)
     {
         sfxSource.volume = volume;
-        PlayerPrefs.SetFloat("SFXVolume", volume);
+        SFXVolume = volume;
     }
     public void BGM_Title()
     {
