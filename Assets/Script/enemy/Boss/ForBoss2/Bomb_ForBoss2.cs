@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bomb_ForBoss2 : enemyExplosionBase
 {
-    bool isTriggered = false;
     public float timeLimit = 1.5f;
     public GameObject[] Bomber;
     public int typeOfBomber = 0;

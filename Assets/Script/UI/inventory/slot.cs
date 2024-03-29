@@ -106,7 +106,7 @@ public class slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         
         if (item != null)
         {
-            Audio_Manager.Instance.SFX_ClickBucket();
+            Audio_Manager.Instance.SFX_Click();
             dragSlot.instance.dragslot = this;
             dragSlot.instance.DragSetImage(itemImage);
             dragSlot.instance.transform.position = eventData.position;

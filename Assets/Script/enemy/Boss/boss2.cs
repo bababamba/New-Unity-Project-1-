@@ -12,10 +12,7 @@ public class boss2 : BossEnemy_Base
     public GameObject Bomber;
     [SerializeField] float spawnRadius = 5f;
     
-    public GameObject Slicer;
-    float minRotation = 0f; 
-    float maxRotation = 180f;
-    
+    public GameObject Slicer;   
      
 
     bool haveWall = false;

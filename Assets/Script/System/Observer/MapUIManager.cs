@@ -117,6 +117,7 @@ public class MapUIManager : MonoBehaviour
 
     public void ToCombatScene()
     {
+        Audio_Manager.Instance.SFX_Click();
         int num = random.Next(0, 4);
         PlayerData.data.enemyPool = num;
         SceneManager.LoadScene("maingame");

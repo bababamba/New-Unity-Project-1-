@@ -4088,11 +4088,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664504644}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 962f81e33a30ead4485f66d1f93593c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OptionPopUp: {fileID: 0}
   bgmSource: {fileID: 1042412685}
   sfxSource: {fileID: 2118872510}
   bgmSlider: {fileID: 0}

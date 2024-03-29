@@ -19,7 +19,7 @@ public class Bomber1_Unit : Bomber_Base
     {
         base.gimick();
         Transform temp = gameManager.getPlayerTransform(this.transform);
-        if (temp != this.transform && 10 > Vector2.Distance(temp.position, this.transform.position)) ;
+        if (temp != this.transform && 10 > Vector2.Distance(temp.position, this.transform.position)) 
         {
             stopSeconds(0.5f);
             GameObject whiteBox = Instantiate(bullet, this.transform.position, Quaternion.identity);

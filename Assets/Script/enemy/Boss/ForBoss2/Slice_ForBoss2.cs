@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slice_ForBoss2 : enemyExplosionBase
 {
-    bool isTriggered = false;
+
     public float timeLimit = 0.5f;
     // Start is called before the first frame update
     protected override void Start()

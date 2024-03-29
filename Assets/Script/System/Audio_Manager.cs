@@ -9,6 +9,8 @@ public class Audio_Manager : MonoBehaviour
     [SerializeField] GameObject OptionPopUp;
     float BGMVolume = 0.8f;
     float SFXVolume = 0.8f;
+    public Slider bgmSlider;
+    public Slider sfxSlider;
     void Awake()
     {
 
@@ -16,9 +18,13 @@ public class Audio_Manager : MonoBehaviour
         if(Instance == null)
             Instance = this;
 
+        
+    }
+    private void Start()
+    {
         if (bgmSlider != null)
             bgmSlider.value = BGMVolume;
-        if(sfxSlider != null)
+        if (sfxSlider != null)
             sfxSlider.value = SFXVolume;
     }
 
@@ -31,8 +37,7 @@ public class Audio_Manager : MonoBehaviour
     public AudioSource bgmSource;
     public AudioSource sfxSource;
 
-    public Slider bgmSlider;
-    public Slider sfxSlider;
+    
 
     public AudioClip Title;
     public AudioClip test1;
@@ -63,7 +68,7 @@ public class Audio_Manager : MonoBehaviour
         bgmSource.clip = Title;
         bgmSource.Play();
     }
-    public void SFX_ClickBucket()
+    public void SFX_Click()
     {
         sfxSource.PlayOneShot(test1);
     }

@@ -35,7 +35,11 @@ public class GameManager : MonoBehaviour
 
     public int KillGoal;
 
-    int[,] monsterPool = { { 1, 0, 0, 0, 0, 0 }, { 10, 1, 0, 0, 0, 0 }, { 20, 4, 1, 0, 0, 0 }, { 20, 1, 0, 1, 0, 0 } };
+    int[,] monsterPool = { 
+        { 1, 0, 0, 0, 0, 0 }, { 10, 1, 0, 0, 0, 0 }, { 20, 4, 1, 0, 0, 0 }, { 20, 1, 0, 1, 0, 0 },// 1단계
+        { 20, 2, 1, 0, 0, 0 }, { 0, 10, 0, 1, 0, 0 }, { 10, 5, 0, 0, 1, 0 }, { 20, 0, 1, 0, 0, 1 },//2단계
+        { 20, 0, 0, 1, 1, 0 }, { 10, 10, 0, 2, 0, 1 }, { 1, 10, 1, 1, 0, 0 }, { 20, 0, 5, 1, 1, 1 },//3단계
+        { 0, 10, 10, 2, 1, 1 }, { 10, 0, 10, 1, 0, 10}, { 0, 20, 2, 0, 5, 0 }, { 0, 0, 10, 3, 2, 5 }};//4단계
     public int poolNumber = 1;
     // Start is called before the first frame update
     void Start()
@@ -62,11 +66,9 @@ public class GameManager : MonoBehaviour
             if (currentSpawnRate <= 0f)
             {
                 currentSpawnRate += spawnRate;
-                for (int i = 0; i < player.Length; i++)
-                {
-                    SpawnMonster(i);
+               
+                    SpawnMonster(0);
 
-                }
                 if (spawnRate > 0.2f)
                     spawnRate -= 0.001f;
 

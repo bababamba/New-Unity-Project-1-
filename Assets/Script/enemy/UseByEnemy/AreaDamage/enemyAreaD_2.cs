@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class enemyAreaD_2 : enemyExplosionBase
 {
-    bool isTriggered = false;
+
     // Start is called before the first frame update
     protected override void Start()
     {
