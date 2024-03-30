@@ -22,6 +22,7 @@ public class PlayerData : MonoBehaviour
     public int curFloor;
     public bool savedLevelData = false;
     public int enemyPool;
+    public int killCount = 0;
 
 
     void Awake()
@@ -38,7 +39,7 @@ public class PlayerData : MonoBehaviour
         // 최초 한정 초기 데이터 입력
         if (!initialized)
         {
-            CreatePlayerData(100,100, 10, 999);
+            CreatePlayerData(100,100, 10, 999, true);
         }
 
 
@@ -65,7 +66,7 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    public void CreatePlayerData(int maxhpValue, int hpValue, float speedValue, int goldValue)
+    public void CreatePlayerData(int maxhpValue, int hpValue, float speedValue, int goldValue, bool newData = false)
     {
         maxHP = maxhpValue;
         curHP = hpValue;
@@ -75,10 +76,18 @@ public class PlayerData : MonoBehaviour
         // 처음에 들고 있을 무기에 active = true; 작성
         foreach (weapon_base weapon in weapons)
         {
+            if(newData)
+                weapon.level = 1;
             weapon.active = false;
         }
         weapons[4].active = true;
         weapons[4].level = 4;
+
+        if (newData)
+        {
+            savedLevelData = false;
+            killCount = 0;
+        }
 
         initialized = true;
     }

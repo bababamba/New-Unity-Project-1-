@@ -60,9 +60,10 @@ public class enemy_base : Creture
     public override void death()
     {
         base.death();
+        PlayerData.data.killCount++;
         gameManager.killCountUp();
-        if(dropped != null)
-           Instantiate(dropped, this.transform.position, Quaternion.identity);
+        //if(dropped != null)
+           //Instantiate(dropped, this.transform.position, Quaternion.identity);
     }
     protected void moveToPlayer()
     {

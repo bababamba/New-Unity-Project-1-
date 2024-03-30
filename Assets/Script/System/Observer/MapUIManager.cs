@@ -17,7 +17,8 @@ public class MapUIManager : MonoBehaviour
 
     public static Level level;
 
-    private bool isAnyUIOpen = false;
+    public bool isAnyUIOpen = false;
+    private bool gameOver = false;
 
     void Awake()
     {
@@ -43,17 +44,26 @@ public class MapUIManager : MonoBehaviour
             Screen[0].GetComponent<HeadPanel>().Enable();
             Screen[1].GetComponent<Level>().Enable();
         }
+
+        if(PlayerData.data.curHP <= 0 && !gameOver)
+        {
+            gameOver = true;
+            for (int i = 0; i < 4; i++)
+                CloseUI(i);
+            OpenUI(4);
+        }
     }
 
     public void OpenUI(int num)
     {
-        if(isAnyUIOpen && num != 3)
+        if(isAnyUIOpen && num != 3 && num != 4)
             return;
 
         if (num == 5 || num == 6)
             PoPUpScreen[0].SetActive(true);
         else
             PoPUpScreen[num].SetActive(true);
+
         if (num == 0)
             //PoPUpScreen[num].GetComponent<EventUI>().Init(random.Next(0, 5));
             PoPUpScreen[num].GetComponent<EventUI>().Init(3);
@@ -63,6 +73,7 @@ public class MapUIManager : MonoBehaviour
             PoPUpScreen[0].GetComponent<EventUI>().Init(5);
         else if (num == 6)
             PoPUpScreen[0].GetComponent<EventUI>().Init(6);
+
         if (num == 5 || num == 6)
             PoPUpScreen[0].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
         else

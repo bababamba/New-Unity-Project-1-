@@ -176,6 +176,7 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         PauseGame();
+        SceneManager.LoadScene("IngameMapScreen");
         GameOverScreen.SetActive(true);
 
     }
