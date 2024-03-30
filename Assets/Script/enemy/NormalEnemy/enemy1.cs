@@ -9,7 +9,6 @@ public class enemy1 : enemy_base
     {
         base.Start();
         this.init(50, 1, 2);
-        attackDamage = 1;
     }
 
 

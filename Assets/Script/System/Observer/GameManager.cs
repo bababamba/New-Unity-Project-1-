@@ -26,8 +26,6 @@ public class GameManager : MonoBehaviour
     public float minDistance = 13f;
     public float maxDistance = 16f;
     public float spawnRate = 3f;
-    public float minSpawnRate = 2f;
-    public float maxSpawnRate = 3f;
     public float currentSpawnRate = 1f;
 
     public GameObject[] player;
@@ -38,10 +36,10 @@ public class GameManager : MonoBehaviour
     public int KillGoal;
 
     int[,] monsterPool = { 
-        { 1, 0, 0, 0, 0, 0, 4 }, { 10, 1, 0, 0, 0, 0, 4 }, { 20, 4, 1, 0, 0, 0, 4 }, { 20, 1, 0, 1, 0, 0, 4 },// 1단계
-        { 20, 2, 1, 0, 0, 0, 3 }, { 0, 10, 0, 1, 0, 0, 3 }, { 10, 5, 0, 0, 1, 0, 3 }, { 20, 0, 1, 0, 0, 1, 3 },//2단계
-        { 20, 0, 0, 1, 1, 0,3 }, { 10, 10, 0, 2, 0, 1,3 }, { 1, 10, 1, 1, 0, 0, 3 }, { 20, 0, 5, 1, 1, 1,3 },//3단계
-        { 0, 10, 10, 2, 1, 1,2 }, { 10, 0, 10, 1, 0, 10, 2}, { 0, 20, 2, 0, 5, 0, 2 }, { 0, 0, 10, 3, 2, 5, 2 }};//4단계
+        { 1, 0, 0, 0, 0, 0 }, { 10, 1, 0, 0, 0, 0 }, { 20, 4, 1, 0, 0, 0 }, { 20, 1, 0, 1, 0, 0 },// 1단계
+        { 20, 2, 1, 0, 0, 0 }, { 0, 10, 0, 1, 0, 0 }, { 10, 5, 0, 0, 1, 0 }, { 20, 0, 1, 0, 0, 1 },//2단계
+        { 20, 0, 0, 1, 1, 0 }, { 10, 10, 0, 2, 0, 1 }, { 1, 10, 1, 1, 0, 0 }, { 20, 0, 5, 1, 1, 1 },//3단계
+        { 0, 10, 10, 2, 1, 1 }, { 10, 0, 10, 1, 0, 10}, { 0, 20, 2, 0, 5, 0 }, { 0, 0, 10, 3, 2, 5 }};//4단계
     public int poolNumber = 1;
     // Start is called before the first frame update
     void Start()
@@ -49,8 +47,6 @@ public class GameManager : MonoBehaviour
         init();
         KillGoal = 1;
         poolNumber = PlayerData.data.enemyPool;
-        spawnRate = monsterPool[poolNumber, 6];
-        minSpawnRate = spawnRate / 2;
     }
 
     // Update is called once per frame
@@ -69,12 +65,11 @@ public class GameManager : MonoBehaviour
             currentSpawnRate -= Time.deltaTime;
             if (currentSpawnRate <= 0f)
             {
-                
                 currentSpawnRate += spawnRate;
                
                     SpawnMonster(0);
 
-                if (spawnRate > minSpawnRate)
+                if (spawnRate > 0.2f)
                     spawnRate -= 0.001f;
 
             }
@@ -342,15 +337,6 @@ public class GameManager : MonoBehaviour
         PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, getGoldEarned());
         StartCoroutine(GotoMap());
     }
-
-    public void GameOver()
-    {
-        PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, getGoldEarned());
-        UIM.GameOver();
-    }
-
-
-
     IEnumerator GotoMap()
     {
         yield return new WaitForSeconds(0.2f);

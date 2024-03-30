@@ -78,7 +78,6 @@ public class Player : Creture
             VJ.speed = 0;
             
             playerDie = true;
-            gameManager.GetComponent<GameManager>().GameOver();
         }
     }
     public Transform playerTransform()
