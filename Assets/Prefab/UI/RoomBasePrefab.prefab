@@ -61,6 +61,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1bfcc1660c52ff441b5335c901758bd7, type: 3}
   - {fileID: 21300000, guid: b555cdf70f36fa746b05081f13205258, type: 3}
   - {fileID: 21300000, guid: 5e21c1ffb7b687940a39efef772e1efb, type: 3}
+  - {fileID: 21300000, guid: ec4c933d43cdf40458428ec55db66cfb, type: 3}
+  - {fileID: 21300000, guid: ee6fca43aee0c2f4392d14ee9abb3b0e, type: 3}
   position: 0000000000000000
 --- !u!114 &4856853223595724256
 MonoBehaviour:

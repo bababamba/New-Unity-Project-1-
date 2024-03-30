@@ -282,10 +282,13 @@ public class Level : MonoBehaviour
                             room.GetComponent<RoomObject>().SetImage(3);
                             break;
                         case Room.RoomType.MERCHANT:
-                            room.GetComponent<RoomObject>().SetImage(3);
+                            room.GetComponent<RoomObject>().SetImage(5);
                             break;
                         case Room.RoomType.FIREPLACE:
                             room.GetComponent<RoomObject>().SetImage(4);
+                            break;
+                        case Room.RoomType.BOSS:
+                            room.GetComponent<RoomObject>().SetImage(6);
                             break;
                         default:
                             break;
@@ -339,7 +342,7 @@ public class Level : MonoBehaviour
         bossRoom.GetComponent<RoomObject>().position[0] = 0;
         bossRoom.GetComponent<RoomObject>().position[1] = height;
 
-        bossRoom.GetComponent<RoomObject>().SetImage(0);
+        bossRoom.GetComponent<RoomObject>().SetImage(6);
         bossRoom.GetComponent<RoomObject>().roomType = rooms[0, height].type;
         bossRoom.GetComponent<RectTransform>().anchoredPosition = new Vector2(((width / 2) - 2) * 200, 0);
 

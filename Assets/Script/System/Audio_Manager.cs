@@ -16,9 +16,7 @@ public class Audio_Manager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         if(Instance == null)
-            Instance = this;
-
-        
+            Instance = this; 
     }
     private void Start()
     {

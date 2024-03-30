@@ -47,7 +47,7 @@ public class MapUIManager : MonoBehaviour
 
     public void OpenUI(int num)
     {
-        if(isAnyUIOpen)
+        if(isAnyUIOpen && num != 3)
             return;
 
         if (num == 5 || num == 6)
@@ -75,7 +75,8 @@ public class MapUIManager : MonoBehaviour
     {
         PoPUpScreen[num].SetActive(false);
 
-        isAnyUIOpen = false;
+        if(num != 3)
+            isAnyUIOpen = false;
     }
 
     public Dictionary<int, Dictionary<string, string>> ReadCSV(TextAsset file)

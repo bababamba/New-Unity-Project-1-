@@ -14,6 +14,12 @@ public class PauseUI : MonoBehaviour
     {
         SceneManager.LoadScene("Scenes/Main Screen");
     }
+
+    public void OpenSettings()
+    {
+        MapUIManager.manager.OpenUI(3);
+    }
+
     public void Resume()
     {
         MapUIManager.manager.CloseUI(2);
