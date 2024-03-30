@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
     public GameObject inventoryObject;
     private inventory inventory;
 
+    public GameObject GameOverScreen;
+
 
     private void Awake()
     {
@@ -169,6 +171,12 @@ public class UIManager : MonoBehaviour
         Debug.Log("Player Level Up!");
 
         // 레벨업 이벤트를 발생시킵니다.
+
+    }
+    public void GameOver()
+    {
+        PauseGame();
+        GameOverScreen.SetActive(true);
 
     }
 }
