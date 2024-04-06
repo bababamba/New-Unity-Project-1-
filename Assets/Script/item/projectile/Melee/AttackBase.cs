@@ -13,6 +13,7 @@ public class AttackBase : projectile_base
     public GameObject player;
     public Vector2 position;
     protected float knockbackForce;
+    public int addDmg;
 
     public enum Type
     {
@@ -58,7 +59,7 @@ public class AttackBase : projectile_base
  
         if(enemy != null && !enemyAttacked.Contains(enemy))
         {
-            enemy.takeDamage(dmg);
+            enemy.takeDamage(dmg + addDmg);
             if(enemy != null && type == Type.MELEE)
                 KnockBack(enemy.transform);
             if (enemy != null && type == Type.ICE)

@@ -12,6 +12,7 @@ public class PauseUI : MonoBehaviour
 
     public void ToMain()
     {
+        PlayerData.data.CreatePlayerData(100, 100, 10, 999, true);
         SceneManager.LoadScene("Scenes/Main Screen");
     }
 

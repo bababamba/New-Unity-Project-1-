@@ -81,12 +81,14 @@ public class PlayerData : MonoBehaviour
             weapon.active = false;
         }
         weapons[4].active = true;
-        weapons[4].level = 4;
+        weapons[4].level = 4000;
 
         if (newData)
         {
             savedLevelData = false;
             killCount = 0;
+
+            curFloor = 0;
         }
 
         initialized = true;

@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         inventoryObject.SetActive(true);
+        ResumeGame();
     }
     void Start()
     {
@@ -69,6 +70,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(false);
 
         inventoryObject.SetActive(true);
+
     }
 
     void Update()
@@ -173,11 +175,13 @@ public class UIManager : MonoBehaviour
         // 레벨업 이벤트를 발생시킵니다.
 
     }
-    public void GameOver()
+    public void GameOver(bool bossClear = false)
     {
-        //PauseGame();
-        SceneManager.LoadScene("IngameMapScreen");
+        PauseGame();
+        //SceneManager.LoadScene("IngameMapScreen");
+        if (bossClear)
+            GameOverScreen.GetComponent<GameOverUI>().clear = true;
         GameOverScreen.SetActive(true);
-
+        
     }
 }

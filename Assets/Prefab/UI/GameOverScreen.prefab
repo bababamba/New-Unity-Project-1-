@@ -364,6 +364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a62aa1b701f34448afcbdd2cfb5d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreText: {fileID: 0}
+  FinalScoreText: {fileID: 0}
+  floors: 0
+  itemLevels: 0
+  enemyKills: 0
+  clear: 0
 --- !u!1 &5444960197183152910
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +382,7 @@ GameObject:
   - component: {fileID: 5444960197183152899}
   - component: {fileID: 5444960197183152908}
   m_Layer: 5
-  m_Name: GamoOverText
+  m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

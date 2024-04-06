@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
     public int KillGoal;
     bool isBoss = false;
 
-    int[,] monsterPool = { 
+    int[,] monsterPool = { // 실제 단계보다 한 단계 더 만들고, 이걸 단계 +1 하는걸 임시 엘리트로?
         { 1, 0, 0, 0, 0, 0, 4 }, { 10, 1, 0, 0, 0, 0, 4 }, { 20, 4, 1, 0, 0, 0, 4 }, { 20, 1, 0, 1, 0, 0, 4 },// 1단계
         { 20, 2, 1, 0, 0, 0, 3 }, { 0, 10, 0, 1, 0, 0, 3 }, { 10, 5, 0, 0, 1, 0, 3 }, { 20, 0, 1, 0, 0, 1, 3 },//2단계
         { 20, 0, 0, 1, 1, 0,3 }, { 10, 10, 0, 2, 0, 1,3 }, { 1, 10, 1, 1, 0, 0, 3 }, { 20, 0, 5, 1, 1, 1,3 },//3단계
         { 0, 10, 10, 2, 1, 1,2 }, { 10, 0, 10, 1, 0, 10, 2}, { 0, 20, 2, 0, 5, 0, 2 }, { 0, 0, 10, 3, 2, 5, 2 }};//4단계
+
     public int poolNumber = 1;
     // Start is called before the first frame update
     void Start()
@@ -92,6 +93,12 @@ public class GameManager : MonoBehaviour
                 GameClearCheck(1);
             }
         }
+        else if(isBoss)
+        {
+            //보스 클리어 확인 시 다음 코드 활성화
+            //UIM.GameOver(true);
+        }
+
 
     }
 
@@ -367,13 +374,13 @@ public class GameManager : MonoBehaviour
         isGaming = false;
         goldEarn(100);
         UIM.LevelUpStart();
-        PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, getGoldEarned());
+        PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, PlayerData.data.gold + getGoldEarned());
         StartCoroutine(GotoMap());
     }
 
     public void GameOver()
     {
-        PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, getGoldEarned());
+        PlayerData.data.CreatePlayerData((int)playerScript.getMaxHP(), (int)playerScript.getCurHP(), playerScript.speed, PlayerData.data.gold + getGoldEarned());
         UIM.GameOver();
     }
 

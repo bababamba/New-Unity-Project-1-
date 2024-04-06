@@ -26,13 +26,13 @@ public class RoomObject : MonoBehaviour
         switch (roomType)
         {
             case Room.RoomType.COMBAT:
-                MapUIManager.manager.ToCombatScene();
+                MapUIManager.manager.ToCombatScene(Room.RoomType.COMBAT);
                 break;
             case Room.RoomType.ELITE:
-                MapUIManager.manager.ToCombatScene();
+                MapUIManager.manager.ToCombatScene(Room.RoomType.ELITE);
                 break;
             case Room.RoomType.BOSS:
-                MapUIManager.manager.ToBossScene();
+                MapUIManager.manager.ToCombatScene(Room.RoomType.BOSS);
                 break;
             case Room.RoomType.EVENT:
                 MapUIManager.manager.OpenUI(0);

@@ -13,6 +13,7 @@ public class Sword  : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 2;
@@ -39,6 +40,7 @@ public class Sword  : weapon_base
                 playerScript.playerDirection.y) * 1.5f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
             bulletScript = swordEffect.GetComponent<SwordAttack>();
             bulletScript.player = player;
+            bulletScript.addDmg = (int)(level * dpl);
             bulletScript.position = position;
             bulletScript.init(calcDmg(), 5, 1);
             //swordEffect.transform.SetParent(player.transform, true);
@@ -49,6 +51,7 @@ public class Sword  : weapon_base
                 playerScript.playerDirection.y) * 1.5f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
             bulletScript = swordEffect.GetComponent<SwordAttack>();
             bulletScript.player = player;
+            bulletScript.addDmg = (int)(level * dpl);
             bulletScript.position = position;
             bulletScript.init(calcDmg(), 5, 1);
             //swordEffect.transform.SetParent(player.transform, true);

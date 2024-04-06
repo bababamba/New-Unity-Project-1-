@@ -69,6 +69,11 @@ public class MapUIManager : MonoBehaviour
             PoPUpScreen[num].GetComponent<EventUI>().Init(3);
         else if (num == 1)
             PoPUpScreen[num].GetComponent<ShopUI>().OpenShop();
+        else if (num == 4)
+        {
+            foreach (Canvas c in Level.level.floor)
+                c.sortingOrder = 0;
+        }
         else if (num == 5)
             PoPUpScreen[0].GetComponent<EventUI>().Init(5);
         else if (num == 6)
@@ -127,17 +132,19 @@ public class MapUIManager : MonoBehaviour
         return eventdata;
     }
 
-    public void ToCombatScene()
+    public void ToCombatScene(Room.RoomType type)
     {
         Audio_Manager.Instance.SFX_Click();
-        int num = random.Next(0, 4);
+        int num = 0;
+        if (type == Room.RoomType.COMBAT)
+            num = random.Next(0, 4);
+        else if (type == Room.RoomType.ELITE)
+        {
+
+        }
+        else if (type == Room.RoomType.BOSS)
+            num = 100;
         PlayerData.data.enemyPool = num;
-        SceneManager.LoadScene("maingame");
-    }
-    public void ToBossScene()
-    {
-        Audio_Manager.Instance.SFX_Click();
-        PlayerData.data.enemyPool = 100;
         SceneManager.LoadScene("maingame");
     }
 }

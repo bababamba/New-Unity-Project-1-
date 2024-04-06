@@ -9,15 +9,19 @@ public class GameOverUI : MonoBehaviour
 {
     public TMP_Text ScoreText;
     public TMP_Text FinalScoreText;
+    public TMP_Text GameoverText;
 
     public int floors = 0;
     public int itemLevels = 0;
     public int enemyKills = 0;
 
+    public bool clear = false;
+
     void Start()
     {
         ScoreText = this.transform.Find("ScoreText").GetComponent<TMP_Text>();
         FinalScoreText = this.transform.Find("FinalScoreText").GetComponent<TMP_Text>();
+        GameoverText = this.transform.Find("GameOverText").GetComponent<TMP_Text>();
 
         this.GetComponent<RectTransform>().SetAsFirstSibling();
         //this.gameObject.SetActive(false);
@@ -26,6 +30,9 @@ public class GameOverUI : MonoBehaviour
     void Update()
     {
         CheckScore();
+
+        if (clear)
+            GameoverText.text = "BOSS CLEAR!";
 
         ScoreText.text = "floors : " + floors + "\nitem levels : " + itemLevels + "\nenemy kills : " + enemyKills + "\ngold : " + PlayerData.data.gold;
 

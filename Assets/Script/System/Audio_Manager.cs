@@ -19,7 +19,7 @@ public class Audio_Manager : MonoBehaviour
         if(Instance == null)
             Instance = this; 
         else if(Instance != this)
-            Destroy(Instance);
+            Destroy(this.gameObject);
     }
     private void Start()
     {
@@ -31,8 +31,11 @@ public class Audio_Manager : MonoBehaviour
 
     void Update()
     {
-        SetBGMVolume(bgmSlider.value);
-        SetSFXVolume(sfxSlider.value);
+        //SetBGMVolume(bgmSlider.value);
+        //SetSFXVolume(sfxSlider.value);
+
+        if (SceneManager.GetActiveScene().name != "maingame" && bgmSource.isPlaying)
+            BGM_OFF();
     }
 
     public AudioSource bgmSource;
@@ -68,6 +71,10 @@ public class Audio_Manager : MonoBehaviour
     {
         bgmSource.clip = Title;
         bgmSource.Play();
+    }
+    public void BGM_OFF()
+    {
+        bgmSource.Stop();
     }
     public void SFX_Click()
     {
