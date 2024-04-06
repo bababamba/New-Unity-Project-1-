@@ -32,7 +32,7 @@ public class RoomObject : MonoBehaviour
                 MapUIManager.manager.ToCombatScene();
                 break;
             case Room.RoomType.BOSS:
-                MapUIManager.manager.ToCombatScene();
+                MapUIManager.manager.ToBossScene();
                 break;
             case Room.RoomType.EVENT:
                 MapUIManager.manager.OpenUI(0);

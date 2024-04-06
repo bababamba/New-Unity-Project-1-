@@ -18,22 +18,31 @@ public class mapGenerator : MonoBehaviour
 
     public Vector2Int currentTile; // 현재 플레이어가 위치한 타일의 좌표
 
+    public GameObject bigTile;
+    public GameObject BossTile;
+
+    bool isBoss = false;
 
     void Start()
     {
+        if (PlayerData.data.enemyPool == 100)
+        {
+            isBoss = true;
+            GenerateBossMap(0, 0);
+        }
         player = GameObject.Find("player");
-        GenerateMap(1, 0, 0);
-        GenerateMap(0, 1, 0);
-        GenerateMap(0, -1, 0);
-        GenerateMap(0, 1, 1);
-        GenerateMap(0, -1, 1);
-        GenerateMap(0, 1, -1);
-        GenerateMap(0, 0, 1);
-        GenerateMap(0, 0, -1);
-        GenerateMap(0, -1, -1);// 초기 맵 생성
+        if (!isBoss) { 
+            GenerateBigMap(0, 0);
+            GenerateBigMap( 1, 0);
+            GenerateBigMap( -1, 0);
+            GenerateBigMap( 1, 1);
+            GenerateBigMap( -1, 1);
+            GenerateBigMap( 1, -1);
+            GenerateBigMap( 0, 1);
+            GenerateBigMap( 0, -1);
+            GenerateBigMap( -1, -1);// 초기 맵 생성
+        }
 
-        // 플레이어 움직임에 따라 맵 생성
-        // 여기서는 예시로 플레이어의 움직임을 키보드의 화살표로 대체하였습니다
     }
 
     void GenerateMap(int mapCode, int mapX, int mapY)
@@ -52,7 +61,7 @@ public class mapGenerator : MonoBehaviour
                     { "W4", "W1", "W6"}
                     { "W8", "W5", "W9"}
                     */
-            // 선택된 맵 코드에 따라 맵 데이터를 설정합니다
+            // 선택된 맵 코드에 따라 맵 데이터를 설정
             if (mapCode == 1)
             {
                 mapData = new string[,]
@@ -263,7 +272,7 @@ public class mapGenerator : MonoBehaviour
                     }
                     else if (tileCode.StartsWith("W")) // 물 타일
                     {
-                        int direction = int.Parse(tileCode.Substring(1)); // 방향을 추출합니다
+                        int direction = int.Parse(tileCode.Substring(1)); // 방향
                         if (direction >= 1 && direction <= 10)
                         {
                             map[x, y] = Instantiate(waterTiles[direction - 1], new Vector2(mapX * 30 + x, -mapY * 30 - y), Quaternion.identity);
@@ -277,27 +286,50 @@ public class mapGenerator : MonoBehaviour
             //Debug.Log("Added unique vector: " + tempmap);
         }
     }
-    // 플레이어 움직임에 따른 맵 생성 로직 구현
-    // 여기서는 키보드의 화살표 입력을 받아 플레이어의 움직임을 제어하는 예시입니다
+    void GenerateBigMap(int mapX, int mapY)
+    {
+        Vector2 tempmap = new Vector2(mapX, mapY);
+        if (!generatedMapList.Contains(tempmap))
+        {
+            GameObject map = Instantiate(bigTile, new Vector2(mapX * 30, -mapY * 30), Quaternion.identity);
+            map.transform.SetParent(this.gameObject.transform);
+            generatedMapList.Add(tempmap);
+        }
+
+    }
+    void GenerateBossMap(int mapX, int mapY)
+    {
+        Vector2 tempmap = new Vector2(mapX, mapY);
+        if (!generatedMapList.Contains(tempmap))
+        {
+            GameObject map = Instantiate(BossTile, new Vector2(mapX * 30, -mapY * 30), Quaternion.identity);
+            map.transform.SetParent(this.gameObject.transform);
+            generatedMapList.Add(tempmap);
+        }
+
+    }
+
     void Update()
     {
-        //currentMap = new Vector2Int((int)(player.transform.position.x-15) / 30, (int)(player.transform.position.y - 15) / 30);
-        Vector2 playerPosition = player.transform.position;
-        currentTile = new Vector2Int(
-            Mathf.FloorToInt(playerPosition.x / tileSize),
-            Mathf.FloorToInt(playerPosition.y / -tileSize)
-        );
-        
-        GenerateMap(0, currentTile.x + 1, currentTile.y);
-        GenerateMap(0, currentTile.x - 1, currentTile.y);
-        GenerateMap(0, currentTile.x + 1, currentTile.y + 1);
-        GenerateMap(0, currentTile.x - 1, currentTile.y + 1);
-        GenerateMap(0, currentTile.x + 1, currentTile.y - 1);
-        GenerateMap(0, currentTile.x, currentTile.y + 1);
-        GenerateMap(0, currentTile.x, currentTile.y - 1);
-        GenerateMap(0, currentTile.x - 1, currentTile.y - 1);
-        // 플레이어 위치 출력
-        
+        if (!isBoss)
+        {
+            //currentMap = new Vector2Int((int)(player.transform.position.x-15) / 30, (int)(player.transform.position.y - 15) / 30);
+            Vector2 playerPosition = player.transform.position;
+            currentTile = new Vector2Int(
+                Mathf.FloorToInt(playerPosition.x / tileSize),
+                Mathf.FloorToInt(playerPosition.y / -tileSize)
+            );
+
+            GenerateBigMap(currentTile.x + 1, currentTile.y);
+            GenerateBigMap(currentTile.x - 1, currentTile.y);
+            GenerateBigMap(currentTile.x + 1, currentTile.y + 1);
+            GenerateBigMap(currentTile.x - 1, currentTile.y + 1);
+            GenerateBigMap(currentTile.x + 1, currentTile.y - 1);
+            GenerateBigMap(currentTile.x, currentTile.y + 1);
+            GenerateBigMap(currentTile.x, currentTile.y - 1);
+            GenerateBigMap(currentTile.x - 1, currentTile.y - 1);
+            // 플레이어 위치 출력
+        }
     }
 }
 /*

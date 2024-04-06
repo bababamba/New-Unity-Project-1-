@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public bool isPlayerActive = false;
     public GameObject[] enemies;
     public GameObject[] enemy;
+    public GameObject[] Boss;
     public GameObject UIManagerObject;
     public GameObject itemManagerObject;
 
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     bool isStart = false;
 
     public int KillGoal;
+    bool isBoss = false;
 
     int[,] monsterPool = { 
         { 1, 0, 0, 0, 0, 0, 4 }, { 10, 1, 0, 0, 0, 0, 4 }, { 20, 4, 1, 0, 0, 0, 4 }, { 20, 1, 0, 1, 0, 0, 4 },// 1´Ü°è
@@ -48,7 +50,13 @@ public class GameManager : MonoBehaviour
     {
         init();
         KillGoal = 1;
-        poolNumber = PlayerData.data.enemyPool;
+        if (PlayerData.data.enemyPool == 100)
+            isBoss = true;
+        else
+        {
+            poolNumber = PlayerData.data.enemyPool;
+            isBoss = false;
+        }
         spawnRate = monsterPool[poolNumber, 6];
         minSpawnRate = spawnRate / 2;
     }
@@ -56,31 +64,34 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isStart)
-        {
-            ReadyToStart();
-            GameStart();
-
-            isStart = true;
-            
-        }
-        if (isGaming)
-        {
-            currentSpawnRate -= Time.deltaTime;
-            if (currentSpawnRate <= 0f)
+        
+            if (!isStart)
             {
-                
-                currentSpawnRate += spawnRate;
-               
-                    SpawnMonster(0);
+                ReadyToStart();
+                GameStart();
 
-                if (spawnRate > minSpawnRate)
-                    spawnRate -= 0.001f;
+                isStart = true;
 
             }
-            GameClearCheck(1);
+        if (!isBoss)
+        {
+            if (isGaming)
+            {
+                currentSpawnRate -= Time.deltaTime;
+                if (currentSpawnRate <= 0f)
+                {
+
+                    currentSpawnRate += spawnRate;
+
+                    SpawnMonster(0);
+
+                    if (spawnRate > minSpawnRate)
+                        spawnRate -= 0.001f;
+
+                }
+                GameClearCheck(1);
+            }
         }
-        
 
     }
 
@@ -106,6 +117,9 @@ public class GameManager : MonoBehaviour
     {
         isGaming = true;
         killCountReset();
+        Audio_Manager.Instance.BGM_Title();
+        if (isBoss)
+            SpawnBossMonster(0);
     }
 
 
@@ -293,7 +307,21 @@ public class GameManager : MonoBehaviour
 
         return -1;
     }
+    void SpawnBossMonster(int playerNumber)
+    {
+        int rand = Random.Range(0, 3);
+        GameObject spawnedEnemy = Instantiate(Boss[rand], new Vector2(0,20), Quaternion.identity);
+        GameObject spawnedEnemy2;
+        if (rand == 2)
+        {
+            spawnedEnemy2 = Instantiate(Boss[3], new Vector2(-10, 20), Quaternion.identity);
+            spawnedEnemy.GetComponent<boss3>().SetFriend(spawnedEnemy2.GetComponent<boss3_2>());
+            spawnedEnemy.transform.position = new Vector2(10, 20);
+            spawnedEnemy2.GetComponent<enemy_base>().initE(playerNumber);
+        }
 
+        spawnedEnemy.GetComponent<enemy_base>().initE(playerNumber);
+    }
     private Vector2 GetRandomSpawnPosition(Vector2 playerPosition)
     {
         float distance = Random.Range(minDistance, maxDistance);

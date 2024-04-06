@@ -134,4 +134,10 @@ public class MapUIManager : MonoBehaviour
         PlayerData.data.enemyPool = num;
         SceneManager.LoadScene("maingame");
     }
+    public void ToBossScene()
+    {
+        Audio_Manager.Instance.SFX_Click();
+        PlayerData.data.enemyPool = 100;
+        SceneManager.LoadScene("maingame");
+    }
 }

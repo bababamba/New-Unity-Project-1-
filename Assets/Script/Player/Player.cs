@@ -50,6 +50,7 @@ public class Player : Creture
     // Start is called before the first frame update
     private void Start()
     {
+        VJ.speed = this.speed;
         barTransform = HealthBar.transform;
     }
 

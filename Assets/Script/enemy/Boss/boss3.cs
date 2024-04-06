@@ -198,4 +198,10 @@ public class boss3 : BossEnemy_Base
         this.speed = 6;
         numberOfGimick = 3;
     }
+    public void SetFriend(boss3_2 myFriend)
+    {
+        friend = myFriend;
+
+        myFriend.friend = this;
+    }
 }
