@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public int KillGoal;
     bool isBoss = false;
+    List<GameObject> TargetMonsters = new List<GameObject>();
 
     int[,] monsterPool = { // 실제 단계보다 한 단계 더 만들고, 이걸 단계 +1 하는걸 임시 엘리트로?
         { 1, 0, 0, 0, 0, 0, 4 }, { 10, 1, 0, 0, 0, 0, 4 }, { 20, 4, 1, 0, 0, 0, 4 }, { 20, 1, 0, 1, 0, 0, 4 },// 1단계
@@ -93,10 +94,9 @@ public class GameManager : MonoBehaviour
                 GameClearCheck(1);
             }
         }
-        else if(isBoss)
+        else if(isBoss && isGaming)
         {
-            //보스 클리어 확인 시 다음 코드 활성화
-            //UIM.GameOver(true);
+            GameClearCheck(2);
         }
 
 
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     {
         //UIM.inventoryObject.GetComponent<inventory>().AcquireItem(itemM.items[0]);
         //Audio_Manager.Instance.BGM_Title();
+        
     }
     void init()
     {
@@ -122,11 +123,12 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+        if (isBoss)
+            SpawnBossMonster(0);
         isGaming = true;
         killCountReset();
         Audio_Manager.Instance.BGM_Title();
-        if (isBoss)
-            SpawnBossMonster(0);
+        
     }
 
 
@@ -319,14 +321,17 @@ public class GameManager : MonoBehaviour
         int rand = Random.Range(0, 3);
         GameObject spawnedEnemy = Instantiate(Boss[rand], new Vector2(0,20), Quaternion.identity);
         GameObject spawnedEnemy2;
+        Debug.Log(spawnedEnemy);
         if (rand == 2)
         {
             spawnedEnemy2 = Instantiate(Boss[3], new Vector2(-10, 20), Quaternion.identity);
             spawnedEnemy.GetComponent<boss3>().SetFriend(spawnedEnemy2.GetComponent<boss3_2>());
             spawnedEnemy.transform.position = new Vector2(10, 20);
             spawnedEnemy2.GetComponent<enemy_base>().initE(playerNumber);
+            Debug.Log(spawnedEnemy2);
+            TargetMonsters.Add(spawnedEnemy2);
         }
-
+        TargetMonsters.Add(spawnedEnemy);
         spawnedEnemy.GetComponent<enemy_base>().initE(playerNumber);
     }
     private Vector2 GetRandomSpawnPosition(Vector2 playerPosition)
@@ -362,9 +367,14 @@ public class GameManager : MonoBehaviour
     }
     void GameClearCheck(int type)
     {
+        bool temp = false;
         switch (type)
         {
             case 1: if (killCount >= KillGoal) GameClear(); break;
+            case 2: foreach (GameObject enemy in TargetMonsters)
+                    if (!enemy.GetComponent<BossEnemy_Base>().isDead) temp = true;
+                if (!temp) UIM.GameOver(true);
+                break;
             default:Debug.Log("GameCleaCheckFail_UnknownType"); break;
         }
     }

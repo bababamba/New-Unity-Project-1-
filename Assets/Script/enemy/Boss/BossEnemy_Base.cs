@@ -13,7 +13,7 @@ public class BossEnemy_Base : enemy_base
     protected bool isGimickEnd = true;
     protected int mustGimick = 0;
 
-    protected bool isDead = false;
+    public bool isDead = false;
 
     protected int lastGimick = 1;
     private System.Random randomNumber = new System.Random();
