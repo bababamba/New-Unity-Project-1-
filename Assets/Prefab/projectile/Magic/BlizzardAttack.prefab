@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   position: {x: 0, y: 0}
+  addDmg: 0
   type: 0
 --- !u!50 &8917976535529359765
 Rigidbody2D:
@@ -158,7 +159,7 @@ Animator:
   m_GameObject: {fileID: 3391756704881495406}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3b4b196116f1cbc4db8147871f29978a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0be3bb77633f10e4980c2ee5a3884e43, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

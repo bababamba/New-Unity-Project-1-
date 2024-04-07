@@ -34,7 +34,7 @@ public class ChainLightningAttack : AttackBase
         chainLeft--;
         if (chainLeft >= 0)
         {
-            Transform target = gameManager.StrongestEnemy(playerNumber, 50);
+            Transform target = gameManager.StrongestEnemy(playerNumber, 100);
             if (target != player.transform)
             {
                 GameObject CLEffect = Instantiate(bullet, target.transform.position, Quaternion.identity);
@@ -47,9 +47,9 @@ public class ChainLightningAttack : AttackBase
         }
         base.die();
     }
-
+    /*
     public new void OnTriggerEnter2D(Collider2D col)
     {
     }
-
+    */
 }

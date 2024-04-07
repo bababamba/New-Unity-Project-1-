@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   position: {x: 0, y: 0}
+  addDmg: 0
   type: 0
   bullet: {fileID: 7465976941069700138}
   curTarget: {fileID: 0}
@@ -161,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 7465976941069700138}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bea53fd5f132e9b4b9896540139a78cf, type: 2}
+  m_Controller: {fileID: 9100000, guid: e338b5a83afb5b147b1108595c10c79b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

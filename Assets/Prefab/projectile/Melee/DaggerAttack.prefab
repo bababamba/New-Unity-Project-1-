@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   position: {x: 0, y: 0}
+  addDmg: 0
   type: 0
 --- !u!58 &3015562847146547410
 CircleCollider2D:
@@ -145,9 +146,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5594329406369390005}
     m_Modifications:
+    - target: {fileID: 464501647720350578, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928568846760067157, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fb23a32955b388645ab79e766a40513a, type: 2}
     - target: {fileID: 4048105730875353304, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
       propertyPath: m_Name
       value: Flash_02A
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542939127696909219, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 766ac704a59635646aaac785279ff6fc, type: 2}
+    - target: {fileID: 6155656954441277887, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
+      propertyPath: m_Size.x
+      value: 2.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155656954441277887, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
+      propertyPath: m_Size.y
+      value: 1.59375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155656954441277887, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6521653037952603094, guid: 75a912d9f3c64ee4a989be5a23f7cf7f, type: 3}
       propertyPath: m_RootOrder
