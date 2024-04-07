@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
-    public static PlayerData data;
+    public static PlayerData data = null;
 
     public int maxHP;
     public int curHP;
@@ -15,7 +15,7 @@ public class PlayerData : MonoBehaviour
     public weapon_base[] weapons = new weapon_base[11];
     public Player player;
 
-    public bool initialized = false;
+    public bool initialized = true;
 
     public Room[,] rooms;
     public int[] lastRoom = new int[2];
@@ -28,20 +28,32 @@ public class PlayerData : MonoBehaviour
     void Awake()
     {
         // 싱글톤
-        if (data != null)
-            Destroy(this.gameObject);
-        else
+        if (data == null)
+        {
             data = this;
 
-        // 씬 변경시 제거X
-        DontDestroyOnLoad(this);
+            // 씬 변경시 제거X
+            DontDestroyOnLoad(this.gameObject);
 
+            Debug.Log("new data");
+            initialized = false;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            Debug.Log("delete duplicate");
+        }
         // 최초 한정 초기 데이터 입력
-        if (!initialized)
+        if (initialized == false)
         {
             CreatePlayerData(100,100, 10, 999, true);
+            Debug.Log(".......");
         }
-
+        foreach(weapon_base weapon in weapons)
+        {
+            Debug.Log(weapon.GetType() + " : level " + weapon.level);
+            Debug.Log(weapon.active);
+        }
 
 
         
@@ -76,13 +88,17 @@ public class PlayerData : MonoBehaviour
         // 처음에 들고 있을 무기에 active = true; 작성
         foreach (weapon_base weapon in weapons)
         {
-            if(newData)
+            if (newData)
+            {
                 weapon.level = 1;
-            weapon.active = false;
+                weapon.active = false;
+            }
         }
-        weapons[4].active = true;
-        weapons[4].level = 4000;
-
+        if (newData)
+        {
+            weapons[4].active = true;
+            weapons[4].level = 4000;
+        }
         if (newData)
         {
             savedLevelData = false;

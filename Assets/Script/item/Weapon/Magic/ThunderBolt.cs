@@ -12,6 +12,7 @@ public class ThunderBolt : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 6;
@@ -32,6 +33,8 @@ public class ThunderBolt : weapon_base
         GameObject rightEffect = Instantiate(bullet, player.transform.position + new Vector3(5.5f, 0, 0), Quaternion.identity);
         leftScript = leftEffect.GetComponent<ThunderBoltAttack>();
         rightScript = rightEffect.GetComponent<ThunderBoltAttack>();
+        leftScript.addDmg = (int)(level * dpl);
+        rightScript.addDmg = (int)(level * dpl);
         leftScript.player = player;
         rightScript.player = player;
         leftScript.left = true;

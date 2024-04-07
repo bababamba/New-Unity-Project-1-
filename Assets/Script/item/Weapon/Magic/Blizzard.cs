@@ -14,6 +14,7 @@ public class Blizzard : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         baseDmg = 0.1f;
         base.Start();
         itemNum = 0;
@@ -40,6 +41,7 @@ public class Blizzard : weapon_base
             {
                 GameObject blizzardEffect = Instantiate(bullet, target.transform.position, Quaternion.identity);
                 bulletScript = blizzardEffect.GetComponent<BlizzardAttack>();
+                bulletScript.addDmg = (int)(level * dpl);
                 bulletScript.init(calcDmg(), 5, 1);
             }
         }

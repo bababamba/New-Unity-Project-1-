@@ -11,6 +11,7 @@ public class Hammer : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 5;
@@ -31,6 +32,7 @@ public class Hammer : weapon_base
         GameObject hammerEffect = Instantiate(bullet, player.transform.position + new Vector3(playerScript.playerDirection.x, 
             playerScript.playerDirection.y) * 2f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = hammerEffect.GetComponent<HammerAttack>();
+        bulletScript.addDmg = (int)(level * dpl);
         bulletScript.player = player;
         bulletScript.position = position;
         bulletScript.init(calcDmg(), 5, 1);

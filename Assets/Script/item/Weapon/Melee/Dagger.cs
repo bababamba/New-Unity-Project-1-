@@ -11,6 +11,7 @@ public class Dagger : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 0.25f;
@@ -31,6 +32,7 @@ public class Dagger : weapon_base
         GameObject daggerEffect = Instantiate(bullet, player.transform.position + new Vector3(playerScript.playerDirection.x, 
             playerScript.playerDirection.y) * 1f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = daggerEffect.GetComponent<DaggerAttack>();
+        bulletScript.addDmg = (int)(level * dpl);
         bulletScript.player = player;
         bulletScript.position = position;
         bulletScript.init(calcDmg(), 5, 1);

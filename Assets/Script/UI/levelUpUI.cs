@@ -63,6 +63,17 @@ public class levelUpUI : MonoBehaviour
         }
         else
         {
+            for (int i = 0; i < PlayerData.data.weapons.Length; i++)
+            {
+                if (PlayerData.data.weapons[i].GetType() == currentItem1.GetType())
+                {
+                    if (PlayerData.data.weapons[i].active)
+                        PlayerData.data.weapons[i].levelUp();
+                    else
+                        PlayerData.data.weapons[i].active = true;
+                    Debug.Log(PlayerData.data.weapons[i].GetType());
+                }
+            }
             inventory.AcquireItem(currentItem1);
             uIManager.LevelUp();
             CloseLevelUP();
@@ -80,6 +91,24 @@ public class levelUpUI : MonoBehaviour
         }
         else
         {
+            for (int i = 0; i < PlayerData.data.weapons.Length; i++)
+            {
+                if (PlayerData.data.weapons[i].GetType() == currentItem2.GetType())
+                {
+                    if (PlayerData.data.weapons[i].active)
+                    {
+                        PlayerData.data.weapons[i].levelUp();
+                        Debug.Log("lvlup");
+                    }
+                    else
+                    {
+                        PlayerData.data.weapons[i].active = true;
+                        Debug.Log("new" + PlayerData.data.weapons[i].active);
+                    }
+                    Debug.Log(PlayerData.data.weapons[i].GetType());
+                    Debug.Log(currentItem2.GetType());
+                }
+            }
             inventory.AcquireItem(currentItem2);
             uIManager.LevelUp();
             CloseLevelUP();
@@ -97,6 +126,18 @@ public class levelUpUI : MonoBehaviour
         }
         else
         {
+            for(int i = 0; i < PlayerData.data.weapons.Length; i++)
+            {
+                if (PlayerData.data.weapons[i].GetType() == currentItem3.GetType())
+                {
+                    if (PlayerData.data.weapons[i].active)
+                        PlayerData.data.weapons[i].levelUp();
+                    else
+                        PlayerData.data.weapons[i].active = true;
+                    Debug.Log(PlayerData.data.weapons[i].GetType());
+                }
+            }
+            
             inventory.AcquireItem(currentItem3);
             uIManager.LevelUp();
             CloseLevelUP();

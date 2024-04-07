@@ -1368,7 +1368,7 @@ MonoBehaviour:
   - {fileID: -5519043855204656949, guid: 236e528edd48f6742a6640d0fa04b624, type: 3}
   - {fileID: -4094377249923018558, guid: 48201c92d4693214b99787d7cc72841a, type: 3}
   player: {fileID: 0}
-  initialized: 0
+  initialized: 1
   lastRoom: 0000000000000000
   curFloor: 0
   savedLevelData: 0

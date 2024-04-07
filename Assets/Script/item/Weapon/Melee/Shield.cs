@@ -12,6 +12,7 @@ public class Shield : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 10;
@@ -35,6 +36,7 @@ public class Shield : weapon_base
             float angle = ((2 * Mathf.PI) / shieldquantity) * i;
             GameObject shield = Instantiate(bullet, new Vector2(player.transform.position.x + Mathf.Cos(i), player.transform.position.y + Mathf.Sin(i)), Quaternion.identity);
             bulletScript = shield.GetComponent<ShieldAttack>();
+            bulletScript.addDmg = (int)(level * dpl);
             bulletScript.angle = angle;
             bulletScript.init(calcDmg(), 5, 1);
             shield.transform.SetParent(player.transform, true);

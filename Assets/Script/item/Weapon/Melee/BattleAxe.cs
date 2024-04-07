@@ -11,6 +11,7 @@ public class BattleAxe : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 6;
@@ -31,6 +32,7 @@ public class BattleAxe : weapon_base
         GameObject axeEffect = Instantiate(bullet, player.transform.position + new Vector3(playerScript.playerDirection.x, 
             playerScript.playerDirection.y) * 0.5f, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = axeEffect.GetComponent<BattleAxeAttack>();
+        bulletScript.addDmg = (int)(level * dpl);
         bulletScript.player = player;
         bulletScript.position = position;
         bulletScript.init(calcDmg(), 5, 1);

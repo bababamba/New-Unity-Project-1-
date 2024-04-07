@@ -11,6 +11,7 @@ public class FlameStep : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 0.25f;
@@ -29,6 +30,7 @@ public class FlameStep : weapon_base
     {
         GameObject flameStepEffect = Instantiate(bullet, player.transform.position, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = flameStepEffect.GetComponent<FlameStepAttack>();
+        bulletScript.addDmg = (int)(level * dpl);
         //bulletScript.init(calcDmg(), 5, 1);
     }
     public override void levelUp()

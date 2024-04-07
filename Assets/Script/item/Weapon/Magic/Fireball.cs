@@ -11,6 +11,7 @@ public class Fireball : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         shootForce = 1.5f;
         base.Start();
         itemNum = 0;
@@ -34,6 +35,7 @@ public class Fireball : weapon_base
         GameObject axeEffect = Instantiate(bullet, player.transform.position, Quaternion.Euler(0, 0, angle - 180));
         Debug.Log(angle);
         bulletScript = axeEffect.GetComponent<FireballAttack>();
+        bulletScript.addDmg = (int)(level * dpl);
         bulletScript.init(calcDmg(), 5, 1);
         axeEffect.GetComponent<Rigidbody2D>().AddForce((target.transform.position - player.transform.position) * shootForce, ForceMode2D.Impulse);
 

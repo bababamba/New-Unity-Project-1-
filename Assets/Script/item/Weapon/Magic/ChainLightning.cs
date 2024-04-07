@@ -11,6 +11,7 @@ public class ChainLightning : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 6;
@@ -33,6 +34,7 @@ public class ChainLightning : weapon_base
         {
             GameObject CLEffect = Instantiate(bullet, target.transform.position, Quaternion.identity);
             bulletScript = CLEffect.GetComponent<ChainLightningAttack>();
+            bulletScript.addDmg = (int)(level * dpl);
             bulletScript.player = player;
             bulletScript.curTarget = target;
             bulletScript.chainLeft = maxChain;

@@ -11,6 +11,7 @@ public class FrostNova : weapon_base
     protected override void Start()
     {
         basic_attack = 10;
+        dpl = 5;
         base.Start();
         itemNum = 0;
         Maxcooldown = 6;
@@ -29,6 +30,7 @@ public class FrostNova : weapon_base
     {
         GameObject axeEffect = Instantiate(bullet, player.transform.position, Quaternion.LookRotation(Vector3.forward, playerScript.playerDirection));
         bulletScript = axeEffect.GetComponent<FrostNovaAttack>();
+        bulletScript.addDmg = (int)(level * dpl);
         bulletScript.player = player;
         bulletScript.position = player.transform.position;
         bulletScript.init(calcDmg(), 5, 1);

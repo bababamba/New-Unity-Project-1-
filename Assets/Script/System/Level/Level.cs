@@ -80,7 +80,7 @@ public class Level : MonoBehaviour
                 }
             }
         }
-        /*
+        
         for (int i = 0; i < floor.Length; i++)
         {
             if (floor.Length - i == curFloor)
@@ -102,7 +102,7 @@ public class Level : MonoBehaviour
                 }
             }
         }
-        */
+        
     }
 
     void Update()
