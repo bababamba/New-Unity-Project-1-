@@ -43,9 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6655f74a36118234cafa9df2a50c003c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
+  level: 4000
   CooldownOff: 0
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: 28cab715ab1f243f5bc8ac56b11d29b3, type: 3}
   itemType: 0
   weaponLevel: 1
   slashEffect: {fileID: 8613412660767093906, guid: 6fed046c6ec0d7846bfce22c7ae15d81, type: 3}

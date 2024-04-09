@@ -15,10 +15,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI goldUI;
 
     public GameObject pauseMenu;
+    public GameObject setting;
     public Button resumeButton;
     public Button optionButton;
     public Button mainMenuButton;
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     [SerializeField]
     private levelUpUI levelUpUIScript;
@@ -41,8 +42,10 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        inventoryObject.SetActive(true);
-        ResumeGame();
+        //inventoryObject.SetActive(true);
+        //pauseMenu.SetActive(true);
+        Time.timeScale = 1f;
+        //ResumeGame();
     }
     void Start()
     {
@@ -65,10 +68,8 @@ public class UIManager : MonoBehaviour
         optionButton.onClick.AddListener(OpenOptions);
         mainMenuButton.onClick.AddListener(ReturnToMainMenu);
 
-        // 시작 시에는 pauseMenu를 비활성화합니다.
         
-        pauseMenu.SetActive(false);
-
+        pauseMenu.SetActive(true);
         inventoryObject.SetActive(true);
 
     }
@@ -113,6 +114,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
+                inventoryObject.GetComponent<InventoryPopUp>().Init();
                 inventoryObject.SetActive(true);
                 PauseGame();
             }

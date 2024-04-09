@@ -12,23 +12,25 @@ public class Sword  : weapon_base
     // Start is called before the first frame update
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 2;
         itemName = "검";
-
+        itemText = "전방을 베어 피해를 입히고, 다음 공격은 전방을 찔러 피해를 준다.";
         itemCaption = "베고 찌르기. 별거 아니지만 있을 건 다 있습니다.";
         slash = true;
     }
 
     // Update is called once per frame
     protected override void Update()
-    {
-        itemText = "전방을 베어" + basic_attack + " + " + baseDmg + "만큼의 피해를 입히고, 다음 공격은 전방을 찔러 "
-            + basic_attack + " + " + baseDmg + "만큼의 피해를 준다.";
-        
+    {        
         base.Update();
     }
     protected override void itemTrigger()

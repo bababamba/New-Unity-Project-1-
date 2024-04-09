@@ -52,6 +52,9 @@ public class MapUIManager : MonoBehaviour
                 CloseUI(i);
             OpenUI(4);
         }
+
+        if (Input.GetKey(KeyCode.I))
+            OpenUI(5);
     }
 
     public void OpenUI(int num)
@@ -59,14 +62,14 @@ public class MapUIManager : MonoBehaviour
         if(isAnyUIOpen && num != 3 && num != 4)
             return;
 
-        if (num == 5 || num == 6)
+        if (num == 111 || num == 777)
             PoPUpScreen[0].SetActive(true);
         else
             PoPUpScreen[num].SetActive(true);
 
         if (num == 0)
             PoPUpScreen[num].GetComponent<EventUI>().Init(random.Next(0, 5));
-            //PoPUpScreen[num].GetComponent<EventUI>().Init(3);
+        //PoPUpScreen[num].GetComponent<EventUI>().Init(3);
         else if (num == 1)
             PoPUpScreen[num].GetComponent<ShopUI>().OpenShop();
         else if (num == 4)
@@ -75,11 +78,13 @@ public class MapUIManager : MonoBehaviour
                 c.sortingOrder = 0;
         }
         else if (num == 5)
+            PoPUpScreen[num].GetComponent<InventoryPopUp>().Init();
+        else if (num == 111)
             PoPUpScreen[0].GetComponent<EventUI>().Init(5);
-        else if (num == 6)
+        else if (num == 777)
             PoPUpScreen[0].GetComponent<EventUI>().Init(6);
 
-        if (num == 5 || num == 6)
+        if (num == 111 || num == 777)
             PoPUpScreen[0].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
         else
             PoPUpScreen[num].GetComponent<RectTransform>().anchoredPosition = Vector3.zero;

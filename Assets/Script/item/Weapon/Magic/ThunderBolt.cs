@@ -11,19 +11,23 @@ public class ThunderBolt : weapon_base
 
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 6;
         itemName = "썬더볼트";
-
+        itemText = "좌우로 번개를 발사해 범위 내 적의 수가 적을수록 강한 피해를 준다.";
         itemCaption = "";
     }
 
     protected override void Update()
     {
-        itemText = "좌우로 번개를 발사해 범위 내 적의 수가 적을수록 강한 피해를 준다.";
         base.Update();
     }
 

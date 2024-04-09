@@ -10,20 +10,24 @@ public class Hammer : weapon_base
     // Start is called before the first frame update
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 5;
         itemName = "망치";
-
+        itemText = "전방에 망치를 내려쳐 " + basic_attack + " + " + "만큼의 피해를 주고 크게 밀쳐낸다.";
         itemCaption = "";
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "전방에 망치를 내려쳐 " + basic_attack + " + " + "만큼의 피해를 주고 크게 밀쳐낸다.";
         base.Update();
     }
     protected override void itemTrigger()

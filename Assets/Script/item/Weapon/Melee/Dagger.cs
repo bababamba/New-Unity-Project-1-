@@ -10,20 +10,24 @@ public class Dagger : weapon_base
     // Start is called before the first frame update
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 0.25f;
         itemName = "단검";
-
+        itemText = "진행 방향으로 단검을 찔러 " + basic_attack + " + " + "만큼의 피해를 준다.";
         itemCaption = "";
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "진행 방향으로 단검을 찔러 " + basic_attack + " + " + "만큼의 피해를 준다.";
         base.Update();
     }
     protected override void itemTrigger()

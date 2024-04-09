@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
+    public UIManager manager;
+
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "maingame")
+            manager = GameObject.Find("UIManager").GetComponent<UIManager>();
         this.gameObject.SetActive(false);
     }
 
@@ -18,12 +22,26 @@ public class PauseUI : MonoBehaviour
 
     public void OpenSettings()
     {
-        MapUIManager.manager.OpenUI(3);
+        if(SceneManager.GetActiveScene().name == "IngameMapScreen")
+            MapUIManager.manager.OpenUI(3);
+        else if (SceneManager.GetActiveScene().name == "maingame")
+        {
+            manager.setting.SetActive(true);
+            manager.setting.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
+
     }
 
     public void Resume()
     {
-        MapUIManager.manager.CloseUI(2);
+        if (SceneManager.GetActiveScene().name == "IngameMapScreen")
+            MapUIManager.manager.CloseUI(2);
+        else if (SceneManager.GetActiveScene().name == "maingame")
+        {
+            manager.ResumeGame();
+            gameObject.SetActive(false);
+        }
+
     }
 
 }

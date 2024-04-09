@@ -26,6 +26,8 @@ public class weapon_base : item_base
 
     }
 
+    public virtual void Init() { }
+
     // Update is called once per frame
     protected override void Update()
     {

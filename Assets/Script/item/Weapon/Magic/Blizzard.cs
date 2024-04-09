@@ -13,22 +13,26 @@ public class Blizzard : weapon_base
 
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
         baseDmg = 0.1f;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 6;
         blizzardNum = 6;
         blizzardRange = 6;
         itemName = "블리자드";
-
+        itemText = "일정 범위 내 여러 적들에게 얼음을 떨어뜨려 피해를 주고 느려지게 한다.";
         itemCaption = "";
     }
 
     protected override void Update()
     {
-        itemText = "일정 범위 내 여러 적들에게 얼음을 떨어뜨려 피해를 주고 느려지게 한다.";
         base.Update();
     }
 

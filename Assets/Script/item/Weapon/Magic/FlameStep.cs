@@ -10,19 +10,23 @@ public class FlameStep : weapon_base
 
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 0.25f;
         itemName = "플레임 스텝";
-
+        itemText = "주기적으로 발걸음에 화염을 남겨 닿은 적에게 짧은 간격으로 피해를 준다.";
         itemCaption = "신발은 안 탄다고 하네요.";
     }
 
     protected override void Update()
-    {
-        itemText = "주기적으로 발걸음에 화염을 남겨 닿은 적에게 짧은 간격으로 피해를 준다.";
+    { 
         base.Update();
     }
 

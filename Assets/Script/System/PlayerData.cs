@@ -35,24 +35,25 @@ public class PlayerData : MonoBehaviour
             // 씬 변경시 제거X
             DontDestroyOnLoad(this.gameObject);
 
-            Debug.Log("new data");
+            //Debug.Log("new data");
             initialized = false;
         }
         else
         {
             Destroy(this.gameObject);
-            Debug.Log("delete duplicate");
+            //Debug.Log("delete duplicate");
         }
         // 최초 한정 초기 데이터 입력
         if (initialized == false)
         {
             CreatePlayerData(100,100, 10, 999, true);
-            Debug.Log(".......");
+            //Debug.Log(".......");
         }
         foreach(weapon_base weapon in weapons)
         {
-            Debug.Log(weapon.GetType() + " : level " + weapon.level);
-            Debug.Log(weapon.active);
+            weapon.Init();
+            //Debug.Log(weapon.GetType() + " : level " + weapon.level);
+            //Debug.Log(weapon.active);
         }
 
 

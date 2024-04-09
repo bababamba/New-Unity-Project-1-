@@ -10,20 +10,24 @@ public class ChainLightning : weapon_base
 
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 6;
         maxChain = 3;
         itemName = "체인 라이트닝";
-
+        itemText = "범위 내 체력이 가장 높은 적에게 연쇄하는 번개를 날려 피해를 주고, 다음 대상에게 약한 피해로 전이된다.";
         itemCaption = "";
     }
 
     protected override void Update()
     {
-        itemText = "범위 내 체력이 가장 높은 적에게 연쇄하는 번개를 날려 피해를 주고, 다음 대상에게 약한 피해로 전이된다.";
         base.Update();
     }
 

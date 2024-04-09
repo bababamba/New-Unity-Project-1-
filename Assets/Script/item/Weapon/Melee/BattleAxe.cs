@@ -10,20 +10,24 @@ public class BattleAxe : weapon_base
     // Start is called before the first frame update
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 6;
         itemName = "전투 도끼";
-
+        itemText = "주변 원형 범위에 도끼를 휘둘러" + basic_attack + " + " + "만큼의 피해를 준다.";
         itemCaption = "뿔 달린 모자만 있으면 당신도 이제 바이킹!";
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "주변 원형 범위에 도끼를 휘둘러" + basic_attack + " + " + "만큼의 피해를 준다.";
         base.Update();
     }
     protected override void itemTrigger()

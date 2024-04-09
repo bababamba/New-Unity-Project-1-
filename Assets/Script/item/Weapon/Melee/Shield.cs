@@ -11,22 +11,26 @@ public class Shield : weapon_base
     // Start is called before the first frame update
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 10;
         shieldquantity = 3;
 
         itemName = "방패";
-
+        itemText = "플레이어 주위를 돌며" + basic_attack + " + " + "만큼의 피해를 입히는 방패를 소환한다.";
         itemCaption = "이 신기한 방패는 알아서 돌면서 적을 후려칩니다!";
     }
 
     // Update is called once per frame
     protected override void Update()
     {
-        itemText = "플레이어 주위를 돌며" + basic_attack + " + "   + "만큼의 피해를 입히는 방패를 소환한다.";
         base.Update();
     }
     protected override void itemTrigger()

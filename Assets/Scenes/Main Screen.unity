@@ -384,8 +384,12 @@ PrefabInstance:
       value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 2844715623822962554, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844715623822962554, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 562
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2844715623822962557, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
       propertyPath: m_Type
@@ -407,6 +411,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2844715623880502115, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d8f2d1290c8df046ba7d1f163fa7ada, type: 3}
+    - target: {fileID: 2844715623880502115, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 6d8f2d1290c8df046ba7d1f163fa7ada, type: 3}
     - target: {fileID: 2844715624308733640, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -419,6 +431,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2844715624308733640, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d8f2d1290c8df046ba7d1f163fa7ada, type: 3}
+    - target: {fileID: 2844715624308733640, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 6d8f2d1290c8df046ba7d1f163fa7ada, type: 3}
     - target: {fileID: 2844715624570260847, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -439,6 +459,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2844715624675738207, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 6d8f2d1290c8df046ba7d1f163fa7ada, type: 3}
+    - target: {fileID: 2844715624675738207, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 6d8f2d1290c8df046ba7d1f163fa7ada, type: 3}
     - target: {fileID: 2844715624811839439, guid: 2d80607ab7eb636458c3a9e02daee27b, type: 3}
       propertyPath: m_Sprite
       value: 

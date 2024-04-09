@@ -10,14 +10,19 @@ public class Fireball : weapon_base
 
     protected override void Start()
     {
+        Init();
+        base.Start();
+    }
+
+    public override void Init()
+    {
         basic_attack = 10;
         dpl = 5;
         shootForce = 1.5f;
-        base.Start();
         itemNum = 0;
         Maxcooldown = 6;
         itemName = "파이어볼";
-
+        itemText = "적에게 닿거나 일정 시간이 지나면 폭발하는 화염구를 발사해 넓은 범위에 피해를 준다.";
         itemCaption = "신뢰와 안정, 그리고~~~~~~~~~~";
     }
 
