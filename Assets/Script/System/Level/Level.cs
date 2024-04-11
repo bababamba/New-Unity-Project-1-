@@ -58,7 +58,7 @@ public class Level : MonoBehaviour
         if(curFloor == height)
         {
             rooms[0, height].accessible = true;
-            Debug.Log(",");
+            //Debug.Log(",");
         }
         else if (curFloor == 1)
         {

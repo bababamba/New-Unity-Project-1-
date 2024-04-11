@@ -74,7 +74,7 @@ public class levelUpUI : MonoBehaviour
                     Debug.Log(PlayerData.data.weapons[i].GetType());
                 }
             }
-            inventory.AcquireItem(currentItem1);
+            //inventory.AcquireItem(currentItem1);
             uIManager.LevelUp();
             CloseLevelUP();
         }
@@ -109,7 +109,7 @@ public class levelUpUI : MonoBehaviour
                     Debug.Log(currentItem2.GetType());
                 }
             }
-            inventory.AcquireItem(currentItem2);
+            //inventory.AcquireItem(currentItem2);
             uIManager.LevelUp();
             CloseLevelUP();
         }
@@ -138,7 +138,7 @@ public class levelUpUI : MonoBehaviour
                 }
             }
             
-            inventory.AcquireItem(currentItem3);
+            //inventory.AcquireItem(currentItem3);
             uIManager.LevelUp();
             CloseLevelUP();
         }

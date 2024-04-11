@@ -31,6 +31,8 @@ public class InventoryPopUp : MonoBehaviour
 
         //this.transform.Find("Inventory").SetAsFirstSibling();
 
+        
+
         int count = 0;
         foreach(Canvas c in inventory)
         {
@@ -38,10 +40,13 @@ public class InventoryPopUp : MonoBehaviour
 
             for(int i = 0; i < buttons.Length; i++)
             {
+                while (count < PlayerData.data.weapons.Length && !PlayerData.data.weapons[count].active)
+                    count++;
+
                 if (count >= PlayerData.data.weapons.Length)
                 {
                     buttons[i].gameObject.SetActive(false);
-                    break;
+                    continue;
                 }
                 buttons[i].SetWeapon(PlayerData.data.weapons[count]);
                 count++;
