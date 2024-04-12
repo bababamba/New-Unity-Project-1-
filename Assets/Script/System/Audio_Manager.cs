@@ -31,9 +31,10 @@ public class Audio_Manager : MonoBehaviour
 
     void Update()
     {
-        //SetBGMVolume(bgmSlider.value);
-        //SetSFXVolume(sfxSlider.value);
-
+        
+            SetBGMVolume(bgmSlider.value);
+            SetSFXVolume(sfxSlider.value);
+        
         if (SceneManager.GetActiveScene().name != "maingame" && bgmSource.isPlaying)
             BGM_OFF();
     }
@@ -60,6 +61,7 @@ public class Audio_Manager : MonoBehaviour
     {
         bgmSource.volume = volume;
         BGMVolume = volume;
+        Debug.Log(bgmSlider.value);
     }
 
     public void SetSFXVolume(float volume)
@@ -80,5 +82,19 @@ public class Audio_Manager : MonoBehaviour
     {
         sfxSource.PlayOneShot(test1);
     }
-
+    public void FindSlider()
+    {
+        Debug.Log(GameObject.Find("BGM"));
+        bgmSlider = GameObject.Find("BGM").GetComponent<Slider>();
+        sfxSlider = GameObject.Find("SFX").GetComponent<Slider>();
+    }
+    public void CloseSettings()
+    {
+        if (SceneManager.GetActiveScene().name == "IngameMapScreen")
+            MapUIManager.manager.CloseUI(3);
+        else if (SceneManager.GetActiveScene().name == "maingame")
+        {
+            OptionPopUp.transform.position = new Vector2(2000, 2000);
+        }
+    }
 }

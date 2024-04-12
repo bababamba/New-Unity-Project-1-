@@ -10,7 +10,10 @@ public class PauseUI : MonoBehaviour
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == "maingame")
+        {
             manager = GameObject.Find("UIManager").GetComponent<UIManager>();
+            manager.setting = GameObject.Find("Setting");
+        }
         this.gameObject.SetActive(false);
     }
 
@@ -30,6 +33,16 @@ public class PauseUI : MonoBehaviour
             manager.setting.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 
+    }
+    public void CloseSettings()
+    {
+        if (SceneManager.GetActiveScene().name == "IngameMapScreen")
+            MapUIManager.manager.CloseUI(3);
+        else if (SceneManager.GetActiveScene().name == "maingame")
+        {
+            manager.setting.SetActive(true);
+            manager.setting.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
     }
 
     public void Resume()

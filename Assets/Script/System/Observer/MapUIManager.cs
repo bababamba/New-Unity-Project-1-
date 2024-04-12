@@ -64,6 +64,8 @@ public class MapUIManager : MonoBehaviour
 
         if (num == 111 || num == 777)
             PoPUpScreen[0].SetActive(true);
+        else if(num==3)
+            PoPUpScreen[num].transform.position = Vector2.zero;
         else
             PoPUpScreen[num].SetActive(true);
 
@@ -94,10 +96,15 @@ public class MapUIManager : MonoBehaviour
 
     public void CloseUI(int num)
     {
-        PoPUpScreen[num].SetActive(false);
 
-        if(num != 3)
+
+        if (num != 3)
+        {
             isAnyUIOpen = false;
+            PoPUpScreen[num].SetActive(false);
+        }
+        else
+            PoPUpScreen[num].transform.position = new Vector2(-2000, -2000);
     }
 
     public Dictionary<int, Dictionary<string, string>> ReadCSV(TextAsset file)

@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2207641400073810419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7689556, y: -2.1771789, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 2207641401377286699}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4418c745c3386f846aff4b6f4a5752f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 2207641400073810419}
+  speed: 0
   dropped: {fileID: 0}
   healthBar: {fileID: 2207641400519827709}
   knockback: 0
@@ -113,11 +114,13 @@ MonoBehaviour:
   attackDamage: 0
   canMove: 1
   timerMax: 1
+  isDead: 0
   bullet: {fileID: 43665031527391403, guid: f6b42c8daf32adf46bbd7fa73018702e, type: 3}
   shootForce: 9
   teleSpawn: {fileID: 199326273950236209, guid: ffd233b9784a8a34cbc5aa526828dc95, type: 3}
   teleportRadius: 20
   thunder: {fileID: 5507922778311510422, guid: 341b1de5d43c634429220204461a072e, type: 3}
+  friend: {fileID: 0}
 --- !u!58 &2207641400073810417
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -180,7 +183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2207641400519827709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 2207641400073810420}
@@ -262,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2207641401377286698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 2207641400073810420}
