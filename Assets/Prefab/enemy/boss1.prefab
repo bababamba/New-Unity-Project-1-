@@ -198,6 +198,8 @@ MonoBehaviour:
   timerMax: 1.5
   isDead: 0
   Pawn: {fileID: 6036598623363558057, guid: d6514277856b4134381ab64c836feff8, type: 3}
+  Rook: {fileID: 7074237749480834288, guid: 91b40a9edc975b44888f7b93a4111c1a, type: 3}
+  Bishop: {fileID: 390513010275696485, guid: f9e0d97ea68714b47a54fdd7cb8004a8, type: 3}
   spawnRadius: 5
 --- !u!50 &3400328710883491385
 Rigidbody2D:
