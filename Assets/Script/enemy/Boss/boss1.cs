@@ -5,8 +5,12 @@ using UnityEngine;
 public class boss1 : BossEnemy_Base
 {
     [SerializeField] GameObject Pawn;
-    [SerializeField] float spawnRadius = 5f;
 
+    [SerializeField] GameObject Rook;
+
+    [SerializeField] GameObject Bishop;
+    [SerializeField] float spawnRadius = 5f;
+    int phase = 1;
     Vector3 centerPosition;
     // Start is called before the first frame update
     protected override void Start()
@@ -23,20 +27,21 @@ public class boss1 : BossEnemy_Base
     protected override void Update()
     {
         base.Update();
-        
+
     }
     protected override void gimick1()
     {
-        for(int i=0;i<this.transform.childCount;i++)
-            if(this.transform.GetChild(i).GetComponent<Chess_Unit>())
+        for (int i = 0; i < this.transform.childCount; i++)
+            if (this.transform.GetChild(i).GetComponent<Chess_Unit>())
                 this.transform.GetChild(i).GetComponent<Chess_Unit>().OnActive();
         base.gimick1();
         isGimickEnd = true;
         //Debug.Log("1 End");
     }
+
     protected override void gimick2()
     {
-       
+
 
         // 반경 내에서 랜덤한 위치 생성
         Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
@@ -45,14 +50,65 @@ public class boss1 : BossEnemy_Base
         Vector3 spawnPosition = new Vector3(centerPosition.x + randomOffset.x, centerPosition.y + randomOffset.y, centerPosition.z);
 
         // Pawn 생성
-        GameObject pawn =  Instantiate(Pawn, spawnPosition, Quaternion.identity);
+        GameObject pawn = Instantiate(Pawn, spawnPosition, Quaternion.identity);
 
         pawn.transform.SetParent(this.transform);
 
-       // timer = 1f;
+        // timer = 1f;
         base.gimick2();
         isGimickEnd = true;
-       // Debug.Log("2 End");
+        // Debug.Log("2 End");
     }
+    protected override void gimick3()
+    {
 
+
+        // 반경 내에서 랜덤한 위치 생성
+        Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+
+        // 생성할 위치 계산
+        Vector3 spawnPosition = new Vector3(centerPosition.x + randomOffset.x, centerPosition.y + randomOffset.y, centerPosition.z);
+
+        // Pawn 생성
+        GameObject pawn = Instantiate(Rook, spawnPosition, Quaternion.identity);
+
+        pawn.transform.SetParent(this.transform);
+
+        // timer = 1f;
+        base.gimick2();
+        isGimickEnd = true;
+        // Debug.Log("2 End");
+    }
+    protected override void gimick4()
+    {
+
+
+        // 반경 내에서 랜덤한 위치 생성
+        Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+
+        // 생성할 위치 계산
+        Vector3 spawnPosition = new Vector3(centerPosition.x + randomOffset.x, centerPosition.y + randomOffset.y, centerPosition.z);
+
+        // Pawn 생성
+        GameObject pawn = Instantiate(Bishop, spawnPosition, Quaternion.identity);
+
+        pawn.transform.SetParent(this.transform);
+
+        // timer = 1f;
+        base.gimick2();
+        isGimickEnd = true;
+        // Debug.Log("2 End");
+    }
+    public override void takeDamage(float dmg)
+    {
+        base.takeDamage(dmg);
+        if (phase < 2 && this.getCurHP() <= 3 * this.getMaxHP() / 4)
+        {
+            phase = 2;
+            timerMax = 0.75f;
+            numberOfGimick = 4;
+
+
+        }
+    }
 }
