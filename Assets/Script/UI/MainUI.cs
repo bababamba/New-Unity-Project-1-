@@ -11,6 +11,11 @@ public class MainUI : MonoBehaviour
         SceneManager.LoadScene("Scenes/IngameMapScreen");
     }
 
+    public void OpenSettings()
+    {
+        Audio_Manager.Instance.OptionPopUpOn();
+    }
+
     public void QuitGame()
     {
         // 게임 종료

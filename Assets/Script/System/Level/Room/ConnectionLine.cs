@@ -35,12 +35,12 @@ public class ConnectionLine : MonoBehaviour
 
         rect.anchoredPosition = Vector3.zero;
         rect.rotation = Quaternion.Euler(0, 0, angle);
-        rect.localScale = new Vector3(3, 0.5f, 1);
+        rect.localScale = new Vector3(2.25f, 0.5f, 1);
 
         if (dir == 0)
         {
             rect.anchoredPosition = new Vector3(0, 100, 0);
-            rect.localScale = new Vector3(2.5f, 0.5f, 1);
+            rect.localScale = new Vector3(2f, 0.5f, 1);
         }
         else if (dir > 0)
             rect.anchoredPosition = new Vector3(100, 100, 0);

@@ -71,11 +71,13 @@ public class UIManager : MonoBehaviour
         
         pauseMenu.SetActive(true);
         inventoryObject.SetActive(true);
-
+        setting = Audio_Manager.Instance.GetComponentInChildren<Canvas>().transform.Find("Setting").gameObject;
     }
 
     void Update()
     {
+        if(setting == null)
+            setting = Audio_Manager.Instance.GetComponentInChildren<Canvas>().transform.Find("Setting").gameObject;
         if (SceneManager.GetActiveScene().name == "maingame")
         {
             exp = gameManagerScript.exp;

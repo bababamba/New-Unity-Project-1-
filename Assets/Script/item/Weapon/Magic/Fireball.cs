@@ -21,6 +21,7 @@ public class Fireball : weapon_base
         shootForce = 1.5f;
         itemNum = 0;
         Maxcooldown = 6;
+        cooldown = 6;
         itemName = "파이어볼";
         itemText = "적에게 닿거나 일정 시간이 지나면 폭발하는 화염구를 발사해 넓은 범위에 피해를 준다.";
         itemCaption = "신뢰와 안정, 그리고~~~~~~~~~~";
@@ -35,15 +36,14 @@ public class Fireball : weapon_base
     protected override void itemTrigger()
     {
         Transform target = gameManager.closestEnemy(playerNumber, 100f);
+        GameObject axeEffect;
         Vector3 dir = (target.transform.position - player.transform.position);
         float angle = Mathf.Atan2(dir.y, dir.x + 1) * Mathf.Rad2Deg;
-        GameObject axeEffect = Instantiate(bullet, player.transform.position, Quaternion.Euler(0, 0, angle - 180));
-        Debug.Log(angle);
+        axeEffect = Instantiate(bullet, player.transform.position, Quaternion.Euler(0, 0, angle - 180));
+        axeEffect.GetComponent<Rigidbody2D>().AddForce((target.transform.position - player.transform.position) * shootForce, ForceMode2D.Impulse);
         bulletScript = axeEffect.GetComponent<FireballAttack>();
         bulletScript.addDmg = (int)(level * dpl);
         bulletScript.init(calcDmg(), 5, 1);
-        axeEffect.GetComponent<Rigidbody2D>().AddForce((target.transform.position - player.transform.position) * shootForce, ForceMode2D.Impulse);
-
     }
     public override void levelUp()
     {

@@ -25,8 +25,10 @@ public class PauseUI : MonoBehaviour
 
     public void OpenSettings()
     {
-        if(SceneManager.GetActiveScene().name == "IngameMapScreen")
+        if (SceneManager.GetActiveScene().name == "IngameMapScreen")
+        {
             MapUIManager.manager.OpenUI(3);
+        }
         else if (SceneManager.GetActiveScene().name == "maingame")
         {
             manager.setting.SetActive(true);

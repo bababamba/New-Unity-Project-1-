@@ -27,6 +27,7 @@ public class IconPanel : MonoBehaviour
     public void SetIcon(Sprite img)
     {
         this.icon.sprite = img;
+        this.icon.color = Color.white;
     }
 
     public void SetText(int i)

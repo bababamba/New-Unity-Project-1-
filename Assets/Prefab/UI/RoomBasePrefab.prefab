@@ -56,13 +56,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomType: 0
   Images:
-  - {fileID: 21300000, guid: 8a535c23c57a3464785b9441dffdd9db, type: 3}
-  - {fileID: 21300000, guid: ca43d927813230f44829dca7fff65e0d, type: 3}
-  - {fileID: 21300000, guid: 1bfcc1660c52ff441b5335c901758bd7, type: 3}
-  - {fileID: 21300000, guid: b555cdf70f36fa746b05081f13205258, type: 3}
-  - {fileID: 21300000, guid: 5e21c1ffb7b687940a39efef772e1efb, type: 3}
-  - {fileID: 21300000, guid: ec4c933d43cdf40458428ec55db66cfb, type: 3}
-  - {fileID: 21300000, guid: ee6fca43aee0c2f4392d14ee9abb3b0e, type: 3}
+  - {fileID: 21300000, guid: 5af4fd4f497b0e949ac69c224a62522b, type: 3}
+  - {fileID: 21300000, guid: c4a1b8b14a40a5c4b9f7ae423e62e7d4, type: 3}
+  - {fileID: 21300000, guid: 648c3d39fec866a479326de673632b16, type: 3}
+  - {fileID: 21300000, guid: 263b312c4e9b6f543a46e43ee5956907, type: 3}
+  - {fileID: 21300000, guid: bae829ba962d28f48bf76c8db9d23600, type: 3}
+  - {fileID: 21300000, guid: c8df4f4a68e21894c9bbe4face584a9f, type: 3}
+  - {fileID: 21300000, guid: 7703f56d3de7a064a85206e68a791063, type: 3}
   position: 0000000000000000
 --- !u!114 &4856853223595724256
 MonoBehaviour:

@@ -27,13 +27,13 @@ public class FireballExplosion : AttackBase
     public new void OnTriggerEnter2D(Collider2D col)
     {
         enemy_base enemy = col.GetComponent<enemy_base>();
-        if (col.CompareTag("Enemy"))
-            enemyInRange.Add(enemy);
 
         if (enemy != null && !enemyAttacked.Contains(enemy))
         {
-            enemy.takeDamage(dmg);
+            enemy.takeDamage(addDmg);
         }
+        if (col.CompareTag("Enemy"))
+            enemyInRange.Add(enemy);
     }
 
 }

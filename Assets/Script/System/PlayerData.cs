@@ -97,8 +97,8 @@ public class PlayerData : MonoBehaviour
         }
         if (newData)
         {
-            weapons[4].active = true;
-            weapons[4].level = 4000;
+            weapons[7].active = true;
+            weapons[7].level = 4000;
         }
         if (newData)
         {

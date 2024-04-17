@@ -29,7 +29,8 @@ public class MapUIManager : MonoBehaviour
 
         if(level == null)
             level = this.GetComponentInChildren<Level>();
-            
+
+        PoPUpScreen[3] = Audio_Manager.Instance.GetComponentInChildren<Canvas>().transform.Find("Setting").gameObject;
     }
 
     void Update()
@@ -64,8 +65,8 @@ public class MapUIManager : MonoBehaviour
 
         if (num == 111 || num == 777)
             PoPUpScreen[0].SetActive(true);
-        else if(num==3)
-            PoPUpScreen[num].transform.position = Vector2.zero;
+        //else if(num==3)
+            //PoPUpScreen[num].transform.position = Vector2.zero;
         else
             PoPUpScreen[num].SetActive(true);
 
@@ -104,7 +105,8 @@ public class MapUIManager : MonoBehaviour
             PoPUpScreen[num].SetActive(false);
         }
         else
-            PoPUpScreen[num].transform.position = new Vector2(-2000, -2000);
+            PoPUpScreen[num].SetActive(false);
+            //PoPUpScreen[num].transform.position = new Vector2(-2000, -2000);
     }
 
     public Dictionary<int, Dictionary<string, string>> ReadCSV(TextAsset file)

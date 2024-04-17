@@ -16,6 +16,8 @@ public class FireballAttack : AttackBase
         maxLifetime = 3f;
         type = Type.FIRE;
         base.Start();
+
+
     }
 
     protected override void Update()
@@ -44,7 +46,7 @@ public class FireballAttack : AttackBase
         {
             GameObject explosionEffect = Instantiate(explosion, this.transform.position, Quaternion.identity);
             explosionScript = explosionEffect.GetComponent<FireballExplosion>();
-
+            explosionScript.addDmg = this.addDmg;
             exploded = true;
             this.die();
         }

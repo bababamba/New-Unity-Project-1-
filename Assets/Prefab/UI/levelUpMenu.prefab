@@ -134,30 +134,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3530671112724978558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8625680297089751034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 256875d487d706347b3bb4d38939d37a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3530671113406120297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8625680297656035813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 256875d487d706347b3bb4d38939d37a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3530671113739842689
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3530671113739842690
 Transform:
   m_ObjectHideFlags: 0
@@ -219,6 +195,30 @@ MonoBehaviour:
   item_Text: {fileID: 3530671112329133425}
   inventory: {fileID: 0}
   uIManager: {fileID: 0}
+--- !u!114 &3530671112724978558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625680297089751034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256875d487d706347b3bb4d38939d37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3530671113406120297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625680297656035813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256875d487d706347b3bb4d38939d37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3530671113941774177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,11 +981,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3953347425023653051, guid: 8272bb79a6e4a4717bf5c3324bfaa46b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3953347425023653051, guid: 8272bb79a6e4a4717bf5c3324bfaa46b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1200
+      value: 1300
       objectReference: {fileID: 0}
     - target: {fileID: 3953347425023653051, guid: 8272bb79a6e4a4717bf5c3324bfaa46b, type: 3}
       propertyPath: m_LocalPosition.x

@@ -61,7 +61,7 @@ public class Audio_Manager : MonoBehaviour
     {
         bgmSource.volume = volume;
         BGMVolume = volume;
-        Debug.Log(bgmSlider.value);
+        //Debug.Log(bgmSlider.value);
     }
 
     public void SetSFXVolume(float volume)
@@ -92,9 +92,11 @@ public class Audio_Manager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "IngameMapScreen")
             MapUIManager.manager.CloseUI(3);
-        else if (SceneManager.GetActiveScene().name == "maingame")
+        /*else if (SceneManager.GetActiveScene().name == "maingame")
         {
             OptionPopUp.transform.position = new Vector2(2000, 2000);
-        }
+        }*/
+        else
+            OptionPopUp.SetActive(false);
     }
 }
