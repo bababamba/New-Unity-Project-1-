@@ -10,6 +10,7 @@ public class Level : MonoBehaviour
 
     public Room[,] rooms;
     public int[] lastRoom = new int[2];
+    public List<int[]> lastRooms;
     public int width;
     public int height;  
     
@@ -300,6 +301,8 @@ public class Level : MonoBehaviour
                     curFloor[i] = room;
                     ConnectionLine[] lines = curFloor[i].GetComponentsInChildren<ConnectionLine>();
                     room.GetComponent<RectTransform>().SetAsLastSibling();
+                    if (rooms[i, j].path)
+                        room.GetComponent<RoomObject>().SetColor(new Color(186 / 255f, 109 / 255f, 25 / 255f));
                     for (int k = 0; k < lines.Length; k++)
                     {
                         lines[k].room = rooms[i, j];
@@ -340,6 +343,7 @@ public class Level : MonoBehaviour
         }
         GameObject bossRoom = Instantiate(roomObject);
         bossRoom.transform.SetParent(floor[0].transform);
+        bossRoom.transform.localScale = new Vector3(2, 2, 1);
         bossRoom.GetComponent<RoomObject>().position[0] = 0;
         bossRoom.GetComponent<RoomObject>().position[1] = height;
 

@@ -24,6 +24,7 @@ public class Room
     public int y;
 
     public bool accessible =false;
+    public bool path = false;
 
     public Room(int x, int y)
     {

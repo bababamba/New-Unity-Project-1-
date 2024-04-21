@@ -19,6 +19,7 @@ public class PlayerData : MonoBehaviour
 
     public Room[,] rooms;
     public int[] lastRoom = new int[2];
+    public List<int[]> lastRooms;
     public int curFloor;
     public bool savedLevelData = false;
     public int enemyPool;
@@ -56,7 +57,6 @@ public class PlayerData : MonoBehaviour
             //Debug.Log(weapon.active);
         }
 
-
         
 
     }
@@ -68,6 +68,7 @@ public class PlayerData : MonoBehaviour
             rooms = new Room[Level.level.width, Level.level.height + 1];
             rooms = Level.level.rooms;
             lastRoom = Level.level.lastRoom;
+            lastRooms = new List<int[]>();
             curFloor = Level.level.curFloor;
             savedLevelData = true;
         }
@@ -75,6 +76,7 @@ public class PlayerData : MonoBehaviour
         {
             Level.level.rooms = rooms;
             Level.level.lastRoom = lastRoom;
+            Level.level.lastRooms = lastRooms;
             Level.level.curFloor = curFloor;
         }
     }
