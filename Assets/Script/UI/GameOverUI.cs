@@ -11,6 +11,9 @@ public class GameOverUI : MonoBehaviour
     public TMP_Text FinalScoreText;
     public TMP_Text GameoverText;
 
+    public Image img;
+    public Sprite[] imageSet;
+
     public int floors = 0;
     public int itemLevels = 0;
     public int enemyKills = 0;
@@ -22,6 +25,7 @@ public class GameOverUI : MonoBehaviour
         ScoreText = this.transform.Find("ScoreText").GetComponent<TMP_Text>();
         FinalScoreText = this.transform.Find("FinalScoreText").GetComponent<TMP_Text>();
         GameoverText = this.transform.Find("GameOverText").GetComponent<TMP_Text>();
+        img = this.transform.Find("Image").GetComponent<Image>();
 
         this.GetComponent<RectTransform>().SetAsFirstSibling();
         //this.gameObject.SetActive(false);
@@ -32,7 +36,14 @@ public class GameOverUI : MonoBehaviour
         CheckScore();
 
         if (clear)
+        {
             GameoverText.text = "BOSS CLEAR!";
+            img.sprite = imageSet[0];
+        }
+        else
+            img.sprite = imageSet[1];
+
+        img.color = new Color(1, 1, 1, 75 / 255f);
 
         ScoreText.text = "floors : " + floors + "\nitem levels : " + itemLevels + "\nenemy kills : " + enemyKills + "\ngold : " + PlayerData.data.gold;
 
